@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 from kintsugi.config import ConfigError, Settings, get_settings
-from pydantic import ValidationError
+from pydantic import SecretStr, ValidationError
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ENV_EXAMPLE = PROJECT_ROOT / ".env.example"
@@ -75,25 +75,64 @@ def test_port_aus_der_umgebung_bewegt_die_url(monkeypatch):
     """Auf einer XAMPP-Maschine ist eine Kollision auf 5432 der Regelfall."""
     monkeypatch.setenv("KINTSUGI_PG_PORT", "55432")
     get_settings.cache_clear()
-    assert get_settings().database_url.endswith(":55432/kintsugi")
+    assert get_settings().database_url.get_secret_value().endswith(":55432/kintsugi")
 
 
 def test_override_schlaegt_alle_einzelteile(monkeypatch):
     monkeypatch.setenv("KINTSUGI_PG_PORT", "55432")
     monkeypatch.setenv("KINTSUGI_DATABASE_URL_OVERRIDE", "postgresql+psycopg://a:b@c:1/d")
     get_settings.cache_clear()
-    assert get_settings().database_url == "postgresql+psycopg://a:b@c:1/d"
+    assert get_settings().database_url.get_secret_value() == "postgresql+psycopg://a:b@c:1/d"
 
 
 def test_url_nutzt_den_synchronen_psycopg_treiber():
     """docs/01 und docs/08 sind gegenueber der README massgeblich: kein asyncpg."""
-    assert Settings().database_url.startswith("postgresql+psycopg://")
-    assert "asyncpg" not in Settings().database_url
+    url = Settings().database_url.get_secret_value()
+    assert url.startswith("postgresql+psycopg://")
+    assert "asyncpg" not in url
 
 
 def test_sonderzeichen_im_passwort_werden_kodiert():
-    url = Settings(pg_password="p@ss/wo rd").database_url
+    url = Settings(pg_password="p@ss/wo rd").database_url.get_secret_value()
     assert "p%40ss%2Fwo%20rd" in url
+
+
+# --------------------------------------------------------------------------
+# Die Datenbank-URL darf nicht beilaeufig in Logs landen
+# --------------------------------------------------------------------------
+
+
+def test_database_url_ist_kein_klartext_string():
+    """Sonst waere pg_password: SecretStr reine Kosmetik.
+
+    Eine als str herausgegebene URL landet im repr der SQLAlchemy-Engine, in
+    Verbindungsfehlern, in der Alembic-Ausgabe und in jeder JSON-Logzeile, die
+    sie beilaeufig mitfuehrt.
+    """
+    url = Settings(pg_password="hochgeheim").database_url
+    assert isinstance(url, SecretStr)
+    assert "hochgeheim" not in repr(url)
+    assert "hochgeheim" not in str(url)
+    assert "hochgeheim" in url.get_secret_value(), "Der echte Wert muss abrufbar bleiben"
+
+
+def test_maskierte_url_verbirgt_das_passwort_und_behaelt_den_rest():
+    settings = Settings(pg_password="hochgeheim", pg_host="db.intern", pg_port=55432)
+    masked = settings.database_url_masked
+    assert "hochgeheim" not in masked
+    assert "db.intern" in masked
+    assert "55432" in masked
+    assert masked.startswith("postgresql+psycopg://")
+
+
+def test_maskierung_greift_auch_bei_einer_von_aussen_gereichten_url():
+    """Ein Override bringt sein Passwort mit — die Maskierung muss es erwischen."""
+    settings = Settings(
+        database_url_override="postgresql+psycopg://nutzer:fremdgeheim@host:5432/db"
+    )
+    assert "fremdgeheim" not in settings.database_url_masked
+    assert "fremdgeheim" not in repr(settings)
+    assert "fremdgeheim" in settings.database_url.get_secret_value()
 
 
 # --------------------------------------------------------------------------
