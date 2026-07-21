@@ -1,0 +1,27 @@
+# Ergaenzt .gitattributes auf der Editor-Seite: git normalisiert beim Commit,
+# der Editor soll gar nicht erst das Falsche schreiben.
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.{yaml,yml,json,md}]
+indent_size = 2
+
+[*.md]
+# Zwei nachlaufende Leerzeichen sind in Markdown ein harter Zeilenumbruch.
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+
+# Golden Snapshots sind byte-genaues Beweismaterial. Kein Editor darf sie
+# aufraeumen — das aendert ihren sha256.
+[fixtures/**]
+trim_trailing_whitespace = false
+insert_final_newline = false

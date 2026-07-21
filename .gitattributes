@@ -1,0 +1,20 @@
+# Zeilenenden werden erzwungen, nicht dem Zufall der Arbeitskopie ueberlassen.
+# Die Entwicklungsmaschine ist Windows mit core.autocrlf=true, CI laeuft auf
+# Linux. `snapshot.content_hash` aus docs/03-data-model.md ist ein byte-genauer
+# sha256 des Rohkoerpers und zugleich der Deduplizierungsschluessel; die Golden
+# Fixtures sind die Grundlage des Freigabe-Gates aus docs/04-self-healing.md.
+# Ein plattformabhaengiger Hash zerlegt beides.
+* text=auto eol=lf
+
+# Fixtures sind Beweismaterial. Git darf sie weder umschreiben noch als Text
+# behandeln — auch nicht beim Diff, wo eine Umkodierung sonst durchschlagen
+# koennte.
+fixtures/** -text -diff
+
+*.gz  binary
+*.bin binary
+*.png binary
+*.gif binary
+*.jpg binary
+*.ico binary
+*.parquet binary
