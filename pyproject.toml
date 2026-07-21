@@ -1,0 +1,67 @@
+[project]
+name = "kintsugi"
+version = "0.1.0"
+description = "Web data that repairs itself, and tells you when it can't"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Sven Weidenmann", email = "sweidenmann@gmail.com" }]
+keywords = ["scraping", "self-healing", "data-quality", "provenance", "scd2"]
+
+# Stack per docs/01-architecture.md ("Stack") und docs/08-roadmap.md.
+# Diese beiden Dokumente sind gegenueber README.md massgeblich: Python 3.12,
+# PostgreSQL 16, SQLAlchemy 2.0 Core auf dem synchronen psycopg3-Treiber.
+dependencies = [
+    "httpx[http2]>=0.28.1",
+    "selectolax>=0.4.11",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.7",
+    "PyYAML>=6.0.2",
+    "SQLAlchemy>=2.0.51",
+    "psycopg[binary]>=3.2",
+    "alembic>=1.18.5",
+    "typer>=0.27.0",
+    "structlog>=25.1",
+    "tenacity>=9.0",
+    "jsonpath-ng>=1.7",
+    "protego>=0.6.2",
+    "polars>=1.43.0",
+    "pandera>=0.32.1",
+]
+
+# Extra, keine dependency-group: Extras ueberleben `uv build` und die
+# Wheel-Installation und werden mit `uv sync --extra profiling` gewaehlt.
+# ydata-profiling zieht rund 50 weitere Pakete und gehoert daher nicht in
+# das Kern-Set. Bindend, festgehalten in ADR-008.
+[project.optional-dependencies]
+# setuptools ist kein Versehen und die Obergrenze auch nicht:
+# ydata-profiling 4.18 importiert zur Laufzeit `pkg_resources`. Das steckt seit
+# Python 3.12 nicht mehr in der Standardinstallation und wurde in setuptools 81
+# endgueltig entfernt. Ohne diesen Pin schlaegt `import ydata_profiling` mit
+# ModuleNotFoundError fehl, obwohl das Paket installiert ist.
+# Faellt weg, sobald ydata-profiling auf importlib.metadata umstellt.
+profiling = ["ydata-profiling>=4.12", "setuptools>=75,<81"]
+
+[project.scripts]
+kintsugi = "kintsugi.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/AlsoTheZv3n/Kintsugi"
+Repository = "https://github.com/AlsoTheZv3n/Kintsugi"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.9",
+    "mypy>=1.14",
+    "pre-commit>=4.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["kintsugi"]
