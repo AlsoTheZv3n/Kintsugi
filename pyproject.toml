@@ -71,6 +71,20 @@ packages = ["kintsugi"]
 # damit es genau eine Konfigurationsdatei gibt.
 # ---------------------------------------------------------------------------
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# `-m 'not live'` haelt den Standardlauf offline. docs/07 verspricht fuer
+# Stufe 0 "laeuft bei jedem Commit, dauert Sekunden" — das ist nur wahr, wenn
+# der Standardlauf keine Steckdose nach draussen hat.
+addopts = "-ra --strict-markers --strict-config -m 'not live'"
+markers = [
+    "unit: reine Einheitentests, kein Netz, keine Datenbank",
+    "integration: benoetigt die Postgres-16-Instanz auf loopback",
+    "mutation: Mutations-Harness aus docs/07-test-targets.md",
+    "live: greift auf echte externe Quellen zu, standardmaessig abgewaehlt",
+    "slow: laeuft laenger als eine Sekunde",
+]
+
 [tool.ruff]
 target-version = "py312"
 line-length = 100
