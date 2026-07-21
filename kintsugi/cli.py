@@ -7,6 +7,8 @@ deshalb vor der Pipeline, die er spaeter startet — vorerst als No-op.
 
 from __future__ import annotations
 
+from typing import Annotated
+
 import typer
 
 from kintsugi import __version__
@@ -21,7 +23,7 @@ app = typer.Typer(
 
 @app.command()
 def run(
-    domain: str = typer.Argument(..., help="Domain der Quelle, z. B. books.toscrape.com"),
+    domain: Annotated[str, typer.Argument(help="Domain der Quelle, z. B. books.toscrape.com")],
 ) -> None:
     """Fuehrt einen Lauf fuer die angegebene Domain aus."""
     typer.echo(f"kintsugi {__version__}: Lauf fuer {domain} — noch nicht implementiert.")

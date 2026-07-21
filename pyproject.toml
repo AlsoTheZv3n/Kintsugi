@@ -65,3 +65,53 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["kintsugi"]
+
+# ---------------------------------------------------------------------------
+# Linting und Typpruefung. Beides steht hier und nicht in ruff.toml/mypy.ini,
+# damit es genau eine Konfigurationsdatei gibt.
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["kintsugi", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "ANN", "PT", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests brauchen keine Annotationen und duerfen assert benutzen.
+"tests/**" = ["ANN", "S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+warn_unreachable = true
+# Tests liegen bewusst ausserhalb: `strict` impliziert disallow_untyped_defs und
+# wuerde eine Rueckgabeannotation an jeder Testfunktion und jeder Fixture
+# verlangen — genau das, wovon die ruff-Ausnahme oben sie befreit. Beides
+# gleichzeitig zu fordern waere widerspruechlich, also wird die Grenze hier
+# einmal gezogen.
+files = ["kintsugi"]
+
+# Ein Block pro untypisierter Drittbibliothek. Ein pauschales
+# ignore_missing_imports auf [tool.mypy]-Ebene ist ausgeschlossen: es schaltet
+# die Pruefung stillschweigend fuer jede kuenftige Abhaengigkeit ab.
+# pydantic, sqlalchemy und typer liefern Typen mit und stehen deshalb nicht hier.
+# Sobald ein gelistetes Paket py.typed mitbringt, wird sein Block entfernt.
+[[tool.mypy.overrides]]
+module = "selectolax.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "jsonpath_ng.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "protego.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "ydata_profiling.*"
+ignore_missing_imports = true
