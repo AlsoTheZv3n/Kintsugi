@@ -1,0 +1,55 @@
+# Die Gates laufen lokal, damit CI nie etwas entdeckt, was ein Commit schon
+# haette abfangen koennen. Jede `repo`-Angabe traegt eine feste `rev` — kein
+# Branchname, kein HEAD. Aktualisiert wird ausschliesslich mit
+# `pre-commit autoupdate` in einem eigenen Commit.
+minimum_pre_commit_version: "3.5.0"
+
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.22
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # fixtures/ ist ausgenommen: Golden Snapshots sind byte-genaue Beweise.
+      # Ein Hook, der eine Zeilenschaltung anhaengt, aendert ihren sha256 und
+      # entwertet damit den gesamten Regressionsbestand.
+      - id: end-of-file-fixer
+        exclude: ^fixtures/
+      - id: trailing-whitespace
+        exclude: ^fixtures/
+      - id: check-yaml
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=512]
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.30
+    hooks:
+      - id: uv-lock
+
+  # actionlint ist keine Python-Abhaengigkeit und liegt auf dieser Maschine
+  # nicht vor. Ueber pre-commit steht es unter Windows und auf dem
+  # Linux-Runner identisch zur Verfuegung.
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+
+  - repo: local
+    hooks:
+      # mypy laeuft als lokaler Hook ueber uv, damit es die aufgeloeste
+      # Projektumgebung sieht statt einer isolierten pre-commit-venv.
+      - id: mypy
+        name: mypy (strict, kintsugi/)
+        entry: uv run mypy
+        language: system
+        types: [python]
+        pass_filenames: false
+        require_serial: true
