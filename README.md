@@ -7,8 +7,8 @@
 
 [![CI](https://github.com/AlsoTheZv3n/kintsugi/actions/workflows/ci.yml/badge.svg)](https://github.com/AlsoTheZv3n/kintsugi/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python 3.14](https://img.shields.io/badge/python-3.14-blue.svg)](pyproject.toml)
-[![Node 24 LTS](https://img.shields.io/badge/node-24_LTS-green.svg)](frontend/package.json)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](pyproject.toml)
+[![PostgreSQL 16](https://img.shields.io/badge/postgres-16-blue.svg)](compose.yaml)
 [![Healing](https://img.shields.io/badge/healed-11%2F12-brightgreen.svg)](docs/07-test-targets.md)
 [![False positives](https://img.shields.io/badge/false%20positives-0%2F6-brightgreen.svg)](docs/07-test-targets.md)
 
@@ -217,16 +217,17 @@ That number only exists after months of running, and it is not claimed here.
 
 ## Tech
 
-Backend: Python 3.14 · FastAPI · PostgreSQL 18 · SQLAlchemy 2.0 Core + asyncpg · uv · httpx ·
-Playwright · selectolax (lexbor) · jsonpath-ng · Pydantic v2 · Polars + Pandera · ydata-profiling ·
-tenacity · structlog.
-Frontend: Vite · React 19 · TypeScript · Tailwind 4.3 · shadcn/ui · TanStack Router + Query ·
-CodeMirror 6.
+Backend: Python 3.12 · FastAPI · PostgreSQL 16 · SQLAlchemy 2.0 Core + psycopg3 (synchronous) · uv ·
+httpx · Playwright · selectolax (lexbor) · jsonpath-ng · Pydantic v2 · Polars + Pandera ·
+ydata-profiling · tenacity · structlog. asyncpg is deferred to the Phase 3 API — Phase 0 and 1 are
+deliberately synchronous.
+Workbench (Phase 4): Next.js · TypeScript · Tailwind · shadcn/ui · CodeMirror 6.
+Storage: filesystem bronze in Phase 0, SeaweedFS from Phase 5.
 Ops: Prometheus · Grafana · Alertmanager · ntfy · Docker (multi-stage, non-root) · GitHub Actions.
 
-No Next.js. The workbench is an authenticated internal SPA with no SEO surface, and FastAPI is already
-the data layer — SSR and server components would buy nothing and cost a second server runtime to
-containerize, monitor and patch.
+The workbench is a Next.js application, built in Phase 4 as an authenticated internal tool for
+triaging incidents. It is out of scope until the pipeline produces real incidents worth triaging, so
+nothing of it exists yet.
 
 The mutation suite runs against the real pipeline writing to a real database. It is written so that
 disabling the healer makes it fail on the M-cases *and* pass on the N-cases, which is the only way to
