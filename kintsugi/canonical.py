@@ -28,9 +28,14 @@ __all__ = [
     "payload_hash",
 ]
 
-# Trennzeichen und Escape fuer den natural_key. \x1f (Unit Separator) ist ein
-# Steuerzeichen, das in extrahierten Web-Werten praktisch nie vorkommt.
-_NK_SEPARATOR = "\x1f"
+# Trennzeichen und Escape fuer den natural_key.
+#
+# Nicht \x1f (Unit Separator), obwohl es selten vorkommt: Python zaehlt \x1c-\x1f
+# zu Whitespace, sodass str.strip() es aus einem Wert entfernte, BEVOR das
+# Escapen greift. Dann kollidierten ["x\x1f","y"] und ["x","\x1fy"] beide zu
+# "x\x1fy" — genau die stille Verschmelzung, die ADR-009 verhindern will. `|`
+# ist kein Whitespace und ueberlebt das Strippen, sodass das Escapen es sieht.
+_NK_SEPARATOR = "|"
 _NK_ESCAPE = "\\"
 
 
@@ -155,15 +160,22 @@ def encode_natural_key(components: Sequence[str], values: Mapping[str, object]) 
     """Kodiert die natural_key-Komponenten in genau einen text-Wert.
 
     Die Reihenfolge stammt aus dem Site-Pack und ist Teil der Identitaet — nie
-    sortieren. Trennzeichen und Escape werden escapt, sodass zwei verschiedene
-    Komponenten-Tupel nie auf denselben String abbilden. Ein einzelner
-    Bestandteil wird als blanker Wert kodiert, damit die Gold-View
-    ``gold_book`` ihn unveraendert als ``upc`` ausgeben kann (docs/03 §Gold).
+    sortieren. Ein einzelner Bestandteil wird als blanker Wert kodiert, damit
+    die Gold-View ``gold_book`` ihn unveraendert als ``upc`` ausgeben kann
+    (docs/03 §Gold). Bei mehreren Bestandteilen werden Trennzeichen und Escape
+    escapt, sodass zwei verschiedene Komponenten-Tupel nie auf denselben String
+    abbilden.
+
+    Das Escapen entfaellt bei einer einzelnen Komponente bewusst: der
+    Unique-Index ``record_current`` schliesst ``entity`` ein (docs/03 §Silver),
+    und alle Records einer Entitaet haben dieselbe, feste Komponentenzahl. Bei
+    genau einer Komponente gibt es kein Trennzeichen, auf dem etwas kollidieren
+    koennte — der blanke Wert ist fuer sich injektiv.
 
     Fehlt eine Komponente oder ist sie leer, wird ``NaturalKeyMissing``
     geworfen, nie ein Platzhalter zurueckgegeben.
     """
-    encoded: list[str] = []
+    cleaned: list[str] = []
     for name in components:
         if name not in values:
             raise NaturalKeyMissing(f"Komponente {name!r} fehlt im Datensatz")
@@ -173,9 +185,13 @@ def encode_natural_key(components: Sequence[str], values: Mapping[str, object]) 
         text = _nfc(str(raw)).strip()
         if not text:
             raise NaturalKeyMissing(f"Komponente {name!r} ist nach dem Strippen leer")
-        encoded.append(
-            text.replace(_NK_ESCAPE, _NK_ESCAPE * 2).replace(
-                _NK_SEPARATOR, _NK_ESCAPE + _NK_SEPARATOR
-            )
-        )
-    return _NK_SEPARATOR.join(encoded)
+        cleaned.append(text)
+
+    if len(cleaned) == 1:
+        return cleaned[0]
+
+    escaped = [
+        value.replace(_NK_ESCAPE, _NK_ESCAPE * 2).replace(_NK_SEPARATOR, _NK_ESCAPE + _NK_SEPARATOR)
+        for value in cleaned
+    ]
+    return _NK_SEPARATOR.join(escaped)
