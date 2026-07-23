@@ -47,8 +47,8 @@ def test_kein_verworfener_mechanismus_im_code_oder_pack(token: str):
     for path in _tracked_files():
         if token in path.read_text(encoding="utf-8"):
             offenders.append(str(path.relative_to(PROJECT_ROOT)))
-    assert not offenders, (
-        f"ADR-013 verworfener Mechanismus {token!r} gefunden in:\n" + "\n".join(offenders)
+    assert not offenders, f"ADR-013 verworfener Mechanismus {token!r} gefunden in:\n" + "\n".join(
+        offenders
     )
 
 
