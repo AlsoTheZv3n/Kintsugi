@@ -1,0 +1,13 @@
+{
+  "_comment": "Golden-Digest fuer die kanonische Serialisierung (ADR-009 Kontrakt 1). Werte aus F2, live gegen books.toscrape.com/catalogue/a-light-in-the-attic_1000 verifiziert. Aendert sich die Kanonisierung, bricht die Zusicherung laut statt den Dedup-Raum still zu spalten. price steht hier als String, weil JSON kein Decimal kennt; der Test rekonstruiert Decimal('51.77').",
+  "payload": {
+    "title": "A Light in the Attic",
+    "price": "51.77",
+    "currency": "GBP",
+    "availability": 22,
+    "upc": "a897fe39b1053632"
+  },
+  "price_is_decimal": true,
+  "canonical": "{\"availability\":22,\"currency\":\"GBP\",\"price\":51.77,\"title\":\"A Light in the Attic\",\"upc\":\"a897fe39b1053632\"}",
+  "sha256_hex": "c5eeefaa2a1f3f8063301d647db8328691a79ea4e700391b769b659085e01bb3"
+}
