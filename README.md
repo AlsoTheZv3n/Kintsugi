@@ -9,10 +9,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](pyproject.toml)
 [![PostgreSQL 16](https://img.shields.io/badge/postgres-16-blue.svg)](compose.yaml)
-[![Healing](https://img.shields.io/badge/healed-11%2F12-brightgreen.svg)](docs/07-test-targets.md)
-[![False positives](https://img.shields.io/badge/false%20positives-0%2F6-brightgreen.svg)](docs/07-test-targets.md)
-
-![Kintsugi demo](docs/demo.gif)
+[![target: healed 11/12](https://img.shields.io/badge/target%3A%20healed-11%2F12-lightgrey.svg)](#proving-the-healer)
+[![target: false positives 0/6](https://img.shields.io/badge/target%3A%20false%20positives-0%2F6-lightgrey.svg)](#proving-the-healer)
 
 > *Kintsugi* is the Japanese craft of mending broken pottery with gold — the repair is made visible
 > rather than hidden. Every automatic fix here is a versioned, diffable, reversible row, and the
@@ -123,7 +121,8 @@ Real sites still get used — but for a different question. They test whether th
 resembles reality, and they test the fetch layer, which cannot be simulated. Sources that expose the
 same data through both HTML and an official API are the strongest test available: the API is free
 ground truth, so the extractor is checked against it nightly without anyone maintaining an expected
-result. See [`docs/07-test-targets.md`](docs/07-test-targets.md).
+result. The full test-target strategy and mutation catalog live in the project's internal design
+notes, which are not published in this repository.
 
 **What the verification gate does not do, and it is the bigger half.** The gate proves a proposal
 reproduces known-correct values on stored pages. It does not prove the proposal is *right* — only that
@@ -136,36 +135,42 @@ rather than left for you to find in production.
 
 ## Quickstart
 
-```bash
-git clone https://github.com/AlsoTheZv3n/kintsugi.git
-cd kintsugi
-docker compose up
-```
+### Available now
 
-Brings up the API, PostgreSQL, Prometheus, Grafana and the workbench, and applies migrations on the
-way. Workbench on **<http://localhost:5174>**, Grafana on **<http://localhost:3000>**.
-
-The registry starts with three sandbox sources that explicitly permit scraping:
+Phase 0 is a walking skeleton: one command fetches a sandbox source and writes validated,
+provenance-complete rows to PostgreSQL. That is all it does, and every command below runs against a
+cold clone.
 
 ```bash
-docker compose exec api python -m kintsugi.cli run books.toscrape.com
-docker compose exec api python -m kintsugi.cli sources        # status, last run, active version
+git clone https://github.com/AlsoTheZv3n/Kintsugi.git
+cd Kintsugi
+uv sync
+docker compose up -d postgres          # single PostgreSQL 16 service, see compose.yaml
+uv run alembic upgrade head
+uv run kintsugi pack sync books.toscrape.com book --activate
+uv run kintsugi run books.toscrape.com
 ```
 
-Break something on purpose and watch it come back:
+`books.toscrape.com` is the source because it explicitly permits scraping and its pagination yields
+1000 products, so the ≥200-record definition of done is reachable from a cold clone. A second `run`
+writes no duplicates.
+
+### Planned
+
+Nothing below exists yet; each line is tagged with the phase that ships it, so the README dates its
+promises instead of faking them.
 
 ```bash
-docker compose exec api python -m kintsugi.cli demo break --domain books.toscrape.com --field price
+uv run kintsugi sources                 # status, last run, active version        (Phase 3)
+# GET /v1/book — read-only API over the gold layer                                 (Phase 3)
+# Grafana fleet overview and healing scoreboard on :3000                           (Phase 3)
+uv run kintsugi demo break --domain books.toscrape.com --field price              # (Phase 4)
+# incident workbench: DOM diff, live selector, one-click fixture replay            (Phase 4)
 ```
 
-That mutates the served fixture, triggers a run, and the healer picks it up. Open the workbench to
-watch the fill rate collapse, the proposal appear, the fixture replay pass, and the version get
-promoted.
-
-No API key is needed for any of this. The LLM proposal stage is the only part that wants one — set
-`ANTHROPIC_API_KEY` or point `OLLAMA_URL` at a local model. Without either, the healer stops after the
-value-anchor and DOM-diff stages and escalates the rest, which is a degraded mode rather than a broken
-one: those two stages handle the majority of real breakage on their own.
+The LLM proposal stage (Phase 4) is the only part that will want an API key — `ANTHROPIC_API_KEY` or a
+local `OLLAMA_URL`. Without either, the healer stops after the value-anchor and DOM-diff stages and
+escalates the rest: a degraded mode, not a broken one.
 
 ## Architecture
 
@@ -249,15 +254,16 @@ enforcement table lists where each one is implemented.
 |---|---|
 | `kintsugi/` | pipeline, site-pack model, healer, gate, API |
 | `packs/` | site packs, one YAML per source and entity |
-| `workbench/` | React incident workbench |
+| `workbench/` | Next.js incident workbench (Phase 4) |
 | `tests/mutations/` | the breakage catalog and its expected outcomes |
 | `fixtures/` | golden snapshots with expected values, including edge cases |
-| `docs/` | architecture, data model, healing, test strategy, roadmap, ADRs |
-| `ops/` | compose, Prometheus rules, Grafana dashboards, alert routing |
+| `compose.yaml` | local service stack; a single PostgreSQL 16 service in Phase 0 |
+| `ops/` | Prometheus rules, Grafana dashboards, alert routing |
 
 ## Status
 
-Phase 0 of six. See [`docs/08-roadmap.md`](docs/08-roadmap.md) for what each phase has to prove before
-the next one starts. The badge numbers and the worked example reflect the target of Phase 2 and are
-replaced with measured values as it lands — a README that fakes its own results would be a strange
-thing to ship on a project whose entire argument is verification before trust.
+Phase 0 of six — the walking skeleton. Each phase has a checkable definition of done before the next
+one starts; the phase plan is kept in the project's internal design notes and is not published here.
+The two `target:` badges and the worked example describe the Phase 2 goal, not a measurement, and are
+replaced with real numbers as that phase lands — a README that fakes its own results would be a
+strange thing to ship on a project whose entire argument is verification before trust.
