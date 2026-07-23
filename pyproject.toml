@@ -76,7 +76,10 @@ testpaths = ["tests"]
 # `-m 'not live'` haelt den Standardlauf offline. docs/07 verspricht fuer
 # Stufe 0 "laeuft bei jedem Commit, dauert Sekunden" — das ist nur wahr, wenn
 # der Standardlauf keine Steckdose nach draussen hat.
-addopts = "-ra --strict-markers --strict-config -m 'not live'"
+# Standardlauf ohne live UND ohne integration: so bekommen Beitragende ohne
+# Docker ein gruenes `uv run pytest`. Integrationstests laufen nur explizit mit
+# `-m integration` (lokal mit KINTSUGI_PG_PORT, in CI im integration-Job).
+addopts = "-ra --strict-markers --strict-config -m 'not live and not integration'"
 markers = [
     "unit: reine Einheitentests, kein Netz, keine Datenbank",
     "integration: benoetigt die Postgres-16-Instanz auf loopback",
