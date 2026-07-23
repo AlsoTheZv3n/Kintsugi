@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Nur Lesen. Kein Job hier schreibt ins Repo.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# KINTSUGI_CONTACT wird von jedem Job geerbt, damit CLI- und Offline-Alembic-
+# Schritte nicht an einer fehlenden Kontaktadresse scheitern (ADR-014/I0.1.6).
+env:
+  KINTSUGI_CONTACT: ops@example.invalid
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      # Stoppt eine handgeaenderte pyproject.toml, die vom Lockfile abdriftet.
+      - run: uv lock --check
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pre-commit run --all-files
+
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv lock --check
+      - run: uv run mypy kintsugi
+
+  unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - run: uv lock --check
+      # Kein Netz zu einer gescrapten Seite und keine DB: live und integration
+      # sind abgewaehlt. Der Integrationsjob mit postgres-Service kommt mit der
+      # DoD (E0.9) additiv dazu.
+      - run: uv run pytest -m "not live and not integration"
