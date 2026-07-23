@@ -41,7 +41,7 @@ def _table_rows() -> list[dict[str, str]]:
     for ln in lines[header_idx + 2 :]:  # Header + Trennzeile ueberspringen
         if not ln.strip().startswith("|"):
             break
-        cells = [c for c in ln.strip().strip("|").split("|")]
+        cells = ln.strip().strip("|").split("|")
         if len(cells) != 5:
             pytest.fail(f"Tabellenzeile hat {len(cells)} statt 5 Zellen: {ln!r}")
         rows.append(
