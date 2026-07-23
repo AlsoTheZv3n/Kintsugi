@@ -37,3 +37,8 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Interne Entwurfsdokumente. Bleiben lokal als Spec-Grundlage, aber nicht im
+# oeffentlichen Repo. Kein getrackter Code liest zur Laufzeit aus docs/ — die
+# Verweise dort sind Kommentare —, deshalb bleibt CI ohne docs/ gruen.
+docs/
