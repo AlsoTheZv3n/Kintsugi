@@ -1,0 +1,36 @@
+# Lokaler Dienst-Stack. In Phase 0 genau ein Dienst: PostgreSQL 16.
+# Jeder Dienst, dessen Image noch nicht existiert (api, workbench, Grafana,
+# Prometheus), ist bewusst nicht hier — ein compose-File, das nicht hochkommt,
+# ist derselbe Defekt wie ein Quickstart, der nicht laeuft.
+#
+# Kein top-level `version:`-Schluessel (obsolet in Compose v2).
+
+services:
+  postgres:
+    # Nicht postgres:16-alpine: die Alpine-Variante bringt andere initdb-Locale-
+    # und Collation-Defaults mit, sodass ein lokaler Lauf und ein CI-Lauf Text
+    # verschieden sortieren und vergleichen wuerden, obwohl beide "Postgres 16"
+    # heissen. Der CI-Service-Container nutzt denselben Tag.
+    image: postgres:16
+    environment:
+      POSTGRES_USER: kintsugi
+      POSTGRES_PASSWORD: kintsugi
+      POSTGRES_DB: kintsugi
+    ports:
+      # Diese Maschine faehrt XAMPP, das 5432 schon besitzen kann. Der Host-Port
+      # ist deshalb ueber KINTSUGI_PG_PORT ueberschreibbar, ohne diese Datei zu
+      # editieren; das Settings-Modul baut database_url aus derselben Variable,
+      # sodass die Anwendung demselben Port folgt.
+      - "${KINTSUGI_PG_PORT:-5432}:5432"
+    volumes:
+      - kintsugi-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # Alembic und die Integrationstests warten auf diesen Healthcheck.
+      test: ["CMD-SHELL", "pg_isready -U kintsugi -d kintsugi"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  kintsugi-pgdata:

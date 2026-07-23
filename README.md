@@ -155,6 +155,12 @@ uv run kintsugi run books.toscrape.com
 1000 products, so the ≥200-record definition of done is reachable from a cold clone. A second `run`
 writes no duplicates.
 
+There is no host-installed `psql` client and none is needed: run ad-hoc SQL through the container,
+`docker compose exec -T postgres psql -U kintsugi -d kintsugi -c 'select 1'`. If port 5432 is already
+taken — this machine also runs XAMPP — set a single knob and everything follows it:
+`KINTSUGI_PG_PORT=55432 docker compose up -d postgres`; the application composes its `database_url`
+from the same variable.
+
 ### Planned
 
 Nothing below exists yet; each line is tagged with the phase that ships it, so the README dates its
