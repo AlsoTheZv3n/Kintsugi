@@ -712,6 +712,21 @@
     "JsonLdSource": {
       "additionalProperties": false,
       "properties": {
+        "fields": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fields"
+        },
         "kind": {
           "const": "jsonld",
           "title": "Kind",

@@ -46,8 +46,8 @@ def test_leerstring_zaehlt_als_leer():
 @pytest.mark.parametrize(
     ("kind", "phase"),
     [
-        # embedded_json ist ab I1.5.2 gebaut und daher kein Stub mehr.
-        ("jsonld", "Phase 1"),
+        # jsonld/embedded_json sind ab I1.5.2/I1.5.2b gebaut und keine Stubs mehr.
+        # xhr bleibt Stub bis I1.5.3.
         ("xhr", "Phase 1"),
         ("llm", "Phase 4"),
         ("api", "Phase 5"),

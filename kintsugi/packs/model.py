@@ -159,7 +159,10 @@ class ApiSource(_Model):
 
 class JsonLdSource(_Model):
     kind: Literal["jsonld"]
-    type: str
+    type: str  # schema.org @type, case-sensitiv; erster Treffer in Dokumentreihenfolge
+    # Optionale Feld-Map (Feldname -> jsonpath relativ zum getroffenen Objekt).
+    # Fehlt sie, werden die Top-Level-Keys des Objekts direkt als Felder genommen.
+    fields: dict[str, str] | None = None
 
 
 class EmbeddedJsonSource(_Model):
