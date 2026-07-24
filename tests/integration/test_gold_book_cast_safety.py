@@ -78,9 +78,11 @@ def _insert_record(conn, sp, snap, *, upc, payload, quality="{}") -> None:
     )
 
 
-def test_feindliche_zeile_bricht_gold_book_nicht():
+def test_feindliche_zeile_bricht_gold_book_nicht(migrated_engine):
     """Ein Payload mit price='n/a' darf keinen Full-Table-Fehler ausloesen."""
-    eng = get_engine()
+    # Ueber migrated_engine, damit das Schema frisch ist und keine Daten aus
+    # anderen Integrationsmodulen (gleiche domain/entity/version) kollidieren.
+    eng = migrated_engine
     with eng.begin() as conn:
         sp, snap = _parents(conn)
         _insert_record(conn, sp, snap, upc="upc-hostile", payload='{"title": "T", "price": "n/a"}')
