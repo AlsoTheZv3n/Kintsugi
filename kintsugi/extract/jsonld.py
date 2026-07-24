@@ -20,10 +20,10 @@ from __future__ import annotations
 import json
 from typing import TYPE_CHECKING, cast
 
-from jsonpath_ng import parse as jsonpath_parse
 from selectolax.lexbor import LexborHTMLParser
 
 from kintsugi.extract.base import register
+from kintsugi.extract.jsonpath_fields import map_fields
 from kintsugi.packs.model import JsonLdSource
 
 if TYPE_CHECKING:
@@ -66,16 +66,6 @@ def _find(doc: LexborHTMLParser, type_: str) -> dict[str, object] | None:
     return None
 
 
-def _map_fields(obj: dict[str, object], fields: dict[str, str]) -> dict[str, object]:
-    out: dict[str, object] = {}
-    for name, path in fields.items():
-        expr = jsonpath_parse(path if path.startswith("$") else "$." + path)
-        found: list[object] = [match.value for match in expr.find(obj)]
-        if found:
-            out[name] = found[0] if len(found) == 1 else found
-    return out
-
-
 class JsonLdExtractor:
     """Zieht Felder aus ``application/ld+json`` (schema.org @type)."""
 
@@ -85,7 +75,7 @@ class JsonLdExtractor:
         obj = _find(doc, source.type)
         if obj is None:
             return {}  # typisierter Fehltreffer -> Kette faellt durch
-        return _map_fields(obj, source.fields) if source.fields else dict(obj)
+        return map_fields(obj, source.fields) if source.fields else dict(obj)
 
     def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
         """JSON-LD ist von Natur aus einzeilig: der erste ``@type``-Treffer.
@@ -102,7 +92,7 @@ class JsonLdExtractor:
         obj = _find(doc, source.type)
         if obj is None:
             return []
-        return [_map_fields(obj, source.fields) if source.fields else dict(obj)]
+        return [map_fields(obj, source.fields) if source.fields else dict(obj)]
 
 
 register("jsonld", JsonLdExtractor())

@@ -173,6 +173,10 @@ class EmbeddedJsonSource(_Model):
     # Name (inline-js-var-Modus) — genau der Fall, den script_id nicht adressiert.
     var_name: str | None = None
     root: str | None = None  # jsonpath/dotted-Pfad in die (Zeilen-)Nutzlast
+    # Optionale Feld-Map (Feldname -> jsonpath relativ zur Zeile), gleiche Semantik
+    # wie bei jsonld. Fehlt sie, werden die Top-Level-Keys der Zeile direkt genommen.
+    # #104: quotes' author ist ein verschachteltes Objekt, also author -> $.author.name.
+    fields: dict[str, str] | None = None
 
     @model_validator(mode="after")
     def _exactly_one_locator(self) -> EmbeddedJsonSource:

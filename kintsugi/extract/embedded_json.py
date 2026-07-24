@@ -16,10 +16,12 @@ Ein abgeschnittenes Literal wirft ``EmbeddedJsonError`` (typisiert), nie einen
 blanken ``json.JSONDecodeError`` — der Aufrufer soll den Bruch als Extraktions-
 fehler behandeln, nicht als generischen Parserfehler.
 
-Rueckgabe sind die rohen Zeilen-Objekte (Schluessel = Feldnamen); die
-Transform-/derived_from-Kette liegt wie bei css spaeter. ``extract`` liefert die
-erste Entitaet (Prioritaetskette), ``extract_all`` alle Zeilen (Mehrzeilen-Quellen
-wie quotes).
+Rueckgabe sind die Zeilen-Objekte; ohne ``fields`` sind die Schluessel die
+Roh-Keys der Zeile, mit ``fields`` werden sie ueber eine jsonpath-Map (gleiche
+Semantik wie jsonld) gebildet — quotes' ``author`` ist ein verschachteltes Objekt,
+also ``author -> $.author.name``. Die Transform-/derived_from-Kette liegt wie bei
+css spaeter. ``extract`` liefert die erste Entitaet (Prioritaetskette),
+``extract_all`` alle Zeilen (Mehrzeilen-Quellen wie quotes).
 """
 
 from __future__ import annotations
@@ -32,6 +34,7 @@ from jsonpath_ng import parse as jsonpath_parse
 from selectolax.lexbor import LexborHTMLParser, LexborNode
 
 from kintsugi.extract.base import register
+from kintsugi.extract.jsonpath_fields import apply_field_map, compile_field_map
 from kintsugi.packs.model import EmbeddedJsonSource
 
 if TYPE_CHECKING:
@@ -147,19 +150,33 @@ def _rows(doc: LexborHTMLParser, source: EmbeddedJsonSource) -> list[dict[str, o
     return []
 
 
+def _resolved_rows(doc: LexborHTMLParser, source: EmbeddedJsonSource) -> list[dict[str, object]]:
+    """Die Zeilen, optional durch die jsonpath-Feld-Map gebildet.
+
+    Ohne ``fields`` bleiben die Roh-Keys der Zeile; mit ``fields`` wird die Map
+    **einmal** kompiliert und auf jede der N Zeilen angewandt (#104: author ist ein
+    verschachteltes Objekt, author -> $.author.name).
+    """
+    rows = _rows(doc, source)
+    if source.fields is None:
+        return rows
+    compiled = compile_field_map(source.fields)
+    return [apply_field_map(compiled, row) for row in rows]
+
+
 class EmbeddedJsonExtractor:
     """Zieht Felder aus eingebettetem JSON (script_id oder inline_js_var)."""
 
     def extract(self, doc: object, source: object) -> dict[str, object]:
         assert isinstance(doc, LexborHTMLParser)
         assert isinstance(source, EmbeddedJsonSource)
-        rows = _rows(doc, source)
+        rows = _resolved_rows(doc, source)
         return dict(rows[0]) if rows else {}
 
     def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
         assert isinstance(doc, LexborHTMLParser)
         assert isinstance(source, EmbeddedJsonSource)
-        return [dict(row) for row in _rows(doc, source)]
+        return [dict(row) for row in _resolved_rows(doc, source)]
 
 
 register("embedded_json", EmbeddedJsonExtractor())

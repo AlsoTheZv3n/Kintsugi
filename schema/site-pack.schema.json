@@ -329,6 +329,21 @@
     "EmbeddedJsonSource": {
       "additionalProperties": false,
       "properties": {
+        "fields": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fields"
+        },
         "kind": {
           "const": "embedded_json",
           "title": "Kind",
