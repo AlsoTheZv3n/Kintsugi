@@ -173,8 +173,102 @@ class ExtractSpec(_Model):
     sources: list[SourceSpec]
 
 
+# --------------------------------------------------------------------------
+# Schema, Qualitaet, Heilung, Auslieferung
+# --------------------------------------------------------------------------
+
+FieldType = Literal["string", "decimal", "integer", "boolean", "datetime"]
+
+
+class DerivedFrom(_Model):
+    """ADR-013: ein Feld ohne eigene Extraktionsquelle wird berechnet.
+
+    ``source`` nennt ein Feld oder eine Liste von Feldern, ``transform`` den
+    registrierten Transform (z. B. currency_from_symbol, sha256_slug).
+    """
+
+    source: str | list[str]
+    transform: str
+
+
+class FieldSchema(_Model):
+    """Vertrag eines einzelnen Zielfelds (docs/02 §Feldsemantik)."""
+
+    type: FieldType
+    required: bool = False
+    min_fill_rate: float = Field(ge=0.0, le=1.0)
+    sane_range: tuple[float, float] | None = None
+    enum: list[str] | None = None
+    pattern: str | None = None
+    derived_from: DerivedFrom | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _default_min_fill_rate(cls, data: object) -> object:
+        # docs/02 nennt min_fill_rate den eigentlichen Wachhund: ein Pflichtfeld
+        # darf nie auf einen ungeprueften Schwellwert defaulten. Fehlt der Wert,
+        # ist er 1.0 fuer required, sonst 0.0.
+        if isinstance(data, dict) and "min_fill_rate" not in data:
+            data = dict(data)
+            data["min_fill_rate"] = 1.0 if data.get("required") else 0.0
+        return data
+
+    @field_validator("pattern")
+    @classmethod
+    def _compilable(cls, value: str | None) -> str | None:
+        if value is not None:
+            try:
+                re.compile(value)
+            except re.error as exc:
+                msg = f"pattern ist kein gueltiger regulaerer Ausdruck: {exc}"
+                raise ValueError(msg) from exc
+        return value
+
+
+class SchemaSpec(_Model):
+    natural_key: list[str] = Field(min_length=1)
+    fields: dict[str, FieldSchema]
+
+
+class QualitySpec(_Model):
+    min_rows_per_run: int = Field(default=1, ge=0)
+    row_count_deviation: float = Field(default=0.30, ge=0)
+    max_duplicate_rate: float = Field(default=0.02, ge=0, le=1)
+    # docs/04 §Ausloeser nennt "Bereichsverletzungen ueber 5 %" als Trigger, hat
+    # aber im docs/02-Beispiel keinen deklarativen Ort. Dieses Feld ist er, damit
+    # das Qualitaetsprofil in Phase 1 einen Schwellwert liest statt einer
+    # hartcodierten Konstante.
+    max_range_violation_rate: float = Field(default=0.05, ge=0, le=1)
+    # Phase 0 hat keinen Baseline-Lauf, also sind die Schwellwerte provisorisch;
+    # die ydata-profiling-Baseline in Phase 1 ersetzt sie, statt einen Schaetzwert
+    # still zu erben.
+    thresholds_source: Literal["provisional", "baseline"] = "provisional"
+
+
+class HealingSpec(_Model):
+    enabled: bool = False
+    max_auto_versions_per_window: int = Field(default=3, ge=0)
+    window: str = "7d"
+    require_golden_pass: bool = True
+    canary_fraction: float = Field(default=0.05, ge=0, le=1)
+    canary_min_rows: int = Field(default=50, ge=0)
+    escalate_on: list[str] = Field(default_factory=list)
+
+
+Sink = Literal["postgres", "webhook", "parquet"]
+
+
+def _default_sinks() -> list[Sink]:
+    return ["postgres"]
+
+
+class DeliverySpec(_Model):
+    sinks: list[Sink] = Field(default_factory=_default_sinks)
+    webhook_on_change: str | None = None
+
+
 class SitePack(_Model):
-    """Wurzel des Site-Pack-Vertrags. Weitere Bloecke folgen in I0.6.3 bis I0.6.4."""
+    """Wurzel des Site-Pack-Vertrags. Der Compliance-Block folgt in I0.6.4."""
 
     api_version: Literal["kintsugi/v1"] = Field(alias="apiVersion")
     domain: str
@@ -183,3 +277,7 @@ class SitePack(_Model):
     discovery: DiscoverySpec
     fetch: FetchSpec = Field(default_factory=FetchSpec)
     extract: ExtractSpec
+    schema_: SchemaSpec = Field(alias="schema")
+    quality: QualitySpec = Field(default_factory=QualitySpec)
+    healing: HealingSpec = Field(default_factory=HealingSpec)
+    delivery: DeliverySpec = Field(default_factory=DeliverySpec)

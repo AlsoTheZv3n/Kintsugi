@@ -23,6 +23,10 @@ def _minimal_pack(**overrides: object) -> dict[str, object]:
                 {"kind": "css", "fields": {"title": {"selector": "h1"}}},
             ],
         },
+        "schema": {
+            "natural_key": ["upc"],
+            "fields": {"upc": {"type": "string", "required": True}},
+        },
     }
     base.update(overrides)
     return base
