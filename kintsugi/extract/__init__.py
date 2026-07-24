@@ -1,7 +1,8 @@
-"""Extraktion: Protokoll, Prioritaetskette, css-Extraktor, derived_from.
+"""Extraktion: Protokoll, Prioritaetskette, Extraktoren, derived_from.
 
-Importiert ``css`` fuer den Registrierungs-Seiteneffekt, damit die Registry den
-css-Extraktor kennt, sobald irgendetwas aus ``kintsugi.extract`` genutzt wird.
+Importiert die Extraktor-Module fuer den Registrierungs-Seiteneffekt, damit die
+Registry sie kennt, sobald irgendetwas aus ``kintsugi.extract`` genutzt wird.
 """
 
 from kintsugi.extract import css as css
+from kintsugi.extract import embedded_json as embedded_json

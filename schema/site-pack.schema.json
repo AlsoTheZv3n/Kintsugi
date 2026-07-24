@@ -329,18 +329,6 @@
     "EmbeddedJsonSource": {
       "additionalProperties": false,
       "properties": {
-        "js_var": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Js Var"
-        },
         "kind": {
           "const": "embedded_json",
           "title": "Kind",
@@ -369,6 +357,18 @@
           ],
           "default": null,
           "title": "Script Id"
+        },
+        "var_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Var Name"
         }
       },
       "required": [

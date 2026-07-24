@@ -29,11 +29,14 @@ class PackConfigError(Exception):
 class Extractor(Protocol):
     """Zieht die deklarierten Felder aus einem geparsten Dokument.
 
-    Gibt je Feld einen rohen Textwert oder ``None`` zurueck; ``None`` und ``""``
-    zaehlen beide als leer.
+    Gibt je Feld einen Wert oder ``None`` zurueck; ``None`` und ``""`` zaehlen
+    beide als leer. Der css-Extraktor liefert rohe Textwerte (``str | None``);
+    strukturierte Quellen (jsonld/embedded_json/xhr) liefern auch verschachtelte
+    Werte (Liste, Objekt), daher ``object`` — die Transform-/derived_from-Kette
+    normalisiert danach.
     """
 
-    def extract(self, doc: object, source: object) -> dict[str, str | None]: ...
+    def extract(self, doc: object, source: object) -> dict[str, object]: ...
 
 
 class _StubExtractor:
@@ -43,7 +46,7 @@ class _StubExtractor:
         self._kind = kind
         self._phase = phase
 
-    def extract(self, doc: object, source: object) -> dict[str, str | None]:
+    def extract(self, doc: object, source: object) -> dict[str, object]:
         raise NotImplementedError(f"Extraktor fuer kind={self._kind!r} kommt in {self._phase}")
 
 

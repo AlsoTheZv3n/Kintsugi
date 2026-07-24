@@ -34,27 +34,29 @@ def _field_value(node: LexborHTMLParser | LexborNode, field: FieldExtract) -> st
     return found.text(strip=True) or None
 
 
-def _row(
-    node: LexborHTMLParser | LexborNode, fields: dict[str, FieldExtract]
-) -> dict[str, str | None]:
-    return {name: _field_value(node, field) for name, field in fields.items()}
+def _row(node: LexborHTMLParser | LexborNode, fields: dict[str, FieldExtract]) -> dict[str, object]:
+    # dict[str, object] statt str|None: das Extractor-Protokoll ist auf strukturierte
+    # Quellen gelockert; css liefert weiterhin nur str|None-Werte hinein.
+    row: dict[str, object] = {name: _field_value(node, field) for name, field in fields.items()}
+    return row
 
 
 class CssExtractor:
     """Zieht Felder per CSS-Selektor. row_selector null = eine Entitaet pro Seite."""
 
-    def extract(self, doc: object, source: object) -> dict[str, str | None]:
+    def extract(self, doc: object, source: object) -> dict[str, object]:
         assert isinstance(source, CssSource)
         parser = doc
         assert isinstance(parser, LexborHTMLParser)
         if source.row_selector is not None:
             node = cast("LexborNode | None", parser.css_first(source.row_selector))
             if node is None:
-                return dict.fromkeys(source.fields)
+                empty: dict[str, object] = dict.fromkeys(source.fields)
+                return empty
             return _row(node, source.fields)
         return _row(parser, source.fields)
 
-    def extract_all(self, doc: LexborHTMLParser, source: CssSource) -> list[dict[str, str | None]]:
+    def extract_all(self, doc: LexborHTMLParser, source: CssSource) -> list[dict[str, object]]:
         """Alle Zeilen: bei row_selector eine je Treffer, sonst genau eine."""
         if source.row_selector is not None:
             return [_row(node, source.fields) for node in doc.css(source.row_selector)]

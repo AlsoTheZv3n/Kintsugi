@@ -164,16 +164,18 @@ class JsonLdSource(_Model):
 
 class EmbeddedJsonSource(_Model):
     kind: Literal["embedded_json"]
-    script_id: str | None = None  # z. B. __NEXT_DATA__
-    root: str | None = None
-    # F5: quotes.toscrape.com/js legt die Daten als `var data = [...]` ohne
-    # id-Attribut ab. js_var findet die Variablenzuweisung per Name.
-    js_var: str | None = None
+    script_id: str | None = None  # z. B. __NEXT_DATA__ (script-id-Modus)
+    # F5: quotes.toscrape.com/js legt die Daten als `var data = [...]` auf einem
+    # script-Tag OHNE id-Attribut ab. var_name findet die Variablenzuweisung per
+    # Name (inline-js-var-Modus) — genau der Fall, den script_id nicht adressiert.
+    var_name: str | None = None
+    root: str | None = None  # jsonpath/dotted-Pfad in die (Zeilen-)Nutzlast
 
     @model_validator(mode="after")
-    def _needs_a_locator(self) -> EmbeddedJsonSource:
-        if not self.script_id and not self.js_var:
-            raise ValueError("embedded_json braucht script_id oder js_var")
+    def _exactly_one_locator(self) -> EmbeddedJsonSource:
+        # Genau eins von script_id / var_name — nie beide, nie keins.
+        if bool(self.script_id) == bool(self.var_name):
+            raise ValueError("embedded_json braucht genau eins von script_id oder var_name")
         return self
 
 

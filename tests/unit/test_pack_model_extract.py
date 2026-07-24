@@ -47,15 +47,21 @@ def test_css_felder_werden_geparst():
     assert css.fields["price"].anchor_hint == "Preis mit Symbol"
 
 
-def test_embedded_json_braucht_locator():
-    with pytest.raises(ValidationError, match="script_id oder js_var"):
+def test_embedded_json_braucht_genau_einen_locator():
+    # Keiner -> Fehler.
+    with pytest.raises(ValidationError, match="genau eins von script_id oder var_name"):
         ExtractSpec.model_validate({"sources": [{"kind": "embedded_json"}]})
+    # Beide -> Fehler (mutually exclusive).
+    with pytest.raises(ValidationError, match="genau eins von script_id oder var_name"):
+        ExtractSpec.model_validate(
+            {"sources": [{"kind": "embedded_json", "script_id": "x", "var_name": "data"}]}
+        )
 
 
-def test_embedded_json_akzeptiert_js_var():
+def test_embedded_json_akzeptiert_var_name():
     """F5: quotes.toscrape.com/js legt Daten als var-Zuweisung ohne id ab."""
-    spec = ExtractSpec.model_validate({"sources": [{"kind": "embedded_json", "js_var": "data"}]})
-    assert spec.sources[0].js_var == "data"
+    spec = ExtractSpec.model_validate({"sources": [{"kind": "embedded_json", "var_name": "data"}]})
+    assert spec.sources[0].var_name == "data"
 
 
 @pytest.mark.parametrize(

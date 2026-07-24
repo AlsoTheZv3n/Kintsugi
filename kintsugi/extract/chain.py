@@ -23,14 +23,15 @@ def run_chain(
     doc: object,
     *,
     registry: Mapping[str, Extractor] | None = None,
-) -> tuple[dict[str, str | None], dict[str, str]]:
+) -> tuple[dict[str, object], dict[str, str]]:
     """Fuehrt die Quellen in Reihenfolge aus und mischt je Feld first-non-empty.
 
     ``sources`` sind Objekte mit einem ``kind``-Attribut (SourceSpec). Gibt
     ``(values, provenance)`` zurueck; provenance nennt je gewonnenem Feld die
-    Art, die es geliefert hat.
+    Art, die es geliefert hat. Werte sind ``object`` — css liefert ``str | None``,
+    strukturierte Quellen auch Listen/Objekte.
     """
-    values: dict[str, str | None] = {}
+    values: dict[str, object] = {}
     provenance: dict[str, str] = {}
     for source in sources:
         kind = source.kind  # type: ignore[attr-defined]
