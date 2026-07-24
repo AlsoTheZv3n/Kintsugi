@@ -14,14 +14,21 @@ sequenziell (ein Test prueft das per AST).
 Block-Erkennung (docs/04 §Vorpruefung, README §Compliance): eine Consent-Wall,
 ein CAPTCHA oder eine Challenge wird **an der Signatur des Koerpers** erkannt,
 nie am Statuscode. Auf einen Treffer bricht der Runner die **ganze Domain** ab
-(``Blocked``), setzt ``status='failed'`` und ``error='blocked:<reason>'`` und die
-CLI endet mit einem Fehlercode — die README-Zusage „A CAPTCHA or consent wall
-aborts the run" ist hier durchgesetzt, nicht nur in COMPLIANCE.md. (Der weichere
-``degraded``-Pfad in I0.9.6 gilt partiellen Ausfaellen ohne harte Blockade; eine
-Blockade bricht immer ab.)
+(kein Extraktor, die Discovery-Schleife endet). Der Ausgang wird ab Phase 1 aus
+der Klassifikation abgeleitet (I1.4.6): die Blockade wird ein
+``PrecheckVerdict.blocked``, der Klassifikator liefert ``no_action`` und einen
+``blocked``-Incident, und der Lauf schliesst **degraded**, nicht failed —
+``failed`` bleibt der unbehandelten Ausnahme, dem fehlenden Pack und der zu
+niedrigen Zeilenzahl bei ``ok``-Verdikt vorbehalten (docs/04 verlangt fuer die
+Negativfaelle degraded/no_action, nie failed).
+
+Vorpruefung -> ``classify`` -> Incident-Writer laufen beim Lauf-Abschluss in
+**derselben Transaktion** wie das ``run``-Update; ein Fehler dazwischen rollt
+Incidents und ``run.metrics`` gemeinsam zurueck. Der Heiler bleibt abwesend: der
+Runner bindet nur ``heal_protocol`` ein, nie ein ``kintsugi.heal.*``-Modul.
 
 ``dry_run`` schreibt weiterhin Snapshots (Snapshot-vor-Parsing ist nicht
-verhandelbar), aber keine ``record``-Zeile.
+verhandelbar), aber keine ``record``-Zeile und keinen Incident.
 """
 
 from __future__ import annotations
@@ -35,19 +42,30 @@ from selectolax.lexbor import LexborHTMLParser
 from sqlalchemy import func, insert, select, update
 
 from kintsugi.canonical import encode_natural_key
+from kintsugi.classify.enums import PrecheckVerdict
+from kintsugi.classify.outcome import classify
+from kintsugi.classify.precheck import evaluate_precheck
 from kintsugi.config import Settings, get_settings
 from kintsugi.discovery import DiscoveryContext, get_strategy
 from kintsugi.extract.entity import extract_entity
-from kintsugi.fetch.block_detect import Blocked, detect_block, resolve_block_signatures
+from kintsugi.fetch.block_detect import (
+    SignatureHit,
+    detect_block,
+    detect_soft_404,
+    resolve_block_signatures,
+    resolve_soft_404_signatures,
+)
 from kintsugi.fetch.http import HttpFetcher, resolve_encoding
 from kintsugi.fetch.ratelimit import DomainLimiter
 from kintsugi.fetch.robots import RobotsDenied
+from kintsugi.heal_protocol import HealerCapabilities
 from kintsugi.packs.model import SitePack
 from kintsugi.quality.counters import RunCounters
 from kintsugi.quality.history import load_history
-from kintsugi.quality.metrics import FetchStats, compute_profile, triggers
+from kintsugi.quality.metrics import FetchStats, compute_profile
 from kintsugi.quality.profile import QualityProfile
 from kintsugi.storage.db import get_engine
+from kintsugi.storage.incidents import report
 from kintsugi.storage.records import RecordRow, touch_last_seen, write_records
 from kintsugi.storage.snapshot_repo import save_snapshot
 from kintsugi.storage.snapshots import FilesystemSnapshotStore
@@ -60,6 +78,8 @@ if TYPE_CHECKING:
 
     from sqlalchemy import Connection, Row
 
+    from kintsugi.classify.outcome import Signal
+    from kintsugi.classify.precheck import PrecheckResult
     from kintsugi.fetch.base import Fetcher
 
 __all__ = ["NoActivePackError", "RunResult", "load_profile", "run"]
@@ -85,12 +105,19 @@ def _json_safe(payload: dict[str, object]) -> dict[str, object]:
 
     payload_hash wird ueber genau diese Darstellung gebildet (kanonisch,
     deterministisch); ``gold_book`` castet ``payload->>'price'`` wieder zu numeric.
+
+    Abwesende (``None``) Felder werden **weggelassen**, nie als ``null``
+    geschrieben (ADR-009 Kontrakt 1): ein kaputter Selektor ist ein Fill-Rate-
+    Einbruch, kein null-Wert im Bestand — ``canonical_json`` lehnt ``None``
+    genau darum ab.
     """
     out: dict[str, object] = {}
     for key, value in payload.items():
+        if value is None:
+            continue
         if isinstance(value, datetime):
             out[key] = value.isoformat()
-        elif value is None or isinstance(value, (str, int, bool)):
+        elif isinstance(value, (str, int, bool)):
             out[key] = value
         else:
             out[key] = str(value)  # Decimal u. Ae.
@@ -162,7 +189,10 @@ def run(
         unchanged_urls: list[str] = []
         partial_failures = 0
         error: str | None = None
-        blocked_reason: str | None = None
+        block_hit: SignatureHit | None = None
+        block_evidence: dict[str, object] = {}
+        soft_404_hits: list[SignatureHit] = []
+        soft_evidence: dict[str, object] = {}
 
         try:
             ctx = DiscoveryContext(fetcher=fetcher, run_id=run_id, counters=counters)
@@ -207,9 +237,38 @@ def run(
                 assert snap.body is not None
                 encoding = resolve_encoding(snap.body, None)
                 html = snap.body.decode(encoding, errors="replace")
-                hit = detect_block(html, {}, resolve_block_signatures(pack.fetch.block_signatures))
-                if hit is not None:
-                    raise Blocked(hit.id)
+                block_hit = detect_block(
+                    html, {}, resolve_block_signatures(pack.fetch.block_signatures)
+                )
+                if block_hit is not None:
+                    # Eine Blockade bricht die Domain ab: nicht extrahieren, Schleife
+                    # beenden. Der Ausgang (degraded + blocked-Incident) faellt beim
+                    # Lauf-Abschluss aus der Klassifikation.
+                    block_evidence = {
+                        "url": url,
+                        "http_status": snap.http_status,
+                        "snapshot_id": str(snap.snapshot_id),
+                    }
+                    break
+
+                # Soft-404 (F1: nur Status 200; ein echter HTTP 404 ist kein Soft-404
+                # und erreicht diesen Zweig nie — er faellt oben in partial_failures).
+                soft_hit = detect_soft_404(
+                    html,
+                    snap.http_status,
+                    url,
+                    resolve_soft_404_signatures(pack.fetch.soft_404_signatures),
+                )
+                if soft_hit is not None:
+                    if not soft_404_hits:
+                        soft_evidence = {
+                            "url": url,
+                            "http_status": snap.http_status,
+                            "snapshot_id": str(snap.snapshot_id),
+                        }
+                    soft_404_hits.append(soft_hit)
+                    partial_failures += 1
+                    continue
 
                 doc = LexborHTMLParser(html)
                 values, _ = extract_entity(pack, doc)
@@ -235,9 +294,6 @@ def run(
                         quality=quality,
                     )
                 )
-        except Blocked as exc:
-            blocked_reason = exc.reason
-            error = f"blocked:{exc.reason}"
         except Exception as exc:
             error = f"{type(exc).__name__}: {exc}"
         finally:
@@ -246,7 +302,7 @@ def run(
 
         valid_from = datetime.now(UTC)
         duplicates = 0
-        if blocked_reason is None and error is None and not dry_run:
+        if block_hit is None and error is None and not dry_run:
             counters_write = write_records(
                 conn,
                 entity=pack_entity,
@@ -282,15 +338,58 @@ def run(
         )
         profile = compute_profile(accepted_payloads, pack, history, fetch_stats)
 
-        # Ein dry_run ist ein Smoke-Test und scheitert nicht an min_rows; ein
-        # echter (auch gekappter) Lauf setzt die Schwelle durch. Trigger machen den
-        # Lauf degraded — aber nur, wenn ueberhaupt neu extrahiert wurde (ein
-        # reiner unchanged-Lauf hat ein degeneriertes Profil und bleibt ok).
+        # Vorpruefung -> Klassifikation -> Incidents (I1.4.6), in derselben
+        # Transaktion wie der Lauf-Abschluss. Die Vorpruefung liest die
+        # Fetch-Ausgaenge (Block-/Soft-404-Treffer, 429/403-Anteil, keine Antwort)
+        # und das Kontingent (Phase 1: immer 0). Ein Soft-404 wird nur dann zum
+        # Lauf-Verdikt, wenn er der Ausgang war (kein einziger gueltiger Record).
+        soft_404_hit = soft_404_hits[0] if (soft_404_hits and counters.rows_valid == 0) else None
+        if block_hit is not None:
+            fetch_evidence: dict[str, object] = block_evidence
+        elif soft_404_hit is not None:
+            fetch_evidence = soft_evidence
+        else:
+            fetch_evidence = {}
+        precheck = evaluate_precheck(
+            max_auto_versions_per_window=pack.healing.max_auto_versions_per_window,
+            unreachable=counters.rows_considered > 0 and not counters.http,
+            block_hit=block_hit,
+            rate_limited=counters.http.get(429, 0) + counters.http.get(403, 0) > 0,
+            soft_404_hit=soft_404_hit,
+            auto_versions_in_window=_auto_versions_in_window(
+                conn, domain, pack_entity, pack.healing.window
+            ),
+            evidence=fetch_evidence,
+        )
+        classification = classify(profile, precheck, pack, HealerCapabilities.NONE)
+        # Ein reiner unchanged-Lauf hat ein degeneriertes Profil (nichts neu
+        # extrahiert -> fill_rate 0 fuer alles) und bleibt ok: bei ``ok``-Verdikt
+        # und null Extraktionen werden die Profil-Signale unterdrueckt. Die
+        # Vorpruefungs-Signale (blocked/soft_404/…) gelten dagegen immer.
+        degenerate_profile = precheck.verdict is PrecheckVerdict.ok and counters.rows_extracted == 0
+        effective_signals = () if degenerate_profile else classification.signals
+
+        # run.status wird aus der Klassifikation abgeleitet, an genau dieser Stelle.
+        if not dry_run:
+            for signal in effective_signals:
+                report(
+                    conn,
+                    site_pack_id=pack_id,
+                    run_id=run_id,
+                    kind=signal.incident_kind,
+                    severity=signal.severity,
+                    field=signal.field,
+                    evidence=_signal_evidence(signal, precheck),
+                )
+
+        # dry_run ist ein Smoke-Test und scheitert nicht an min_rows. Ein
+        # nicht-``ok``-Verdikt oder ein Warn+-Signal macht degraded, nie failed;
+        # failed bleibt der zu niedrigen Zeilenzahl bei ``ok``-Verdikt vorbehalten.
         meets_min = dry_run or counters.meets_min_rows(pack.quality.min_rows_per_run)
-        fired = counters.rows_extracted > 0 and bool(triggers(profile, pack, history))
+        fired = any(sig.severity != "info" for sig in effective_signals)
         status = _final_status(
-            blocked=blocked_reason is not None,
             has_error=error is not None,
+            verdict_non_ok=precheck.verdict is not PrecheckVerdict.ok,
             partial=partial_failures > 0 or fired,
             meets_min=meets_min,
         )
@@ -340,12 +439,63 @@ def _natural_keys_for_urls(conn: Connection, entity: str, urls: list[str]) -> li
     return list(result)
 
 
-def _final_status(*, blocked: bool, has_error: bool, partial: bool, meets_min: bool) -> str:
-    if blocked or has_error:
+def _final_status(*, has_error: bool, verdict_non_ok: bool, partial: bool, meets_min: bool) -> str:
+    # Genau eine Stelle, an der run.status entsteht (I1.4.6). Reihenfolge ist die
+    # Praezedenz: eine unbehandelte Ausnahme ist failed; ein Nicht-``ok``-Verdikt
+    # (blocked/unreachable/rate_limited/soft_404/quota) oder ein Teilausfall ist
+    # degraded, nie failed; failed bleibt der zu niedrigen Zeilenzahl bei
+    # ``ok``-Verdikt ohne Teilausfall vorbehalten (docs/04-Negativfaelle).
+    if has_error:
         return "failed"
+    if verdict_non_ok:
+        return "degraded"
     if partial:
-        # Teilausfall ohne harte Blockade: degraded, auch unter der Schwelle.
         return "degraded"
     if not meets_min:
         return "failed"
     return "ok"
+
+
+def _window_days(window: str) -> int:
+    """Parst ``healing.window`` (z. B. ``"7d"``) zu Tagen; Fallback 7."""
+    if window.endswith("d"):
+        try:
+            return int(window[:-1])
+        except ValueError:
+            return 7
+    return 7
+
+
+def _auto_versions_in_window(conn: Connection, domain: str, entity: str, window: str) -> int:
+    """Zahl der vom Heiler erzeugten Pack-Versionen im Fenster (Phase 1: immer 0).
+
+    ``created_by LIKE 'healer:%'`` unterscheidet Maschinen- von Menschenversionen
+    (docs/02 §Lebenszyklus). Der Zeitfilter nutzt die Server-Uhr (``now()``), nie
+    die Client-Uhr — sonst flackert die Grenze bei Uhren-Skew.
+    """
+    count: int = conn.execute(
+        select(func.count())
+        .select_from(site_pack)
+        .where(
+            site_pack.c.domain == domain,
+            site_pack.c.entity == entity,
+            site_pack.c.created_by.like("healer:%"),
+            site_pack.c.created_at
+            >= func.now() - func.make_interval(0, 0, 0, _window_days(window)),
+        )
+    ).scalar_one()
+    return count
+
+
+def _signal_evidence(signal: Signal, precheck: PrecheckResult) -> dict[str, object]:
+    """Baut das Evidence-Dict eines Signal-Incidents (#98) am Aufrufort zusammen."""
+    evidence: dict[str, object] = {
+        "signal": signal.id,
+        "field": signal.field,
+        "observed": signal.observed,
+        "threshold": signal.threshold,
+    }
+    # Fuer Verdikt-Signale (blocked/unreachable/…) traegt die Vorpruefung
+    # matched_signature, url, http_status und snapshot_id bei.
+    evidence.update(precheck.evidence)
+    return evidence

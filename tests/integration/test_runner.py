@@ -180,12 +180,16 @@ def test_consent_wall_bricht_ab_und_wird_nicht_extrahiert(conn, books_fixture_ba
     _activate_pack(conn, books_fixture_base_url)
     fetcher = WrapFetcher(_fast_fetcher(), mode="block")
     result = run("books.toscrape.com", fetcher=fetcher, settings=_settings(tmp_path))
-    # README/#67: eine Consent-Wall bricht die Domain ab (failed), nie extrahiert.
-    assert result.status == "failed"
-    assert result.error is not None
-    assert result.error.startswith("blocked:")
+    # Ab Phase 1 (I1.4.6, revidiert #67): eine Consent-Wall bricht die Domain ab
+    # (nie extrahiert), aber die Vorpruefung macht daraus einen blocked-Incident
+    # und der Lauf schliesst degraded, nicht failed (docs/04 verlangt degraded).
+    assert result.status == "degraded"
     assert _count(conn, record) == 0  # nichts extrahiert
     assert _count(conn, snapshot) >= 1  # aber der Block-Snapshot ist da
+    incidents = conn.execute(
+        text("select kind, severity from incident where closed_at is null")
+    ).all()
+    assert incidents == [("blocked", "warn")]
 
 
 def test_dry_run_schreibt_snapshots_aber_keine_records(conn, books_fixture_base_url, tmp_path):
