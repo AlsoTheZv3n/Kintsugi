@@ -15,6 +15,8 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from kintsugi.packs.denylist import check_domain, check_no_credentials
+
 _BASE = ConfigDict(frozen=True, extra="forbid", populate_by_name=True)
 
 
@@ -323,3 +325,18 @@ class SitePack(_Model):
     healing: HealingSpec = Field(default_factory=HealingSpec)
     delivery: DeliverySpec = Field(default_factory=DeliverySpec)
     compliance: ComplianceSpec
+
+    @model_validator(mode="before")
+    @classmethod
+    def _reject_credentials(cls, data: object) -> object:
+        # Vor der Feldvalidierung: das ganze rohe Dokument nach
+        # Zugangsdaten-Schluesseln durchsuchen, auch in dict-typisierten Bloecken.
+        check_no_credentials(data)
+        return data
+
+    @model_validator(mode="after")
+    def _reject_denied_domain(self) -> SitePack:
+        # In der Modellvalidierung, nicht nur in der CLI: ein Heiler-Vorschlag
+        # trifft die Sperre kostenlos.
+        check_domain(self.domain)
+        return self
