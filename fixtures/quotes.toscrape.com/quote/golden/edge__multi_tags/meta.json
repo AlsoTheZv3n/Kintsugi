@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/multi-tags/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "ba348c2d76d2458e3bb03a4108875d4992b81a54e2bce5bf79191f3a9919ffb4",
+  "byte_size": 607,
+  "fetcher": "httpx",
+  "golden_label": "edge:multi_tags",
+  "synthetic": true,
+  "derived_from": "baseline; tags-Liste mit fuenf Eintraegen (multi-tag-Zeile)",
+  "edit": "tags-Liste mit fuenf Eintraegen (multi-tag-Zeile)"
+}

@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "e6f8a389ee69f384",
+        "required": true
+      },
+      "text": {
+        "value": "Ein Zitat mit vielen Schlagworten.",
+        "required": true
+      },
+      "author": {
+        "value": "Viel Tag",
+        "required": true
+      },
+      "author_slug": {
+        "value": "viel-tag",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "c3aef1b690e13c12",
+        "required": true
+      },
+      "text": {
+        "value": "Ein zweites, kurzes.",
+        "required": true
+      },
+      "author": {
+        "value": "Kurz Tag",
+        "required": true
+      },
+      "author_slug": {
+        "value": "kurz-tag",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "e6f8a389ee69f384",
+    "c3aef1b690e13c12"
+  ]
+}

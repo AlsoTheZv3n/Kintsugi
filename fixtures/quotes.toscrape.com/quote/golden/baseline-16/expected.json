@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "e457e9867fc591c6",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 16-A ueber das Leben und die Wahrheit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 16 Alpha",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-16-alpha",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "026a3024f9114529",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 16-B ueber Mut und Zeit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 16 Beta",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-16-beta",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "e457e9867fc591c6",
+    "026a3024f9114529"
+  ]
+}

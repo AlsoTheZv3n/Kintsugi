@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "a5d069850c137362",
+        "required": true
+      },
+      "text": {
+        "value": "A",
+        "required": true
+      },
+      "author": {
+        "value": "K",
+        "required": true
+      },
+      "author_slug": {
+        "value": "k-autor",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "7290027b97504063",
+        "required": true
+      },
+      "text": {
+        "value": "B",
+        "required": true
+      },
+      "author": {
+        "value": "L",
+        "required": true
+      },
+      "author_slug": {
+        "value": "l-autor",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "a5d069850c137362",
+    "7290027b97504063"
+  ]
+}

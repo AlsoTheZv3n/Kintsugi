@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/no-tags/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "67b8b5d058e83d37820659a77228e4c1be630dbaea1f1a22f9c22a354ddb4a74",
+  "byte_size": 565,
+  "fetcher": "httpx",
+  "golden_label": "edge:no_tags",
+  "synthetic": true,
+  "derived_from": "baseline; tags-Liste leer (no-tag-Zeile)",
+  "edit": "tags-Liste leer (no-tag-Zeile)"
+}

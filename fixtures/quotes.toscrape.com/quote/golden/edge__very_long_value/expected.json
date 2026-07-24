@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "ff996854115df3a2",
+        "required": true
+      },
+      "text": {
+        "value": "Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. Sehr langes Zitat. ",
+        "required": true
+      },
+      "author": {
+        "value": "Lang Autor",
+        "required": true
+      },
+      "author_slug": {
+        "value": "lang-autor",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "03907a59ae4a1b06",
+        "required": true
+      },
+      "text": {
+        "value": "Zweites, normales Zitat.",
+        "required": true
+      },
+      "author": {
+        "value": "Norm Autor",
+        "required": true
+      },
+      "author_slug": {
+        "value": "norm-autor",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "ff996854115df3a2",
+    "03907a59ae4a1b06"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "882f0daaf4100c88",
+        "required": true
+      },
+      "text": {
+        "value": "Ein Zitat ganz ohne Schlagworte.",
+        "required": true
+      },
+      "author": {
+        "value": "Ohne Tag",
+        "required": true
+      },
+      "author_slug": {
+        "value": "ohne-tag",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "5f54c56334cebe4a",
+        "required": true
+      },
+      "text": {
+        "value": "Noch eines, ebenfalls ohne Tags.",
+        "required": true
+      },
+      "author": {
+        "value": "Leer Tag",
+        "required": true
+      },
+      "author_slug": {
+        "value": "leer-tag",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "882f0daaf4100c88",
+    "5f54c56334cebe4a"
+  ]
+}

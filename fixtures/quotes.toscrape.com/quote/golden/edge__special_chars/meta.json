@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/special-chars/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "32f4eff407cf1e32fe21aafc7ddc3b75bc6f1654ff817a4a936232eb1f0325f4",
+  "byte_size": 579,
+  "fetcher": "httpx",
+  "golden_label": "edge:special_chars",
+  "synthetic": true,
+  "derived_from": "baseline; Sonderzeichen und Entitaeten in Text/Autor",
+  "edit": "Sonderzeichen und Entitaeten in Text/Autor"
+}

@@ -125,6 +125,126 @@
     "books.toscrape.com/book/golden/edge__zero_results": {
       "page.html.gz": "9d3a8e65521209b89413cbc507ca594e08908d5853416114d83c40e1b73ce6d2",
       "expected.json": "03c92c94f5f1067ec3c3f542f9ca18d095a32b1c3a488b3bf393a4f78a98f30c"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-01": {
+      "page.html.gz": "0600e82d0383f19a3e94fa019d27a46af55afae10a306a4a33c05a730fd7e82d",
+      "expected.json": "0f1a90567a4a0701b5e45faf64d30cd1bddcf6268460865e4210c04ecbee0375"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-02": {
+      "page.html.gz": "aad0fa26357bfaf31f2cfe94c55ca5004ab3f4e031ff02aaefebff4ea990949b",
+      "expected.json": "52066ec5f5df9f886e26fc33cbc9d2af0a141023d563e8100b75a3a26edb8ca6"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-03": {
+      "page.html.gz": "0cf5b1e811c6d0a1820e822d89d3ccf05f0694c7c3ef07d1a41264c0730f428d",
+      "expected.json": "f73d92b18b7432a6da7fda9edc53217ad457c014f06fa1034c4a59843359a54d"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-04": {
+      "page.html.gz": "90990a32e49e1f1dfafad528e0e4b018d71810b2ac99353052f89635f1485421",
+      "expected.json": "824816523eaf34cb11c0cbecfa5e426d97884525e9ebde84bd289cfb7df756c8"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-05": {
+      "page.html.gz": "7904845bf17bea1a5419deb2b346c44380303286354c915720d0e9293890be6c",
+      "expected.json": "b22c2d572895598733e7d821c91a9e0255a7d65f856650566bb2ea79ff361ef3"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-06": {
+      "page.html.gz": "9e3dec984616d7788871886a858cbd05b6d1ee465164eb04517d2d71a5f344a4",
+      "expected.json": "efde34f8afc80c2ab547883b465510427efa4ff7a1bee339801d791f7c30a1ee"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-07": {
+      "page.html.gz": "a27e955a29c8795afd79d729b50585864934320afb0421596d1064af22d32e64",
+      "expected.json": "e354d372e433fd6715aa4202c18170cea3a2ee365da47e8a8d894085ade50101"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-08": {
+      "page.html.gz": "56a6adaa003bae59fc5b5c471f9d994b62da85ef5304a211577e6677d5aebdd0",
+      "expected.json": "fa95cf96f561c68a04c7bfab2552d58c146686ad3aed6c44ee05d2d3dcebafce"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-09": {
+      "page.html.gz": "6cc6d74ad6b9835642a32cc0767cd558f6142a38055d3de0dc6f843d450e9dd2",
+      "expected.json": "a96403b7824d5abb968a4deb0043046b9f9e34b2a550d7809ce216061e2970b1"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-10": {
+      "page.html.gz": "47089a2e7b52e23b0e6a3da3d8829eefa780c2d7163b0ad80e2131658267afae",
+      "expected.json": "bee46eb955ee065c2d0fbed7f4337e675e04974d30a44a3608e317a6a536d50d"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-11": {
+      "page.html.gz": "d7df5a71e11f9e5ee0a47d081fd788386539c6596f9b9ef764059f7e4c5828b8",
+      "expected.json": "72d29a364f74c66ec1b6ae0167e096343b1eee660b3334e76f5277fba8bac955"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-12": {
+      "page.html.gz": "85b712210eea0d4fba0519398ff2060c6a97579c6396a230e6920e75374a65d3",
+      "expected.json": "8616c14c004c3581ec024a908d085a7626ec41168c0f17019ff885f8756146eb"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-13": {
+      "page.html.gz": "98f3cf52f8ac6acad39ece201be17fa147d57a3f98a0a387f23a508e0e19955d",
+      "expected.json": "3732058847c1d7ba5c7c7194b4d9b3c5b812012219a872083b7a0e6a0ae86bf3"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-14": {
+      "page.html.gz": "19c0cbd8977b096e1e20daf04197c97fbba852e49884661c411a44392f8a9970",
+      "expected.json": "c868a74bc702040b697eb3ec0f6b374528a691648a88259977d6370c56ab06e8"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-15": {
+      "page.html.gz": "2eadd4ff10cd299e9f79853cec938b52e8962b21c45948f66dcee94267566794",
+      "expected.json": "500ff11a6409dcfae3394b0632e6ddf149f2ef6448c16c34af95f01e33e64be3"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-16": {
+      "page.html.gz": "aa9ff381a0a0d83967ce7e481ca66af6dfe29c079425255d85833626b6c4493e",
+      "expected.json": "47b707df066e14a3f3242b2fa23f4661e82c7ce3dd522c39f051706fcb4b293c"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-17": {
+      "page.html.gz": "a7eb9bef16b7961c5c6db608f4f3191ec11ffca5c2301814ccb2bad609b2ba15",
+      "expected.json": "428db34703ebcd240c41c7faf9d0e8073c5543605284bf1b4fa639c0d50178b5"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-18": {
+      "page.html.gz": "27f1c996cb9a5a63b2005032ec9efe090395edf6b8e9ad51ff7f9f3c44c2399b",
+      "expected.json": "8093b083900123ec7e748cfb5f6c0ea20ddaceda01a2d21232bb3263555a3ccd"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-19": {
+      "page.html.gz": "8069d5340f0732255f268914956babeaf5083cb150413cb940f694ff46359672",
+      "expected.json": "050601d6418c1fa19adcee5d44e48981c5beba7af8f7818e96b8de8bc7ee0fd6"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-20": {
+      "page.html.gz": "81b4d1cad7642755a3076e5195b35dc6a96328139b6eacf89d38dbac4c0255cb",
+      "expected.json": "ca458e5a00cb6e019252a7471fd99ce9974c5ce19de03f063520af248d3bd12b"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-21": {
+      "page.html.gz": "8b397f24e188f6603726a6b0e55450dc7ef58b48f5b58e50d3ab01ca13918586",
+      "expected.json": "7c6f816c3262ca3239e0e24fb29ca9845000a22dd9db5181ce3399cd6cc32c8c"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-22": {
+      "page.html.gz": "98b9e6ea319c3f4fc0556af422e3d26d9976480f6425cc5ea435318e4d969a80",
+      "expected.json": "bae11fc476cb9a18fcb247f2c8f4e24a669bedc75fcc189dd4360873768b2852"
+    },
+    "quotes.toscrape.com/quote/golden/baseline-23": {
+      "page.html.gz": "90d44fed2ae618e3d31a0a0b13433dfcc36432a6b1b178edb0e3d98edd9a149b",
+      "expected.json": "3fa4151a6aef9fe474787741b4c3f71152e3347b86f19611a662e2f71305408b"
+    },
+    "quotes.toscrape.com/quote/golden/edge__multi_tags": {
+      "page.html.gz": "bfe1147672db88209a172812fc7d5c877fcccd56cc3eb3021df292beed56eb8f",
+      "expected.json": "bf9db911e166f438adc99fac9924364661c069f81a2f978b2bbb057854e7ed54"
+    },
+    "quotes.toscrape.com/quote/golden/edge__multilingual": {
+      "page.html.gz": "a21b28476a2e61e84321cf5d968e17c4dbe28ae0b924eb27b2760426f7dfa9a2",
+      "expected.json": "d2e1ab659f44df97eb221fd427d19b10cb00f37516c38c9f3cd6ecaaeed55351"
+    },
+    "quotes.toscrape.com/quote/golden/edge__no_tags": {
+      "page.html.gz": "e241a14084cd4ee1c2e49eca3c5f552c7889f4b1532f68f6fcb8d6717ae14512",
+      "expected.json": "3c017cb81de8a92847c5c1887121dab4ef7197dd2a6c74bf10504ac7712e02fa"
+    },
+    "quotes.toscrape.com/quote/golden/edge__special_chars": {
+      "page.html.gz": "de6e84d036cfcf9ae6841e06723d5e9b8cc9cfa938a240d7176bc1528505ee51",
+      "expected.json": "ce98d25deeb408fa71f51d254b6dc1357e0cba97cf80fad01dd63ca9869cc444"
+    },
+    "quotes.toscrape.com/quote/golden/edge__very_long_value": {
+      "page.html.gz": "ba690381ccbd89326244fdfd09e732d0d3a9c49fcb9fbcf766b4e1beb924cd0b",
+      "expected.json": "986190cd13716b5b750b6c4cc53d7b42219337d87aa14727585e53eda8f288f7"
+    },
+    "quotes.toscrape.com/quote/golden/edge__very_short_value": {
+      "page.html.gz": "d55ec7604c2ce21bffa18d34073a679691c6447a2ffbbb4b3ef28ed70d0d2be0",
+      "expected.json": "a0dfba9344ca294cf16ee3ec4a2582323758494d8b477949839cb89c689ee806"
+    },
+    "quotes.toscrape.com/quote/golden/edge__zero_results": {
+      "page.html.gz": "a16f12ed3c663f7abc90ea5fdd634c12b7a0c3d7c758136d639fa96e83f8f769",
+      "expected.json": "b440cf81d8d9ef9f17abb13d216f8a1bf5a18fe1d5836ef47520792c37871a31"
     }
   }
 }

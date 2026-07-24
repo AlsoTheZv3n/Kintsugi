@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "ae002b148eadf240",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 17-A ueber das Leben und die Wahrheit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 17 Alpha",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-17-alpha",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "06625291d60c4ed4",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 17-B ueber Mut und Zeit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 17 Beta",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-17-beta",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "ae002b148eadf240",
+    "06625291d60c4ed4"
+  ]
+}

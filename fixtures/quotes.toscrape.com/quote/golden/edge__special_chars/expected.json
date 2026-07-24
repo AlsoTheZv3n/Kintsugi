@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "7a87cb4afc578802",
+        "required": true
+      },
+      "text": {
+        "value": "Cœur & Ægis: <Über> ½ — „Zitat",
+        "required": true
+      },
+      "author": {
+        "value": "Sœur Ç",
+        "required": true
+      },
+      "author_slug": {
+        "value": "soeur-c",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "76dcbf6acdb572ce",
+        "required": true
+      },
+      "text": {
+        "value": "Zeichen & Entitäten <b> test.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor Zwei",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-zwei",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "7a87cb4afc578802",
+    "76dcbf6acdb572ce"
+  ]
+}

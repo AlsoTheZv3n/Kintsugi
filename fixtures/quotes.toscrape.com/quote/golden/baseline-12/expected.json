@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "be485b10c510bb52",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 12-A ueber das Leben und die Wahrheit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 12 Alpha",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-12-alpha",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "e5fb9654367c3d8c",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 12-B ueber Mut und Zeit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 12 Beta",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-12-beta",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "be485b10c510bb52",
+    "e5fb9654367c3d8c"
+  ]
+}

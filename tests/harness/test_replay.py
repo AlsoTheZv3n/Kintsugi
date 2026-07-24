@@ -70,6 +70,33 @@ def test_replay_macht_kein_io(monkeypatch):
     assert replay(_pack(), _corpus()).passed is True
 
 
+def _quotes_pack() -> SitePack:
+    return load_pack("quotes.toscrape.com", "quote", root=Path("packs"))
+
+
+def _quotes_corpus() -> Corpus:
+    return Corpus(FIXTURES, "quotes.toscrape.com", "quote")
+
+
+def test_quotes_mehrzeilen_corpus_besteht():
+    # #106: der mehrzeilige quotes-Corpus (N Zitate je /js/-Seite) besteht das Gate.
+    assert replay(_quotes_pack(), _quotes_corpus()).passed is True
+
+
+def test_quotes_corpus_ist_wirklich_mehrzeilig():
+    fixtures = _quotes_corpus().fixtures()
+    assert len(fixtures) == 30
+    assert any(f.expected.expected_row_count > 1 for f in fixtures)  # N>1 wird geprueft
+    assert any(f.expected.expected_row_count == 0 for f in fixtures)  # leere Seite dabei
+
+
+def test_quotes_gebrochener_embedded_json_pfad_reisst_report():
+    data = _quotes_pack().model_dump(by_alias=True)
+    data["extract"]["sources"][0]["fields"]["text"] = "$.gibtsnicht"
+    broken = SitePack.model_validate(data)
+    assert replay(broken, _quotes_corpus()).passed is False
+
+
 def test_jede_fixture_wird_genau_einmal_geparst():
     corpus = _corpus()
     replay(_pack(), corpus)

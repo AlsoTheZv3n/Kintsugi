@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "0e7f45e395b7db2b",
+        "required": true
+      },
+      "text": {
+        "value": "日本語の名言 café Ærø Straße Ω книга",
+        "required": true
+      },
+      "author": {
+        "value": "Ünïcode Autör",
+        "required": true
+      },
+      "author_slug": {
+        "value": "unicode-autor",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "d29eb5c09f538b86",
+        "required": true
+      },
+      "text": {
+        "value": " Второе многоязычное высказывание.",
+        "required": true
+      },
+      "author": {
+        "value": "Кириллица Автор",
+        "required": true
+      },
+      "author_slug": {
+        "value": "kyrillica",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "0e7f45e395b7db2b",
+    "d29eb5c09f538b86"
+  ]
+}

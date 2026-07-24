@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/very-short-value/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "9cf0b15212e1696040e74f8a50f5a5e542c63791446620cacf774bf517248d3f",
+  "byte_size": 491,
+  "fetcher": "httpx",
+  "golden_label": "edge:very_short_value",
+  "synthetic": true,
+  "derived_from": "baseline; text auf ein Zeichen gekuerzt",
+  "edit": "text auf ein Zeichen gekuerzt"
+}

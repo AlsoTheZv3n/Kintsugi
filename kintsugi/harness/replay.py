@@ -29,7 +29,7 @@ from typing import TYPE_CHECKING
 from pydantic import BaseModel, ConfigDict
 from selectolax.lexbor import LexborHTMLParser
 
-from kintsugi.extract.entity import extract_entity
+from kintsugi.extract.entity import extract_entities
 from kintsugi.harness.expected_model import ExpectedFixture
 from kintsugi.validate.dynamic_model import validate_row
 
@@ -120,17 +120,21 @@ def replay(pack: SitePack, corpus: Corpus) -> ReplayReport:
     schema = pack.schema_
     optional = [name for name, fs in schema.fields.items() if not fs.required]
     optional_counts = dict.fromkeys(optional, 0)
+    key_field = schema.natural_key[0] if schema.natural_key else None
     results: list[FixtureResult] = []
     passed = True
 
     for fixture in corpus.fixtures():
         tree = corpus.tree(fixture)
-        values, _ = extract_entity(pack, tree)
-        validated = validate_row(pack, values)
+        # Mehrzeilen: N Entitaeten je Seite (books: N=1 je Detailseite). Der
+        # feldweise Vergleich laeuft Zeile fuer Zeile in Reihenfolge.
+        entities = extract_entities(pack, tree)
+        exp = fixture.expected
+        valid_count = sum(1 for values, _ in entities if validate_row(pack, values).accepted)
 
-        if fixture.expected.expected_row_count == 0:
+        if exp.expected_row_count == 0:
             # Listen-/Nullseite: es darf keine gueltige Entitaet herausfallen.
-            row_ok = not validated.accepted
+            row_ok = valid_count == 0
             results.append(
                 FixtureResult(
                     label=fixture.label, fields=[], row_count_ok=row_ok, natural_keys_ok=True
@@ -140,37 +144,40 @@ def replay(pack: SitePack, corpus: Corpus) -> ReplayReport:
             continue
 
         field_results: list[FieldResult] = []
-        for name, expected_field in fixture.expected.fields.items():
-            actual = _json_val(values.get(name))
-            ok = actual == expected_field.value
-            field_results.append(
-                FieldResult(
-                    field=name,
-                    expected=expected_field.value,
-                    actual=actual,
-                    ok=ok,
-                    required=expected_field.required,
+        for i, expected_row in enumerate(exp.expected_rows()):
+            values = entities[i][0] if i < len(entities) else {}
+            for name, expected_field in expected_row.items():
+                actual = _json_val(values.get(name))
+                ok = actual == expected_field.value
+                field_results.append(
+                    FieldResult(
+                        field=name,
+                        expected=expected_field.value,
+                        actual=actual,
+                        ok=ok,
+                        required=expected_field.required,
+                    )
                 )
-            )
-            if expected_field.required and not ok:
-                passed = False
-            if not expected_field.required and actual is not None:
-                optional_counts[name] += 1
+                if expected_field.required and not ok:
+                    passed = False
+                if not expected_field.required and actual is not None:
+                    optional_counts[name] += 1
 
-        key = _json_val(values.get(schema.natural_key[0])) if schema.natural_key else None
-        natural_keys_ok = [key] == fixture.expected.expected_natural_keys
-        if not natural_keys_ok:
+        row_count_ok = valid_count == exp.expected_row_count
+        actual_keys = (
+            [_json_val(values.get(key_field)) for values, _ in entities] if key_field else []
+        )
+        natural_keys_ok = actual_keys == exp.expected_natural_keys
+        if not row_count_ok or not natural_keys_ok:
             passed = False
         results.append(
             FixtureResult(
                 label=fixture.label,
                 fields=field_results,
-                row_count_ok=validated.accepted,
+                row_count_ok=row_count_ok,
                 natural_keys_ok=natural_keys_ok,
             )
         )
-        if not validated.accepted:
-            passed = False
 
     for name in optional:
         if optional_counts[name] < corpus.baseline.get(name, 0):

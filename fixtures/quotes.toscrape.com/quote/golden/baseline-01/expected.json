@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "807ae6c9c533e229",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 01-A ueber das Leben und die Wahrheit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 01 Alpha",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-01-alpha",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "59f902905f02c46a",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 01-B ueber Mut und Zeit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 01 Beta",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-01-beta",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "807ae6c9c533e229",
+    "59f902905f02c46a"
+  ]
+}

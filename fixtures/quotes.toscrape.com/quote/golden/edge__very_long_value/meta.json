@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/very-long-value/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "89390d5043df3c0cf87d0ed2a6d341bbf2b92715a4148ad344f3c173c8b5422b",
+  "byte_size": 929,
+  "fetcher": "httpx",
+  "golden_label": "edge:very_long_value",
+  "synthetic": true,
+  "derived_from": "baseline; text auf ueber 300 Zeichen verlaengert",
+  "edit": "text auf ueber 300 Zeichen verlaengert"
+}

@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/multilingual/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "5552fbdb10a5cb47558704936efb8f3cdeeef428767b1baa1e7bd15694bb1123",
+  "byte_size": 668,
+  "fetcher": "httpx",
+  "golden_label": "edge:multilingual",
+  "synthetic": true,
+  "derived_from": "baseline; mehrsprachiger/Nicht-ASCII-Text und -Autor",
+  "edit": "mehrsprachiger/Nicht-ASCII-Text und -Autor"
+}

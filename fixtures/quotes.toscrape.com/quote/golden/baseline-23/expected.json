@@ -1,0 +1,46 @@
+{
+  "fields": {},
+  "rows": [
+    {
+      "quote_id": {
+        "value": "5364a28023d2379f",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 23-A ueber das Leben und die Wahrheit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 23 Alpha",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-23-alpha",
+        "required": true
+      }
+    },
+    {
+      "quote_id": {
+        "value": "9e8b28a0ef6f0647",
+        "required": true
+      },
+      "text": {
+        "value": "Zitat 23-B ueber Mut und Zeit.",
+        "required": true
+      },
+      "author": {
+        "value": "Autor 23 Beta",
+        "required": true
+      },
+      "author_slug": {
+        "value": "autor-23-beta",
+        "required": true
+      }
+    }
+  ],
+  "expected_row_count": 2,
+  "expected_natural_keys": [
+    "5364a28023d2379f",
+    "9e8b28a0ef6f0647"
+  ]
+}

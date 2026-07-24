@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/page/14/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "f6beb729d2c47d0032d4bab9d5da6b56bf196aa3619c3eb706a3ebd0bfd2c4d2",
+  "byte_size": 632,
+  "fetcher": "httpx",
+  "golden_label": "baseline",
+  "synthetic": false,
+  "derived_from": null,
+  "edit": null
+}

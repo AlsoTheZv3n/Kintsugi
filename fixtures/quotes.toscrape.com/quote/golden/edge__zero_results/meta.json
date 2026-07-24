@@ -1,0 +1,13 @@
+{
+  "url": "https://quotes.toscrape.com/js/edge/zero-results/",
+  "fetched_at": "2026-07-24T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "41ab6a8537aae42a6ee43c804d7b60167f324f8ca049588022eb8a9cea887759",
+  "byte_size": 271,
+  "fetcher": "httpx",
+  "golden_label": "edge:zero_results",
+  "synthetic": true,
+  "derived_from": "baseline; Seite ohne Zitate (var data leer)",
+  "edit": "Seite ohne Zitate (var data leer)"
+}

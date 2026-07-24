@@ -26,10 +26,21 @@ class ExpectedField(BaseModel):
 
 
 class ExpectedFixture(BaseModel):
-    """Das erwartete Ergebnis eines Fixture-Replays."""
+    """Das erwartete Ergebnis eines Fixture-Replays.
+
+    Einzeilig (books: eine Entitaet je Detailseite) traegt ``fields`` die eine
+    Zeile; mehrzeilig (quotes: N Entitaeten je /js/-Seite) traegt ``rows`` die
+    Sollwerte je Zeile in Reihenfolge, und ``fields`` bleibt leer. ``rows`` ist
+    additiv: bestehende Einzeiler-``expected.json`` ohne ``rows`` bleiben gueltig.
+    """
 
     model_config = ConfigDict(extra="forbid")
 
-    fields: dict[str, ExpectedField]
+    fields: dict[str, ExpectedField] = {}
+    rows: list[dict[str, ExpectedField]] | None = None
     expected_row_count: int
     expected_natural_keys: list[str]
+
+    def expected_rows(self) -> list[dict[str, ExpectedField]]:
+        """Die Soll-Zeilen: ``rows`` mehrzeilig, sonst die eine ``fields``-Zeile."""
+        return self.rows if self.rows is not None else [self.fields]
