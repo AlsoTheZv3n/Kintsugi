@@ -188,7 +188,19 @@ class EmbeddedJsonSource(_Model):
 
 class XhrSource(_Model):
     kind: Literal["xhr"]
+    # Endpunkt-URL oder Template mit {name}-Platzhaltern, die aus den
+    # Query-Parametern der entdeckten Seiten-URL gefuellt werden.
     endpoint: str | None = None
+    method: Literal["GET"] = "GET"  # der Fetcher kann nur GET; POST waere Phase 5+
+    # Zusaetzliche Query-Parameter (Werte duerfen {name}-Platzhalter tragen).
+    params: dict[str, str] = Field(default_factory=dict)
+    # Zusaetzliche Request-Header (z. B. X-Requested-With). Die Zugangsdaten-Sperre
+    # (denylist) durchsucht sie mit: ein Authorization/Cookie-Header laesst das Pack
+    # gar nicht erst laden.
+    headers: dict[str, str] = Field(default_factory=dict)
+    # jsonpath auf die Zeilen (bare Array: '$[*]') und die Feld-Map je Zeile.
+    row_root: str | None = None
+    fields: dict[str, str] | None = None
 
 
 class CssSource(_Model):

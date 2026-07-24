@@ -57,5 +57,10 @@ class Fetcher(Protocol):
     """Strategy-Protokoll. Drittanbieter brauchen keinen Import einer Basisklasse."""
 
     def fetch(
-        self, url: str, *, etag: str | None = None, last_modified: str | None = None
+        self,
+        url: str,
+        *,
+        etag: str | None = None,
+        last_modified: str | None = None,
+        headers: Mapping[str, str] | None = None,
     ) -> FetchResult: ...

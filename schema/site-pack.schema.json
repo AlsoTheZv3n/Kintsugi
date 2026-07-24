@@ -961,10 +961,57 @@
           "default": null,
           "title": "Endpoint"
         },
+        "fields": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fields"
+        },
+        "headers": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Headers",
+          "type": "object"
+        },
         "kind": {
           "const": "xhr",
           "title": "Kind",
           "type": "string"
+        },
+        "method": {
+          "const": "GET",
+          "default": "GET",
+          "title": "Method",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Params",
+          "type": "object"
+        },
+        "row_root": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Root"
         }
       },
       "required": [

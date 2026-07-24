@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import re
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from contextlib import nullcontext
 from email.utils import parsedate_to_datetime
 
@@ -136,24 +136,31 @@ class HttpFetcher:
         return self._client
 
     def fetch(
-        self, url: str, *, etag: str | None = None, last_modified: str | None = None
+        self,
+        url: str,
+        *,
+        etag: str | None = None,
+        last_modified: str | None = None,
+        headers: Mapping[str, str] | None = None,
     ) -> FetchResult:
         # robots.txt zuerst — auch fuer Discovery-URLs. RobotsUnavailable (5xx)
         # propagiert und bricht den Lauf ab; RobotsDenied ueberspringt die URL.
         if self._robots is not None and not self._robots.allowed(url):
             raise RobotsDenied(url)
 
-        headers: dict[str, str] = {}
+        # Pack-Header (z. B. X-Requested-With) zuerst, dann die bedingten Header —
+        # die Validatoren bleiben unter Kontrolle des Fetchers, nicht ueberschreibbar.
+        request_headers: dict[str, str] = dict(headers) if headers else {}
         if etag:
-            headers["If-None-Match"] = etag
+            request_headers["If-None-Match"] = etag
         if last_modified:
-            headers["If-Modified-Since"] = last_modified
+            request_headers["If-Modified-Since"] = last_modified
 
         # Ein Concurrency-Platz und ein Rate-Token, falls ein Limiter gesetzt ist.
         slot = self._limiter.slot() if self._limiter is not None else nullcontext()
         with slot:
             start = time.perf_counter()
-            response = self._request_with_retry(url, headers)
+            response = self._request_with_retry(url, request_headers)
             elapsed_ms = int((time.perf_counter() - start) * 1000)
 
         return self._to_result(url, response, elapsed_ms)
