@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "No Availability Count",
+      "required": true
+    },
+    "price": {
+      "value": "12.34",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": null,
+      "required": false
+    },
+    "upc": {
+      "value": "210f44f0484bcf85",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "210f44f0484bcf85"
+  ]
+}

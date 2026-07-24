@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 17",
+      "required": true
+    },
+    "price": {
+      "value": "27.17",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 18,
+      "required": false
+    },
+    "upc": {
+      "value": "357d947e46a0e3c3",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "357d947e46a0e3c3"
+  ]
+}

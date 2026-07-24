@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 08",
+      "required": true
+    },
+    "price": {
+      "value": "18.08",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 9,
+      "required": false
+    },
+    "upc": {
+      "value": "08cb786576a2ae7a",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "08cb786576a2ae7a"
+  ]
+}

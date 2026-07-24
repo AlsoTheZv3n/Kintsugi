@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Out Of Stock Sample",
+      "required": true
+    },
+    "price": {
+      "value": "19.99",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": null,
+      "required": false
+    },
+    "upc": {
+      "value": "41836646e391a1f4",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "41836646e391a1f4"
+  ]
+}

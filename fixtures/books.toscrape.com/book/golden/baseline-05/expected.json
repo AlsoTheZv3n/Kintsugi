@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 05",
+      "required": true
+    },
+    "price": {
+      "value": "15.05",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 6,
+      "required": false
+    },
+    "upc": {
+      "value": "6ee3edc5a2aba3e7",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "6ee3edc5a2aba3e7"
+  ]
+}

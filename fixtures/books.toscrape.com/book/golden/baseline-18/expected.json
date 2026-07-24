@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 18",
+      "required": true
+    },
+    "price": {
+      "value": "28.18",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 19,
+      "required": false
+    },
+    "upc": {
+      "value": "a877984140a6efe1",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "a877984140a6efe1"
+  ]
+}

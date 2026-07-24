@@ -7,94 +7,124 @@
   ],
   "golden": {
     "books.toscrape.com/book/golden/baseline-01": {
-      "page.html.gz": "fb00a6f101f0497573b8ad864791237a46acb45053555323c4616735bea3a99b"
+      "page.html.gz": "fb00a6f101f0497573b8ad864791237a46acb45053555323c4616735bea3a99b",
+      "expected.json": "31a9d35a92364bb5b79a6c7d715da1bf1466472462fb9c1b8c92f18b675f75a7"
     },
     "books.toscrape.com/book/golden/baseline-02": {
-      "page.html.gz": "d89798764ed10e73ecebb3ad991217f2552a27000d2857689fbc25c7d9f382a8"
+      "page.html.gz": "d89798764ed10e73ecebb3ad991217f2552a27000d2857689fbc25c7d9f382a8",
+      "expected.json": "c41bca9860351798915bc5f59c90a73992b5d27aca0275c855e6095b7f1d8385"
     },
     "books.toscrape.com/book/golden/baseline-03": {
-      "page.html.gz": "1e43586662c0f10c757e90bb7b933e3b5971d9434f0dfe07eb913f5db1fa169c"
+      "page.html.gz": "1e43586662c0f10c757e90bb7b933e3b5971d9434f0dfe07eb913f5db1fa169c",
+      "expected.json": "06644ed74e65d871a22deeec32b452f20218d992846feb27bcece82fe080383c"
     },
     "books.toscrape.com/book/golden/baseline-04": {
-      "page.html.gz": "2db6fb8a055971834ea1905bdd544c89ac75b019ee3bd22c00d6c0e626cb9f40"
+      "page.html.gz": "2db6fb8a055971834ea1905bdd544c89ac75b019ee3bd22c00d6c0e626cb9f40",
+      "expected.json": "323580c11ee8d004d04f327b15fb59bce510d640a98e1b74d9d06ad6fddcc396"
     },
     "books.toscrape.com/book/golden/baseline-05": {
-      "page.html.gz": "b8564252d5ebdad2943c08c6af5079f97f0607d475c767e1235f52ec22fa4dcb"
+      "page.html.gz": "b8564252d5ebdad2943c08c6af5079f97f0607d475c767e1235f52ec22fa4dcb",
+      "expected.json": "6c7b57176a18d290bc9ce34da26611918d844f3a352765c8dd74141088279958"
     },
     "books.toscrape.com/book/golden/baseline-06": {
-      "page.html.gz": "12be7269adeef06d80fadf9ac027faa2990c37881b998afffd73b8995cd25817"
+      "page.html.gz": "12be7269adeef06d80fadf9ac027faa2990c37881b998afffd73b8995cd25817",
+      "expected.json": "9d75119d2816466d021fbbd8b4ce265b55f5bc7f88d201ae8f11dee06ae317fe"
     },
     "books.toscrape.com/book/golden/baseline-07": {
-      "page.html.gz": "a33ae3d45532e84f71cd80ee5af9de741f0471e25334ea504a6b39da695d8b2d"
+      "page.html.gz": "a33ae3d45532e84f71cd80ee5af9de741f0471e25334ea504a6b39da695d8b2d",
+      "expected.json": "699139795d7bacc2807bbee38bf36e031800828c624ba78744f95a977fcd3dde"
     },
     "books.toscrape.com/book/golden/baseline-08": {
-      "page.html.gz": "ada1f40e76515f3aab83b177a5bf13b098d84c6fb4286959bc5865c337ae1492"
+      "page.html.gz": "ada1f40e76515f3aab83b177a5bf13b098d84c6fb4286959bc5865c337ae1492",
+      "expected.json": "c5f6822f53a3da4f16ff71c8acca54332be44ccf89b075cd26c0b97db249d81b"
     },
     "books.toscrape.com/book/golden/baseline-09": {
-      "page.html.gz": "2303794d1911e483f077f08a084d0c9cf1fd2f4199b60f2d4ddabdd35e88113e"
+      "page.html.gz": "2303794d1911e483f077f08a084d0c9cf1fd2f4199b60f2d4ddabdd35e88113e",
+      "expected.json": "6087d0a506f149c88c3f795b0287abd13c4775e76e22453e7db21eeab7ad6b29"
     },
     "books.toscrape.com/book/golden/baseline-10": {
-      "page.html.gz": "f13dd48283ce2f4e9a6f9e7f1983a06d1786b9076ff515581de6169045841927"
+      "page.html.gz": "f13dd48283ce2f4e9a6f9e7f1983a06d1786b9076ff515581de6169045841927",
+      "expected.json": "e51cffb97dc492ecbe9d3217decafa9cbce420987bcd754c0f03cf2efaf55519"
     },
     "books.toscrape.com/book/golden/baseline-11": {
-      "page.html.gz": "41b251a6de3ceffb23d1605fbc5fa29dcbfa542b4105ec441423cea9279ab836"
+      "page.html.gz": "41b251a6de3ceffb23d1605fbc5fa29dcbfa542b4105ec441423cea9279ab836",
+      "expected.json": "7ee44bef34e62847f81233b555c770baf6d164086828cc16635eb0d07f70cfb6"
     },
     "books.toscrape.com/book/golden/baseline-12": {
-      "page.html.gz": "d2838cd7f364b435c963020e9426926980fc7c71e2c150114a65d1c63d1d08f0"
+      "page.html.gz": "d2838cd7f364b435c963020e9426926980fc7c71e2c150114a65d1c63d1d08f0",
+      "expected.json": "0b7b65659078d88d44b486562f4034f1cd90d422c5733637901f19339723502b"
     },
     "books.toscrape.com/book/golden/baseline-13": {
-      "page.html.gz": "4a2b526ff67ac082ff6df8915195c849c5bc2f7fac7530d8ff0a0ace4dd316cd"
+      "page.html.gz": "4a2b526ff67ac082ff6df8915195c849c5bc2f7fac7530d8ff0a0ace4dd316cd",
+      "expected.json": "4726328dd387f7b6663acbb5e4db0afbfe889645cf48643d3381e7e477661d4d"
     },
     "books.toscrape.com/book/golden/baseline-14": {
-      "page.html.gz": "a7d2d1fd9ccc353f369fdebb7dad961c155315ad4fc74b12a42a71a6240c0d3e"
+      "page.html.gz": "a7d2d1fd9ccc353f369fdebb7dad961c155315ad4fc74b12a42a71a6240c0d3e",
+      "expected.json": "e043694969fc90a3b5c536c759da97aa77fa3a00e5e4928908e086dcf6f85fb2"
     },
     "books.toscrape.com/book/golden/baseline-15": {
-      "page.html.gz": "40d255f0c4f1d3635a42f5be602a06159106eabd8ec6d32749997ce6601a2035"
+      "page.html.gz": "40d255f0c4f1d3635a42f5be602a06159106eabd8ec6d32749997ce6601a2035",
+      "expected.json": "82a08ebd92a63cda29fe278883508c4abf67998a2b93c1cbd9aa4804ff621b10"
     },
     "books.toscrape.com/book/golden/baseline-16": {
-      "page.html.gz": "ab304d8ef876addfd1575efdcb7f912c80a578e3edb3b66607939ba311a7a34f"
+      "page.html.gz": "ab304d8ef876addfd1575efdcb7f912c80a578e3edb3b66607939ba311a7a34f",
+      "expected.json": "6df21b1fa1d48ae8af85fb6d5bb4d3f5b085c1494b33c46d47208811e3471940"
     },
     "books.toscrape.com/book/golden/baseline-17": {
-      "page.html.gz": "c832c77c5a8ff9ab8ff43c891983d4c6dc3f4beea3c412eb24abe7bdca69e63a"
+      "page.html.gz": "c832c77c5a8ff9ab8ff43c891983d4c6dc3f4beea3c412eb24abe7bdca69e63a",
+      "expected.json": "a21d1f16ae01a6d49f7ddceb60ca0d3ac6d402ff06fbc53c46043c28c14e0011"
     },
     "books.toscrape.com/book/golden/baseline-18": {
-      "page.html.gz": "963326116e48f7ab4ed7ef8dc39072f19c0a90932b3dfe25d61b0a577bcf1435"
+      "page.html.gz": "963326116e48f7ab4ed7ef8dc39072f19c0a90932b3dfe25d61b0a577bcf1435",
+      "expected.json": "476f3487beb950e3e37595969ae80b21e7f0bef12690f6de7b2d89898fe42653"
     },
     "books.toscrape.com/book/golden/baseline-19": {
-      "page.html.gz": "f8430e809dceab469a3e672d07e3c119b71b28c1590b3f3f7fb2265139110d8b"
+      "page.html.gz": "f8430e809dceab469a3e672d07e3c119b71b28c1590b3f3f7fb2265139110d8b",
+      "expected.json": "5bd7092b5c8544ac399f15777b2d20c3baf7d4942c6533d2146ee596db52bc37"
     },
     "books.toscrape.com/book/golden/baseline-20": {
-      "page.html.gz": "b2db05bb7cde7aa9320916e079fa66e239c1d54f2eebe65725380ebba76435b1"
+      "page.html.gz": "b2db05bb7cde7aa9320916e079fa66e239c1d54f2eebe65725380ebba76435b1",
+      "expected.json": "465ef74a983e46db16eb06fabe88b174826aa52b04ef69bd803fa16e68bce266"
     },
     "books.toscrape.com/book/golden/baseline-21": {
-      "page.html.gz": "5cceb3a9b15140de58929902d0d1da9dc0632780a363371adc9fc95437d55151"
+      "page.html.gz": "5cceb3a9b15140de58929902d0d1da9dc0632780a363371adc9fc95437d55151",
+      "expected.json": "f7bdd9a0782b77026595fa14bde7f5f4e4e264267cf5ab159cb9e7e5710c6fc8"
     },
     "books.toscrape.com/book/golden/baseline-22": {
-      "page.html.gz": "443bcd2a2e9e2867c02cea5e56e3e035f5d1f45fe2d60d31ecd1ab5df178592d"
+      "page.html.gz": "443bcd2a2e9e2867c02cea5e56e3e035f5d1f45fe2d60d31ecd1ab5df178592d",
+      "expected.json": "30b5dd55e471891dbbccbfff01439bac4bc7ce2e86ead1b12ca09194fa908481"
     },
     "books.toscrape.com/book/golden/baseline-23": {
-      "page.html.gz": "2a511f7ce3c7015511dbc556b2aae6d770e2a92ac0e0944a1334df3f4042c943"
+      "page.html.gz": "2a511f7ce3c7015511dbc556b2aae6d770e2a92ac0e0944a1334df3f4042c943",
+      "expected.json": "9dd4976430a0287b952148713232a4d7f7617687c0df92e2263aa4e54abfe3db"
     },
     "books.toscrape.com/book/golden/edge__missing_optional": {
-      "page.html.gz": "852eea59740e0be1a7e37c55a6e3f4a341f272d01bba23271753ed8e827ef4f5"
+      "page.html.gz": "852eea59740e0be1a7e37c55a6e3f4a341f272d01bba23271753ed8e827ef4f5",
+      "expected.json": "1e6bd11c63899d53263be16f65125c8df59e15a54b0e0053f891ab12e3a85ea9"
     },
     "books.toscrape.com/book/golden/edge__multilingual": {
-      "page.html.gz": "f5f11b7dd7efa8fd7077072fac4a0b3f2ae5ac6a2b84bd39342c908a3b25ed69"
+      "page.html.gz": "f5f11b7dd7efa8fd7077072fac4a0b3f2ae5ac6a2b84bd39342c908a3b25ed69",
+      "expected.json": "9256cf9616bb6fea17bac71ba53f15a4dedfcb8a59e355f380edd39a74eb39be"
     },
     "books.toscrape.com/book/golden/edge__out_of_stock": {
-      "page.html.gz": "bc48092a638458358f2ca2b78ff74503191f9ed361469543759b60774755c2b8"
+      "page.html.gz": "bc48092a638458358f2ca2b78ff74503191f9ed361469543759b60774755c2b8",
+      "expected.json": "6510f3ff82408580c1cde272ecdf413dacf3864b711be11d95bdfb6e066b5b36"
     },
     "books.toscrape.com/book/golden/edge__special_chars": {
-      "page.html.gz": "580ae0ba2492a15a6b37e851a1dacb5c6125d521495f91e4da1add8f161965ee"
+      "page.html.gz": "580ae0ba2492a15a6b37e851a1dacb5c6125d521495f91e4da1add8f161965ee",
+      "expected.json": "1d9b3b767670406924341cbe25f9eaef80ce873d9de16212b130eb1779c6d95e"
     },
     "books.toscrape.com/book/golden/edge__very_long_value": {
-      "page.html.gz": "2462893f460cc3d1f6aedfdec5a4dbbbf445c65bad58a131bca43e6d073f634e"
+      "page.html.gz": "2462893f460cc3d1f6aedfdec5a4dbbbf445c65bad58a131bca43e6d073f634e",
+      "expected.json": "a6016b7a44aa4a014d8ce60beb5c88730d1581ad15d984da5dd2b79d06dca486"
     },
     "books.toscrape.com/book/golden/edge__very_short_value": {
-      "page.html.gz": "2d8e6542d09d95d088a678b5ef090087710382477bb100d37bf372766ac559a7"
+      "page.html.gz": "2d8e6542d09d95d088a678b5ef090087710382477bb100d37bf372766ac559a7",
+      "expected.json": "c00f7630e6e10b804dfbc99ee9e34e4d416f71835e41aa04d9b75b84a98a701b"
     },
     "books.toscrape.com/book/golden/edge__zero_results": {
-      "page.html.gz": "9d3a8e65521209b89413cbc507ca594e08908d5853416114d83c40e1b73ce6d2"
+      "page.html.gz": "9d3a8e65521209b89413cbc507ca594e08908d5853416114d83c40e1b73ce6d2",
+      "expected.json": "03c92c94f5f1067ec3c3f542f9ca18d095a32b1c3a488b3bf393a4f78a98f30c"
     }
   }
 }

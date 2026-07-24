@@ -231,6 +231,66 @@ def _write_taxonomy() -> None:
     )
 
 
+def _json_val(value: object) -> object:
+    from decimal import Decimal
+
+    if isinstance(value, Decimal):
+        return str(value)
+    return value
+
+
+def _write_expected_and_baseline() -> None:
+    """expected.json je Fixture + baseline.json der optionalen Fuellstaende (I1.3.4)."""
+    from kintsugi.extract.entity import extract_entity
+    from kintsugi.packs.loader import load_pack
+    from selectolax.lexbor import LexborHTMLParser
+
+    pack = load_pack("books.toscrape.com", "book", root=Path("packs"))
+    schema_fields = pack.schema_.fields
+    optional = [name for name, fs in schema_fields.items() if not fs.required]
+    optional_nonnull = dict.fromkeys(optional, 0)
+    detail_count = 0
+
+    for meta_path in sorted((ROOT / "golden").rglob("meta.json")):
+        data = json.loads(meta_path.read_text(encoding="utf-8"))
+        if "golden_label" not in data:  # CssExtractor-Baseline uebergehen
+            continue
+        body = gzip.decompress((meta_path.parent / "page.html.gz").read_bytes()).decode("utf-8")
+        if data["golden_label"] == "edge:zero_results":
+            expected: dict[str, object] = {
+                "fields": {},
+                "expected_row_count": 0,
+                "expected_natural_keys": [],
+            }
+        else:
+            values, _ = extract_entity(pack, LexborHTMLParser(body))
+            fields = {
+                name: {"value": _json_val(values.get(name)), "required": fs.required}
+                for name, fs in schema_fields.items()
+            }
+            upc = values.get("upc")
+            expected = {
+                "fields": fields,
+                "expected_row_count": 1,
+                "expected_natural_keys": [upc] if upc else [],
+            }
+            detail_count += 1
+            for name in optional:
+                if values.get(name) is not None:
+                    optional_nonnull[name] += 1
+        (meta_path.parent / "expected.json").write_text(
+            json.dumps(expected, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+
+    baseline = {
+        "corpus_size": detail_count,
+        "optional_nonnull": dict(sorted(optional_nonnull.items())),
+    }
+    (ROOT / "baseline.json").write_text(
+        json.dumps(baseline, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+
 def main() -> None:
     corpus = ROOT / "corpus"
     if corpus.exists():
@@ -275,6 +335,8 @@ def main() -> None:
             if "golden_label" in data:  # FixtureMeta-Format
                 shutil.rmtree(child)
     _write_taxonomy()
+
+    _write_expected_and_baseline()
 
     # Regenerierbaren Index schreiben.
     from kintsugi.harness.fixtures_cli import write_index

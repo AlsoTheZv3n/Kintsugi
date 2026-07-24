@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 20",
+      "required": true
+    },
+    "price": {
+      "value": "30.20",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 1,
+      "required": false
+    },
+    "upc": {
+      "value": "ec4d4cfd57896ddd",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "ec4d4cfd57896ddd"
+  ]
+}

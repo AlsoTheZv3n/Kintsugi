@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "A",
+      "required": true
+    },
+    "price": {
+      "value": "1.00",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 1,
+      "required": false
+    },
+    "upc": {
+      "value": "a444cd4ad6383cec",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "a444cd4ad6383cec"
+  ]
+}

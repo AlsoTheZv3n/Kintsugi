@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Årsteruttrykk øwær: naïve Café Résumé Straße 日本語 книга — Band Ω Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung Fortsetzung",
+      "required": true
+    },
+    "price": {
+      "value": "42.00",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 5,
+      "required": false
+    },
+    "upc": {
+      "value": "febc9aa091a9977b",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "febc9aa091a9977b"
+  ]
+}

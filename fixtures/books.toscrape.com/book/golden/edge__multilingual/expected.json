@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "日本語 книга café Ærø Straße Ω",
+      "required": true
+    },
+    "price": {
+      "value": "33.33",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 9,
+      "required": false
+    },
+    "upc": {
+      "value": "39b54e52b6cb2f51",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "39b54e52b6cb2f51"
+  ]
+}

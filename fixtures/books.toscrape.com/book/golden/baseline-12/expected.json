@@ -1,0 +1,28 @@
+{
+  "fields": {
+    "title": {
+      "value": "Baseline Book 12",
+      "required": true
+    },
+    "price": {
+      "value": "22.12",
+      "required": true
+    },
+    "currency": {
+      "value": "GBP",
+      "required": true
+    },
+    "availability": {
+      "value": 13,
+      "required": false
+    },
+    "upc": {
+      "value": "be275318f0728f02",
+      "required": true
+    }
+  },
+  "expected_row_count": 1,
+  "expected_natural_keys": [
+    "be275318f0728f02"
+  ]
+}
