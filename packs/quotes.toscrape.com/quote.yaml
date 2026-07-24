@@ -1,0 +1,126 @@
+# Site-Pack fuer quotes.toscrape.com/js (Phase-1-Quelle zwei, F5).
+#
+# F5: /js/ liefert null <div class="quote">-Elemente; die Zeilen liegen als
+# `var data = [...]` auf einem script-Tag ohne id. Daher ist embedded_json (Modus
+# inline-js-var, var_name: data) die erste Quelle und eine css-Quelle mit
+# row_selector: div.quote die zweite -- auf /js/ ein bewusster Fehltreffer, auf der
+# klassischen Variante ein Treffer (dieselbe Entitaet, mehrere Beschaffungswege,
+# docs/07). Playwright wird bewusst NICHT genutzt.
+#
+# Eintritts-URL ist https://quotes.toscrape.com/js/ MIT abschliessendem Slash --
+# /js liefert live einen 247-Byte-Redirect, /js/ die 5808-Byte-Seite. robots.txt
+# ist ebenfalls 404, die Allow-all-Regel (RFC 9309) traegt also auch hier.
+#
+# natural_key [quote_id] ist abgeleitet (ADR-013): quotes tragen keinen
+# Identifikator. quote_id = erste 16 Hex des sha256 ueber NFC-normalisierten,
+# whitespace-kollabierten author_slug + U+001F + text (Transform natural_key_16).
+# author_slug -- nicht der freie Anzeigename -- ist der stabile Traeger.
+#
+# tags wird extrahiert (Liste) und steht in der Entitaet, ist aber KEIN
+# typisiertes schema.fields-Feld: FieldType ist skalar (string/decimal/integer/
+# boolean/datetime), ein Array-Typ existiert noch nicht. Das beschneidet keine
+# #104-Zusage -- "tags als Liste" wird am Extraktionsergebnis geprueft; der
+# typisierte Array-Feld-Support kommt mit dem Runner-Mehrzeilen-Pfad.
+apiVersion: kintsugi/v1
+domain: quotes.toscrape.com
+entity: quote
+version: 1
+notes: >-
+  natural_key [quote_id] abgeleitet via natural_key_16 (ADR-013): sha256 ueber
+  author_slug + U+001F + text, NFC-normalisiert und whitespace-kollabiert, erste
+  16 Hex. tags ist extrahiert, aber mangels Array-FieldType kein Schema-Feld.
+
+discovery:
+  strategy: pagination
+  # Eintritt ist /js/ (Seite 1); die Folgeseiten sind /js/page/{n}/. Die
+  # Pagination ist provisorisch bis zur Live-Erfassung (#106) -- der Offline-Test
+  # fuehrt Discovery nicht aus, prueft aber, dass der /js/-Slash deklariert ist.
+  url_template: https://quotes.toscrape.com/js/page/{n}/
+  page_start: 1
+  page_stop: 10
+  max_urls_per_run: 100
+
+fetch:
+  strategy: http
+  rate_limit_rps: 0.5
+  concurrency: 2
+  respect_robots: true
+  conditional_requests: true
+
+extract:
+  sources:
+    # Quelle 1 (Prioritaet): die inline-js-var-Nutzlast auf /js/. author ist ein
+    # verschachteltes Objekt, daher $.author.name / $.author.slug.
+    - kind: embedded_json
+      var_name: data
+      fields:
+        text: '$.text'
+        author: '$.author.name'
+        author_slug: '$.author.slug'
+        tags: '$.tags'
+    # Quelle 2 (Fallback): die klassische, server-gerenderte Variante. Auf /js/
+    # ein bewusster Fehltreffer -- dort existiert keine div.quote.
+    - kind: css
+      row_selector: 'div.quote'
+      fields:
+        text:
+          selector: 'span.text'
+          anchor_hint: 'Der Zitattext in Anfuehrungszeichen'
+          transform: [strip]
+        author:
+          selector: 'small.author'
+          anchor_hint: 'Der Anzeigename des Autors'
+          transform: [strip]
+
+schema:
+  natural_key: [quote_id]
+  fields:
+    quote_id:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+      pattern: '^[a-f0-9]{16}$'
+      derived_from:
+        source: [author_slug, text]
+        transform: natural_key_16
+    text:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+    author:
+      type: string
+      required: true
+      min_fill_rate: 0.99
+    author_slug:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+
+quality:
+  min_rows_per_run: 10
+  row_count_deviation: 0.30
+  max_duplicate_rate: 0.02
+  max_range_violation_rate: 0.05
+  thresholds_source: provisional
+
+healing:
+  enabled: false
+  max_auto_versions_per_window: 3
+  window: 7d
+  require_golden_pass: true
+  canary_fraction: 0.05
+  canary_min_rows: 50
+  escalate_on: [field_removed, schema_change, enum_violation, natural_key_broken]
+
+delivery:
+  sinks: [postgres]
+  webhook_on_change: null
+
+compliance:
+  tos_url: https://quotes.toscrape.com/
+  tos_verdict: permits           # explizit als Scraping-Sandbox gebaut
+  tos_reviewed_at: 2026-07-24
+  reviewed_by: human:sven
+  robots_checked_at: 2026-07-24   # robots.txt liefert 404 -> allow all (RFC 9309)
+  public_content: true
+  personal_data: false

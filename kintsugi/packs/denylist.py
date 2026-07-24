@@ -27,9 +27,13 @@ DENIED_BRANDS: frozenset[str] = frozenset(
     }
 )
 
-# Schluesselnamen, die auf eingeschmuggelte Zugangsdaten hindeuten.
+# Schluesselnamen, die auf eingeschmuggelte Zugangsdaten hindeuten. ``auth`` nur
+# als eigenstaendiges Token (nicht von einem weiteren Buchstaben gefolgt), sonst
+# schluege ein legitimes Datenfeld wie ``author`` oder ``author_slug`` (quotes)
+# faelschlich an. ``authorization`` bleibt als volles Wort explizit gelistet, weil
+# der Token-Schutz ``auth(?![a-zA-Z])`` es (auth+o) gerade nicht faengt.
 _CREDENTIAL_RE = re.compile(
-    r"auth|authorization|login|password|cookie|session|credential|bearer|api_key",
+    r"authorization|auth(?![a-zA-Z])|login|password|cookie|session|credential|bearer|api_key",
     re.IGNORECASE,
 )
 

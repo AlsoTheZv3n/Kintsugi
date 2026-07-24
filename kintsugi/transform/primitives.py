@@ -201,3 +201,40 @@ def sha256_slug(value: str | None) -> str | None:
         return None
     normalised = unicodedata.normalize("NFC", value)
     return hashlib.sha256(normalised.encode("utf-8")).hexdigest()
+
+
+@register(
+    "natural_key_16",
+    in_type=str,
+    out_type=str,
+    failure_mode="None -> None; sonst die ersten 16 Hex des sha256.",
+)
+def natural_key_16(value: str | None) -> str | None:
+    """16-Hex-Slug fuer zusammengesetzte, abgeleitete Natural Keys (ADR-013).
+
+    Der ``derived_from``-Schritt fuegt die Quellfelder mit U+001F (Unit Separator,
+    == ``derive._COMPOSITE_SEP``) zusammen und reicht sie herein. Diese Primitive
+    macht den Schluessel unabhaengig von
+
+    - der Unicode-Normalform (NFC), damit dieselbe Zeichenkette in NFD und NFC
+      einen identischen Schluessel ergibt;
+    - Rand-Whitespace jedes Segments und kollabierten internen Whitespace-Laeufen,
+      damit „dasselbe Zitat mit abweichendem Umgebungs-Whitespace" (docs/02
+      §Feldsemantik, quotes) auf **eine** id faellt.
+
+    Sie liefert die ersten 16 Hexziffern des sha256; 64 Bit reichen fuer die
+    Sandkasten-Kardinalitaeten (quotes ~100, oscar_film ~75) kollisionsfrei, das
+    Muster ist ``^[a-f0-9]{16}$``. Der U+001F-Trenner verhindert die Kollision
+    ("ab","c") == ("a","bc"), die trennerloses Verketten haette; Whitespace um den
+    Trenner wird entfernt, damit ein Segment mit und ohne Rand-Whitespace denselben
+    Schluessel ergibt.
+    """
+    if value is None:
+        return None
+    text = unicodedata.normalize("NFC", value)
+    # Whitespace um den U+001F-Trenner tilgen, dann interne Laeufe kollabieren:
+    # so wird der Rand-Whitespace jedes Segments getrennt (nicht ueber den Trenner
+    # hinweg) normalisiert. \x1f ist selbst kein \s, der zweite Lauf laesst ihn stehen.
+    text = re.sub(r"\s*\x1f\s*", "\x1f", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]

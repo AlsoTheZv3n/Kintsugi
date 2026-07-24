@@ -15,6 +15,13 @@ from kintsugi.packs.model import FieldSchema
 from kintsugi.transform.primitives import Money
 from kintsugi.transform.registry import resolve
 
+# Trenner, mit dem eine Mehr-Quellen-Ableitung ihre Segmente verkettet, bevor der
+# Transform sie sieht (U+001F, Unit Separator). Ein Trenner ist noetig, damit
+# ("ab","c") und ("a","bc") verschiedene Schluessel ergeben; U+001F, weil er in
+# echtem Text nicht vorkommt. ``natural_key_16`` kennt ihn und tilgt Rand-Whitespace
+# um ihn herum.
+_COMPOSITE_SEP = "\x1f"
+
 
 def apply_derived_fields(
     values: Mapping[str, object], schema_fields: Mapping[str, FieldSchema]
@@ -37,7 +44,7 @@ def apply_derived_fields(
         if len(sources) == 1:
             result[name] = transform.fn(result.get(sources[0]))
         else:
-            joined = "".join(str(result.get(s) or "") for s in sources)
+            joined = _COMPOSITE_SEP.join(str(result.get(s) or "") for s in sources)
             result[name] = transform.fn(joined)
 
     for key, value in list(result.items()):
