@@ -273,7 +273,8 @@ def run(
                 error=func.concat_ws("\n", run_table.c.error, error)
                 if error
                 else run_table.c.error,
-                metrics=counters.to_metrics(),
+                # namespaced (#82): der counters-Block; quality kommt in I1.1.4 dazu.
+                metrics={"counters": counters.to_metrics()},
                 pages_fetched=counters.pages_fetched,
                 rows_extracted=counters.rows_extracted,
             )

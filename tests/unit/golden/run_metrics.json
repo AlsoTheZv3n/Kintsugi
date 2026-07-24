@@ -1,0 +1,49 @@
+{
+  "counters": {
+    "fetch_ms_p95": 12.0,
+    "http": {
+      "200": 253
+    },
+    "pages_fetched": 253,
+    "pages_skipped_robots": 0,
+    "pages_unchanged": 0,
+    "rows_considered": 240,
+    "rows_extracted": 240,
+    "rows_inserted": 240,
+    "rows_rejected": {},
+    "rows_unchanged": 0,
+    "rows_valid": 240,
+    "rows_versioned": 0,
+    "urls_discovered": 240
+  },
+  "quality": {
+    "duplicate_rate": 0.0,
+    "enum_violations": {},
+    "fetch_ms_p95": 12,
+    "fill_rate": {
+      "availability": 0.8,
+      "currency": 1.0,
+      "price": 0.99,
+      "title": 1.0,
+      "upc": 1.0
+    },
+    "http": {
+      "200": 252
+    },
+    "insufficient_baseline": false,
+    "natural_key_missing": 0,
+    "range_violations": {
+      "price": {
+        "count": 6,
+        "rate": 0.06
+      }
+    },
+    "row_count": {
+      "actual": 240,
+      "deviation": 0.008403,
+      "median_14d": 238
+    },
+    "rows_considered": 252,
+    "rows_written": 240
+  }
+}

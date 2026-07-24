@@ -120,7 +120,7 @@ def test_cli_und_modulaufruf_gleiche_pack_id_und_counter(conn, books_fixture_bas
     runs = conn.execute(select(run_table.c.site_pack_id, run_table.c.metrics)).all()
     assert len(runs) == 2
     assert len({r.site_pack_id for r in runs}) == 1  # dasselbe Pack
-    assert {r.metrics["rows_considered"] for r in runs} == {5}  # gleiche Zaehler
+    assert {r.metrics["counters"]["rows_considered"] for r in runs} == {5}  # namespaced (#82)
 
 
 def test_unbekannte_domain_exit2(conn, cli_env):

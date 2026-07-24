@@ -89,7 +89,9 @@ def _activate_pack(conn: Connection, base: str, *, min_rows: int = 200) -> UUID:
 
 
 def _metrics(conn: Connection, run_id: UUID) -> dict:
-    return conn.execute(select(run_table.c.metrics).where(run_table.c.id == run_id)).scalar_one()
+    # namespaced (#82): der Betriebs-Block liegt unter "counters".
+    doc = conn.execute(select(run_table.c.metrics).where(run_table.c.id == run_id)).scalar_one()
+    return doc["counters"]
 
 
 def test_erster_lauf_schreibt_und_zweiter_ist_unchanged(conn, books_fixture_base_url, tmp_path):
@@ -118,12 +120,13 @@ def test_pages_fetched_spiegelt_spalte_und_http_summe(conn, books_fixture_base_u
             run_table.c.id == r.run_id
         )
     ).one()
-    assert row.pages_fetched == row.metrics["pages_fetched"]
-    assert row.rows_extracted == row.metrics["rows_extracted"]
-    assert sum(row.metrics["http"].values()) == row.metrics["pages_fetched"]
+    counters = row.metrics["counters"]  # namespaced (#82)
+    assert row.pages_fetched == counters["pages_fetched"]
+    assert row.rows_extracted == counters["rows_extracted"]
+    assert sum(counters["http"].values()) == counters["pages_fetched"]
     # rows_valid + alle Ablehnungen == extrahierte Zeilen.
-    rejected = sum(row.metrics["rows_rejected"].values())
-    assert row.metrics["rows_valid"] + rejected == row.metrics["rows_extracted"]
+    rejected = sum(counters["rows_rejected"].values())
+    assert counters["rows_valid"] + rejected == counters["rows_extracted"]
 
 
 def test_200_betrachtete_zeilen_sind_ok_199_ist_failed(conn, books_fixture_base_url, tmp_path):
