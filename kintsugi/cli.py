@@ -236,6 +236,39 @@ def run(
 
 
 @app.command()
+def replay(
+    domain: Annotated[str, typer.Argument(help="Quelle mit einem Pack unter packs/")],
+    entity: Annotated[str, typer.Option("--entity")] = "book",
+    root: Annotated[Path, typer.Option("--root")] = Path("fixtures"),
+    as_json: Annotated[bool, typer.Option("--json")] = False,
+) -> None:
+    """Faehrt das Pack gegen die Golden-Fixtures; Exit 0 bei Pass, 1 bei Durchfall.
+
+    Derselbe Codepfad wie das kuenftige Freigabe-Gate — das Gate ist nie eine
+    zweite Implementierung.
+    """
+    from kintsugi.harness.replay import Corpus
+    from kintsugi.harness.replay import replay as run_replay
+    from kintsugi.packs.loader import load_pack
+
+    pack = load_pack(domain, entity)
+    report = run_replay(pack, Corpus(root, domain, entity))
+    if as_json:
+        typer.echo(report.model_dump_json(indent=2))
+    else:
+        for fixture in report.fixtures:
+            for field_result in fixture.fields:
+                mark = "ok  " if field_result.ok else "FAIL"
+                typer.echo(
+                    f"  {mark} {fixture.label} {field_result.field}: "
+                    f"expected={field_result.expected!r} actual={field_result.actual!r}"
+                )
+        typer.echo(f"optional_counts={report.optional_counts} baseline={report.baseline}")
+    typer.echo(f"passed={report.passed}")
+    raise typer.Exit(0 if report.passed else 1)
+
+
+@app.command()
 def sources() -> None:
     """Listet je (domain, entity): aktive Version, letzter Lauf, aktuelle Records."""
     from sqlalchemy import func, select, true
