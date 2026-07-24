@@ -10,7 +10,7 @@ Angabe. YAML-Schluessel sind teils camelCase (``apiVersion``), daher
 from __future__ import annotations
 
 import re
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -19,6 +19,26 @@ _BASE = ConfigDict(frozen=True, extra="forbid", populate_by_name=True)
 
 class _Model(BaseModel):
     model_config = _BASE
+
+
+# Welche Phase den Executor einer Source-Art liefert. Nur css laeuft in Phase 0.
+# Die Reihenfolge in extract.sources ist die Prioritaet aus docs/01 (erster
+# Treffer gewinnt); dieser Zuordnung entnimmt der Extraktor die Fehlermeldung
+# fuer noch nicht gebaute Arten.
+SOURCE_PHASE: dict[str, str] = {
+    "api": "Phase 5",
+    "jsonld": "Phase 1",
+    "embedded_json": "Phase 1",
+    "xhr": "Phase 1",
+    "css": "Phase 0",
+    "llm": "Phase 4",
+}
+
+
+def stub_execute(kind: str) -> None:
+    """Platzhalter fuer noch nicht gebaute Extraktoren; nennt die liefernde Phase."""
+    phase = SOURCE_PHASE.get(kind, "einer spaeteren Phase")
+    raise NotImplementedError(f"Extraktor fuer kind={kind!r} kommt in {phase}")
 
 
 class BrowserSpec(_Model):
@@ -85,8 +105,76 @@ class DiscoverySpec(_Model):
         return self
 
 
+# --------------------------------------------------------------------------
+# Extraction: priorisierte Source-Liste, diskriminierte Union auf `kind`
+# (docs/01 Extraktionsleiter). Kein `const`-Kind — ADR-013 waehlt derived_from
+# auf dem Schema-Feld (siehe FieldSchema), nicht eine Source-Art.
+# --------------------------------------------------------------------------
+
+
+class FieldExtract(_Model):
+    """Wie ein einzelnes Feld aus dem DOM geholt wird (css-Source)."""
+
+    selector: str
+    attr: str | None = None  # Attribut statt Textinhalt, z. B. data-price
+    anchor_hint: str | None = None  # Freitext nur fuer die Heilung (docs/02)
+    transform: list[str] = Field(default_factory=list)
+
+
+class ApiSource(_Model):
+    kind: Literal["api"]
+    endpoint: str | None = None
+
+
+class JsonLdSource(_Model):
+    kind: Literal["jsonld"]
+    type: str
+
+
+class EmbeddedJsonSource(_Model):
+    kind: Literal["embedded_json"]
+    script_id: str | None = None  # z. B. __NEXT_DATA__
+    root: str | None = None
+    # F5: quotes.toscrape.com/js legt die Daten als `var data = [...]` ohne
+    # id-Attribut ab. js_var findet die Variablenzuweisung per Name.
+    js_var: str | None = None
+
+    @model_validator(mode="after")
+    def _needs_a_locator(self) -> EmbeddedJsonSource:
+        if not self.script_id and not self.js_var:
+            raise ValueError("embedded_json braucht script_id oder js_var")
+        return self
+
+
+class XhrSource(_Model):
+    kind: Literal["xhr"]
+    endpoint: str | None = None
+
+
+class CssSource(_Model):
+    kind: Literal["css"]
+    row_selector: str | None = None  # None = eine Entitaet pro Seite
+    fields: dict[str, FieldExtract]
+
+
+class LlmSource(_Model):
+    kind: Literal["llm"]
+
+
+SourceSpec = Annotated[
+    ApiSource | JsonLdSource | EmbeddedJsonSource | XhrSource | CssSource | LlmSource,
+    Field(discriminator="kind"),
+]
+
+
+class ExtractSpec(_Model):
+    """Priorisierte Liste von Quellen; die Reihenfolge ist die Prioritaet."""
+
+    sources: list[SourceSpec]
+
+
 class SitePack(_Model):
-    """Wurzel des Site-Pack-Vertrags. Weitere Bloecke folgen in I0.6.2 bis I0.6.4."""
+    """Wurzel des Site-Pack-Vertrags. Weitere Bloecke folgen in I0.6.3 bis I0.6.4."""
 
     api_version: Literal["kintsugi/v1"] = Field(alias="apiVersion")
     domain: str
@@ -94,3 +182,4 @@ class SitePack(_Model):
     version: int = Field(ge=1)
     discovery: DiscoverySpec
     fetch: FetchSpec = Field(default_factory=FetchSpec)
+    extract: ExtractSpec

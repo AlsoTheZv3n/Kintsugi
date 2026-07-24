@@ -18,6 +18,11 @@ def _minimal_pack(**overrides: object) -> dict[str, object]:
             "url_template": "https://books.toscrape.com/catalogue/page-{n}.html",
             "page_stop": 50,
         },
+        "extract": {
+            "sources": [
+                {"kind": "css", "fields": {"title": {"selector": "h1"}}},
+            ],
+        },
     }
     base.update(overrides)
     return base
