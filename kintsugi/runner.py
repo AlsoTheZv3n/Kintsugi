@@ -38,7 +38,7 @@ from kintsugi.canonical import encode_natural_key
 from kintsugi.config import Settings, get_settings
 from kintsugi.discovery import DiscoveryContext, get_strategy
 from kintsugi.extract.entity import extract_entity
-from kintsugi.fetch.block_detect import Blocked, detect
+from kintsugi.fetch.block_detect import Blocked, detect_block, resolve_block_signatures
 from kintsugi.fetch.http import HttpFetcher, resolve_encoding
 from kintsugi.fetch.ratelimit import DomainLimiter
 from kintsugi.fetch.robots import RobotsDenied
@@ -206,11 +206,12 @@ def run(
                 # Block-Erkennung NACH dem Snapshot, VOR dem Extraktor.
                 assert snap.body is not None
                 encoding = resolve_encoding(snap.body, None)
-                reason = detect(snap.body, {}, encoding)
-                if reason is not None:
-                    raise Blocked(reason)
+                html = snap.body.decode(encoding, errors="replace")
+                hit = detect_block(html, {}, resolve_block_signatures(pack.fetch.block_signatures))
+                if hit is not None:
+                    raise Blocked(hit.id)
 
-                doc = LexborHTMLParser(snap.body.decode(encoding, errors="replace"))
+                doc = LexborHTMLParser(html)
                 values, _ = extract_entity(pack, doc)
                 counters.rows_extracted += 1
 

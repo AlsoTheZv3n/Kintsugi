@@ -15,6 +15,7 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from kintsugi.fetch.block_detect import SignatureOverride
 from kintsugi.packs.denylist import check_domain, check_no_credentials
 
 _BASE = ConfigDict(frozen=True, extra="forbid", populate_by_name=True)
@@ -79,6 +80,11 @@ class FetchSpec(_Model):
     conditional_requests: bool = True
     proxy_pool: Literal["residential", "datacenter"] | None = None
     browser: BrowserSpec | None = None
+    # Pack-Overrides der globalen Signaturlisten (I1.4.2): default anhaengen,
+    # ``replace: true`` tauscht die globale Liste aus. Dasselbe Entry-Modell wie
+    # die Fetch-Schicht, ein schlechtes Pack scheitert also statisch, nicht im Fetch.
+    block_signatures: SignatureOverride | None = None
+    soft_404_signatures: SignatureOverride | None = None
 
 
 # Ein benannter Alias, damit die Discovery-Registry (kintsugi/discovery) und das

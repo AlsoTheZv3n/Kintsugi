@@ -429,6 +429,17 @@
       "additionalProperties": false,
       "description": "Wie geholt wird. Der Fetcher ist Eigenschaft des Packs, nicht global.",
       "properties": {
+        "block_signatures": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SignatureOverride"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "browser": {
           "anyOf": [
             {
@@ -485,6 +496,17 @@
           ],
           "default": true,
           "title": "Respect Robots"
+        },
+        "soft_404_signatures": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SignatureOverride"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "strategy": {
           "default": "http",
@@ -825,6 +847,73 @@
         "fields"
       ],
       "title": "SchemaSpec",
+      "type": "object"
+    },
+    "SignatureEntry": {
+      "additionalProperties": false,
+      "description": "Eine einzelne Signatur. ``pattern`` ist ein CSS-Selektor oder ein Regex.\n\n``scope`` waehlt den Heuhaufen: ``body`` = ganzer HTML-Text, ``title`` =\nTiteltext, ``header`` = ``k: v``-Zeilen der Antwort-Header (klein\ngeschrieben). Fuer ``kind: css`` ist ``scope`` per Konvention ``body``.\n``source_note`` belegt, woher die Signatur stammt (Provenienz, kein Freitext-\nKommentar) — sie verrottet sonst.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "regex",
+            "css"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "pattern": {
+          "title": "Pattern",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "body",
+            "title",
+            "header"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "source_note": {
+          "title": "Source Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "pattern",
+        "scope",
+        "kind",
+        "source_note"
+      ],
+      "title": "SignatureEntry",
+      "type": "object"
+    },
+    "SignatureOverride": {
+      "additionalProperties": false,
+      "description": "Pack-Override einer Signaturliste. Default ist *anhaengen*, ``replace``\ntauscht die globale Liste ganz aus.",
+      "properties": {
+        "replace": {
+          "default": false,
+          "title": "Replace",
+          "type": "boolean"
+        },
+        "signatures": {
+          "items": {
+            "$ref": "#/$defs/SignatureEntry"
+          },
+          "title": "Signatures",
+          "type": "array"
+        }
+      },
+      "required": [
+        "signatures"
+      ],
+      "title": "SignatureOverride",
       "type": "object"
     },
     "XhrSource": {

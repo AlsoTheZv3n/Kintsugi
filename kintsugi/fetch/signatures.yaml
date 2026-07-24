@@ -1,39 +1,88 @@
-# Eine versionierte Liste von Block-Signaturen. Eine Liste, ein Ort zum
-# Erweitern — ueber Module verstreute Signaturen verrotten. Jede Signatur hat
-# einen eindeutigen name. kind ist css (Selektor vorhanden), substring oder
-# regex; die Header- und Text-Floor-Pruefungen sind fest in block_detect.py.
-version: 1
-signatures:
-  # Consent-Management-Plattformen (CMP-Container)
-  - name: onetrust_cmp
-    kind: css
-    value: "#onetrust-consent-sdk"
-  - name: usercentrics_cmp
-    kind: css
-    value: "#usercentrics-root"
-  - name: didomi_cmp
-    kind: css
-    value: "#didomi-host"
-  - name: generic_cmp
-    kind: css
-    value: ".cmp-container"
-  # Cloudflare / Akamai / Incapsula
-  - name: cloudflare_challenge
-    kind: substring
-    value: "cf-browser-verification"
-  - name: cloudflare_just_a_moment
-    kind: substring
-    value: "Just a moment..."
-  - name: incapsula
-    kind: substring
-    value: "_Incapsula_Resource"
-  - name: reference_id
+# Die einzige versionierte Signaturliste (I1.4.2). Ein Ort zum Erweitern —
+# ueber Module verstreute Signaturen verrotten. Jeder Eintrag hat eine
+# eindeutige id, ein pattern (CSS-Selektor bei kind: css, sonst Regex), einen
+# scope (body | title | header) und eine source_note (Provenienz). Die
+# strukturellen Pruefungen (meta-refresh auf Consent, Text-Floor) stecken fest in
+# block_detect.py, weil sie sich nicht als Pattern ausdruecken lassen.
+schema_version: 1
+
+block_signatures:
+  # Cloudflare markiert abgemilderte Antworten per Response-Header.
+  - id: cf_mitigated_header
+    pattern: cf-mitigated
+    scope: header
     kind: regex
-    value: 'Reference #\d'
+    source_note: "Cloudflare: cf-mitigated response header on challenge/block"
+  # Consent-Management-Plattformen (CMP-Container)
+  - id: onetrust_cmp
+    pattern: "#onetrust-consent-sdk"
+    scope: body
+    kind: css
+    source_note: "OneTrust CMP container id"
+  - id: usercentrics_cmp
+    pattern: "#usercentrics-root"
+    scope: body
+    kind: css
+    source_note: "Usercentrics CMP root id"
+  - id: didomi_cmp
+    pattern: "#didomi-host"
+    scope: body
+    kind: css
+    source_note: "Didomi CMP host id"
+  - id: generic_cmp
+    pattern: ".cmp-container"
+    scope: body
+    kind: css
+    source_note: "Generic IAB TCF cmp-container class"
+  # Cloudflare / Akamai / Incapsula Challenges
+  - id: cloudflare_challenge
+    pattern: 'cf-browser-verification'
+    scope: body
+    kind: regex
+    source_note: "Cloudflare interstitial marker"
+  - id: cloudflare_just_a_moment
+    pattern: 'Just a moment\.\.\.'
+    scope: body
+    kind: regex
+    source_note: "Cloudflare 'Just a moment...' interstitial title text"
+  - id: incapsula
+    pattern: '_Incapsula_Resource'
+    scope: body
+    kind: regex
+    source_note: "Imperva/Incapsula resource marker"
+  - id: reference_id
+    pattern: 'Reference #\d'
+    scope: body
+    kind: regex
+    source_note: "Akamai/WAF block page 'Reference #<n>' error id"
   # CAPTCHA-Hosts
-  - name: hcaptcha
-    kind: substring
-    value: "hcaptcha.com"
-  - name: recaptcha
-    kind: substring
-    value: "google.com/recaptcha"
+  - id: hcaptcha
+    pattern: 'hcaptcha\.com'
+    scope: body
+    kind: regex
+    source_note: "hCaptcha embed host"
+  - id: recaptcha
+    pattern: 'google\.com/recaptcha'
+    scope: body
+    kind: regex
+    source_note: "Google reCAPTCHA embed host"
+
+soft_404_signatures:
+  # Status 200, aber der Titel schreit 404. Der haeufigste Soft-404.
+  - id: soft_404_title
+    pattern: '(?i)\b404\b|not found|page not found'
+    scope: title
+    kind: regex
+    source_note: "Title advertises 404/Not Found while serving HTTP 200"
+  # Fliesstext-Formulierungen der „Seite nicht gefunden"-Meldung.
+  - id: soft_404_body_not_found
+    pattern: "(?i)page (you requested |you were looking for )?(could not|couldn't|cannot|can't) be found"
+    scope: body
+    kind: regex
+    source_note: "Soft-404 body copy 'page ... could not be found'"
+  # Explizite Fehler-Container, die Themes fuer 404-Seiten setzen.
+  - id: soft_404_error_container
+    pattern: ".error-404"
+    scope: body
+    kind: css
+    source_note: "Theme error-404 container class on a 200 response"
