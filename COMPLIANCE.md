@@ -65,6 +65,15 @@ It is therefore **not used**, even though the design docs once named it. The adm
 the same AJAX test case is <https://www.scrapethissite.com/pages/ajax-javascript/>, whose `robots.txt`
 disallows only `/lessons/` and `/faq/`.
 
+## Admitted sources
+
+Sources whose compliance block has been reviewed and which are active. The
+verdict and robots-checked date mirror each pack's `compliance` block.
+
+| Source | ToS verdict | robots checked | personal data |
+|---|---|---|---|
+| books.toscrape.com | permits | 2026-07-21 (404 → allow all) | no |
+
 ## Personal data and deletion
 
 For a source carrying personal data, a deletion request must reach **every** copy of a record, not

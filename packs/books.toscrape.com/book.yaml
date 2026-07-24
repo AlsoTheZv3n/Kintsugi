@@ -1,0 +1,110 @@
+# Site-Pack fuer books.toscrape.com (Phase-0-Basisfall).
+#
+# F1: books.toscrape.com bietet keine maschinenlesbare URL-Karte (die uebliche
+# XML-Datei liefert 404, ebenso robots.txt), deshalb discovery.strategy:
+# pagination ueber catalogue/page-{n}.html (1..50). 20 Produkte je Seite, 1000
+# gesamt -> die DoD (>=200 Records) ist erreichbar.
+# F2: die vier Selektoren sind live gegen die echte Seite verifiziert.
+# F3: currency hat keine eigene Extraktionsquelle und wird via derived_from aus
+# dem Money-Wert von price abgeleitet (ADR-013).
+apiVersion: kintsugi/v1
+domain: books.toscrape.com
+entity: book
+version: 1
+
+discovery:
+  strategy: pagination
+  url_template: https://books.toscrape.com/catalogue/page-{n}.html
+  page_start: 1
+  page_stop: 50
+  url_pattern: '^https://books\.toscrape\.com/catalogue/[^/]+/index\.html$'
+  max_urls_per_run: 1000
+
+fetch:
+  strategy: http
+  rate_limit_rps: 0.5
+  concurrency: 2
+  respect_robots: true
+  conditional_requests: true
+
+extract:
+  sources:
+    - kind: css
+      row_selector: null            # eine Entitaet pro Detailseite
+      fields:
+        title:
+          selector: 'div.product_main > h1'
+          anchor_hint: 'Der Buchtitel, die erste Ueberschrift im Produktbereich'
+          transform: [strip]
+        price:
+          selector: 'p.price_color'
+          anchor_hint: 'Preis mit Waehrungssymbol, z. B. GBP 51.77'
+          transform: [strip, parse_currency]
+        availability:
+          selector: 'p.availability'
+          anchor_hint: 'Text wie "In stock (22 available)"'
+          transform: [strip, int_from_text]
+        upc:
+          selector: 'table.table-striped tr:nth-child(1) td'
+          anchor_hint: 'UPC in der Produktinformationstabelle, erste Zeile'
+          transform: [strip]
+
+schema:
+  natural_key: [upc]
+  fields:
+    title:
+      type: string
+      required: true
+      min_fill_rate: 0.99
+    price:
+      type: decimal
+      required: true
+      min_fill_rate: 0.98
+      sane_range: [0.01, 10000]
+    currency:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+      enum: [GBP, CHF, EUR, USD]
+      derived_from:
+        source: price
+        transform: currency_from_symbol
+    availability:
+      type: integer
+      required: false
+      min_fill_rate: 0.80
+      sane_range: [0, 100000]
+    upc:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+      pattern: '^[a-f0-9]{16}$'
+
+quality:
+  min_rows_per_run: 200
+  row_count_deviation: 0.30
+  max_duplicate_rate: 0.02
+  max_range_violation_rate: 0.05
+  thresholds_source: provisional
+
+healing:
+  enabled: false                 # kein Heiler in Phase 0; aktiviert ab Phase 2
+  max_auto_versions_per_window: 3
+  window: 7d
+  require_golden_pass: true
+  canary_fraction: 0.05
+  canary_min_rows: 50
+  escalate_on: [field_removed, schema_change, enum_violation, natural_key_broken]
+
+delivery:
+  sinks: [postgres]
+  webhook_on_change: null
+
+compliance:
+  tos_url: https://books.toscrape.com/
+  tos_verdict: permits          # explizit als Scraping-Sandbox gebaut
+  tos_reviewed_at: 2026-07-21
+  reviewed_by: human:sven
+  robots_checked_at: 2026-07-21  # robots.txt liefert 404 -> allow all (RFC 9309)
+  public_content: true
+  personal_data: false
