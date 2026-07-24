@@ -136,9 +136,91 @@ def fixtures_capture(
 @app.command()
 def run(
     domain: Annotated[str, typer.Argument(help="Domain der Quelle, z. B. books.toscrape.com")],
+    entity: Annotated[str | None, typer.Option("--entity")] = None,
+    limit: Annotated[int | None, typer.Option("--limit")] = None,
+    max_urls: Annotated[int | None, typer.Option("--max-urls")] = None,
+    dry_run: Annotated[bool, typer.Option("--dry-run")] = False,
 ) -> None:
-    """Fuehrt einen Lauf fuer die angegebene Domain aus."""
-    typer.echo(f"kintsugi {__version__}: Lauf fuer {domain} — noch nicht implementiert.")
+    """Fuehrt einen Lauf fuer die angegebene Domain aus.
+
+    Exit-Codes: 0 fuer ok und degraded (mit Warnzeile), 1 fuer failed, 2 fuer
+    Bedien-/Konfigurationsfehler wie ein fehlendes aktives Pack.
+    """
+    from kintsugi.runner import NoActivePackError
+    from kintsugi.runner import run as run_pipeline
+
+    try:
+        result = run_pipeline(
+            domain, entity=entity, limit=limit, max_urls=max_urls, dry_run=dry_run
+        )
+    except NoActivePackError as exc:
+        typer.echo(f"no active site pack: {exc}", err=True)
+        raise typer.Exit(2) from exc
+
+    c = result.counters
+    typer.echo(
+        f"run {result.run_id} status={result.status} "
+        f"rows_considered={c.rows_considered} rows_extracted={c.rows_extracted} "
+        f"rows_valid={c.rows_valid} rows_inserted={c.rows_inserted} "
+        f"rows_versioned={c.rows_versioned} rows_unchanged={c.rows_unchanged}"
+    )
+    if result.status == "failed":
+        typer.echo(f"FAILED: {result.error}", err=True)
+        raise typer.Exit(1)
+    if result.status == "degraded":
+        typer.echo(f"WARN: Lauf degraded ({result.error or 'Teilausfall'})", err=True)
+    raise typer.Exit(0)
+
+
+@app.command()
+def sources() -> None:
+    """Listet je (domain, entity): aktive Version, letzter Lauf, aktuelle Records."""
+    from sqlalchemy import func, select, true
+
+    from kintsugi.storage.db import transaction
+    from kintsugi.storage.tables import record, site_pack
+    from kintsugi.storage.tables import run as run_t
+
+    # Der juengste Lauf je aktivem Pack ueber einen Lateral-Join.
+    latest = (
+        select(
+            run_t.c.status.label("status"),
+            run_t.c.started_at.label("started_at"),
+        )
+        .where(run_t.c.site_pack_id == site_pack.c.id)
+        .order_by(run_t.c.started_at.desc())
+        .limit(1)
+        .lateral("lr")
+    )
+    with transaction() as conn:
+        rows = conn.execute(
+            select(
+                site_pack.c.domain,
+                site_pack.c.entity,
+                site_pack.c.version,
+                latest.c.started_at,
+                latest.c.status,
+            )
+            .select_from(site_pack.outerjoin(latest, true()))
+            .where(site_pack.c.status == "active")
+            .order_by(site_pack.c.domain, site_pack.c.entity)
+        ).all()
+        counts: dict[str, int] = {
+            entity: count
+            for entity, count in conn.execute(
+                select(record.c.entity, func.count())
+                .where(record.c.valid_to.is_(None))
+                .group_by(record.c.entity)
+            ).all()
+        }
+    if not rows:
+        typer.echo("keine aktiven Packs.")
+        return
+    for r in rows:
+        typer.echo(
+            f"{r.domain}/{r.entity} v{r.version} "
+            f"last_run={r.started_at} status={r.status} records={counts.get(r.entity, 0)}"
+        )
 
 
 @app.command()

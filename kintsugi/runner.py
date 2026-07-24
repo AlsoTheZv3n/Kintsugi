@@ -247,11 +247,14 @@ def run(
                 )
             conn.commit()
 
+        # Ein dry_run ist ein Smoke-Test und scheitert nicht an min_rows; ein
+        # echter (auch gekappter) Lauf setzt die Schwelle durch.
+        meets_min = dry_run or counters.meets_min_rows(pack.quality.min_rows_per_run)
         status = _final_status(
             blocked=blocked_reason is not None,
             has_error=error is not None,
             partial=partial_failures > 0,
-            meets_min=counters.meets_min_rows(pack.quality.min_rows_per_run),
+            meets_min=meets_min,
         )
         if status == "failed" and error is None:
             error = (
