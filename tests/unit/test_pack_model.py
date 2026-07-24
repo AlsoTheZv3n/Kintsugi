@@ -27,6 +27,15 @@ def _minimal_pack(**overrides: object) -> dict[str, object]:
             "natural_key": ["upc"],
             "fields": {"upc": {"type": "string", "required": True}},
         },
+        "compliance": {
+            "tos_url": "https://books.toscrape.com/",
+            "tos_verdict": "permits",
+            "tos_reviewed_at": "2026-07-21",
+            "reviewed_by": "human:sven",
+            "robots_checked_at": "2026-07-21",
+            "public_content": True,
+            "personal_data": False,
+        },
     }
     base.update(overrides)
     return base

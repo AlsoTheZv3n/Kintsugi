@@ -10,6 +10,7 @@ Angabe. YAML-Schluessel sind teils camelCase (``apiVersion``), daher
 from __future__ import annotations
 
 import re
+from datetime import date
 from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -50,14 +51,29 @@ class BrowserSpec(_Model):
     )
 
 
+class RobotsOverride(_Model):
+    """Dokumentierte Ausnahme von der robots.txt (README: nicht ohne Eintrag).
+
+    ``respect_robots: false`` ist damit nicht darstellbar — die README-Zusage
+    „nicht abschaltbar ohne dokumentierten Site-Pack-Eintrag" wird eine
+    Typbedingung statt einer Gewohnheit.
+    """
+
+    override: Literal[True]
+    reason: str
+    approved_by: str
+    approved_at: date
+    evidence_url: str
+
+
 class FetchSpec(_Model):
     """Wie geholt wird. Der Fetcher ist Eigenschaft des Packs, nicht global."""
 
     strategy: Literal["http", "browser"] = "http"
     rate_limit_rps: float = Field(default=0.5, gt=0)
     concurrency: int = Field(default=2, ge=1)
-    # respect_robots wird in I0.6.4 zur strukturierten Form erweitert.
-    respect_robots: bool = True
+    # Nur True oder eine dokumentierte Ausnahme; false ist nicht darstellbar.
+    respect_robots: Literal[True] | RobotsOverride = True
     conditional_requests: bool = True
     proxy_pool: Literal["residential", "datacenter"] | None = None
     browser: BrowserSpec | None = None
@@ -267,8 +283,33 @@ class DeliverySpec(_Model):
     webhook_on_change: str | None = None
 
 
+class ComplianceSpec(_Model):
+    """Pflichtantworten auf die Compliance-Zusagen der README.
+
+    Ein Pack, das diese Fragen nicht beantwortet, laesst sich gar nicht laden.
+    """
+
+    tos_url: str
+    tos_verdict: Literal["permits", "silent", "forbids"]
+    tos_reviewed_at: date
+    reviewed_by: str
+    robots_checked_at: date
+    public_content: bool
+    personal_data: bool
+    personal_data_fields: list[str] = Field(default_factory=list)
+    legal_basis: str | None = None
+
+    @model_validator(mode="after")
+    def _admissible(self) -> ComplianceSpec:
+        if self.tos_verdict == "forbids":
+            raise ValueError("Quelle verbietet automatisierten Zugriff (tos_verdict=forbids)")
+        if self.personal_data and not (self.legal_basis and self.legal_basis.strip()):
+            raise ValueError("personal_data=true verlangt eine nicht-leere legal_basis")
+        return self
+
+
 class SitePack(_Model):
-    """Wurzel des Site-Pack-Vertrags. Der Compliance-Block folgt in I0.6.4."""
+    """Wurzel des Site-Pack-Vertrags."""
 
     api_version: Literal["kintsugi/v1"] = Field(alias="apiVersion")
     domain: str
@@ -281,3 +322,4 @@ class SitePack(_Model):
     quality: QualitySpec = Field(default_factory=QualitySpec)
     healing: HealingSpec = Field(default_factory=HealingSpec)
     delivery: DeliverySpec = Field(default_factory=DeliverySpec)
+    compliance: ComplianceSpec

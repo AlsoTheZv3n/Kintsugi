@@ -96,6 +96,15 @@ def test_vollstaendiges_pack_mit_allen_bloecken():
             "quality": {"min_rows_per_run": 200, "thresholds_source": "provisional"},
             "healing": {"enabled": True, "escalate_on": ["field_removed"]},
             "delivery": {"sinks": ["postgres"]},
+            "compliance": {
+                "tos_url": "https://books.toscrape.com/",
+                "tos_verdict": "permits",
+                "tos_reviewed_at": "2026-07-21",
+                "reviewed_by": "human:sven",
+                "robots_checked_at": "2026-07-21",
+                "public_content": True,
+                "personal_data": False,
+            },
         }
     )
     assert pack.schema_.natural_key == ["upc"]

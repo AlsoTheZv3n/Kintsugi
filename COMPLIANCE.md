@@ -115,3 +115,6 @@ that are enforced name a single pytest node that proves it.
 | Blocked sources are never healed | `UNENFORCED` | pre-heal check, Phase 2 | planned `tests/mutations/test_negatives.py` | 2 |
 | Personal data: deletion reaches history and bronze | `UNENFORCED` | delete path, later phase | planned `tests/integration/test_deletion_path.py` | 5 |
 | Fixtures are not redistributed and carry no personal data | `UNENFORCED` | policy, manual review | — | 1 |
+| robots.txt not disablable without a documented pack entry | `kintsugi.packs.model` | pack load fails validation | `tests/compliance/test_pack_compliance_block.py::test_respect_robots_false_wird_abgelehnt` | 0 |
+| ToS verdict recorded, and a forbidding source is refused | `kintsugi.packs.model` | pack load fails validation | `tests/compliance/test_pack_compliance_block.py::test_tos_verdict_forbids_wird_immer_abgelehnt` | 0 |
+| Personal data requires a recorded legal basis | `kintsugi.packs.model` | pack load fails validation | `tests/compliance/test_pack_compliance_block.py::test_personal_data_ohne_legal_basis_wird_abgelehnt` | 0 |
