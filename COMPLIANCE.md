@@ -119,7 +119,8 @@ that are enforced name a single pytest node that proves it.
 | robots.txt obeyed; 404/410 allow-all, 5xx/timeout deny | `kintsugi.fetch.robots` | fetch aborts or skips the URL | `tests/compliance/test_robots.py::test_404_robots_erlaubt_die_produktseite` | 0 |
 | Conservative rate limit; Crawl-delay only raises it | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_rate_limit.py` | 0 |
 | Conditional requests (ETag / If-Modified-Since) | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_conditional_requests.py` | 0 |
-| CAPTCHA / consent wall aborts the run as `blocked` | `UNENFORCED` | fetch/extract, E0.7/E0.8 | planned `tests/unit/test_block_detection.py` | 0 |
+| Consent wall / CAPTCHA detected by body signature (HTTP 200) | `kintsugi.fetch.block_detect` | fetch raises `Blocked`; run abort wired in E0.9 | `tests/compliance/test_block_detect.py::test_consent_wall_mit_status_200_wird_erkannt` | 0 |
+| No protection bypass (no CAPTCHA solving, no fingerprint rotation) | `kintsugi.fetch.block_detect` | blocking pages are surfaced, never learned from | `tests/compliance/test_block_detect.py::test_cloudflare_just_a_moment` | 0 |
 | No login-gated content | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_no_auth_fetch.py` | 0 |
 | Blocked sources are never healed | `UNENFORCED` | pre-heal check, Phase 2 | planned `tests/mutations/test_negatives.py` | 2 |
 | Personal data: deletion reaches history and bronze | `UNENFORCED` | delete path, later phase | planned `tests/integration/test_deletion_path.py` | 5 |

@@ -1,0 +1,39 @@
+# Eine versionierte Liste von Block-Signaturen. Eine Liste, ein Ort zum
+# Erweitern — ueber Module verstreute Signaturen verrotten. Jede Signatur hat
+# einen eindeutigen name. kind ist css (Selektor vorhanden), substring oder
+# regex; die Header- und Text-Floor-Pruefungen sind fest in block_detect.py.
+version: 1
+signatures:
+  # Consent-Management-Plattformen (CMP-Container)
+  - name: onetrust_cmp
+    kind: css
+    value: "#onetrust-consent-sdk"
+  - name: usercentrics_cmp
+    kind: css
+    value: "#usercentrics-root"
+  - name: didomi_cmp
+    kind: css
+    value: "#didomi-host"
+  - name: generic_cmp
+    kind: css
+    value: ".cmp-container"
+  # Cloudflare / Akamai / Incapsula
+  - name: cloudflare_challenge
+    kind: substring
+    value: "cf-browser-verification"
+  - name: cloudflare_just_a_moment
+    kind: substring
+    value: "Just a moment..."
+  - name: incapsula
+    kind: substring
+    value: "_Incapsula_Resource"
+  - name: reference_id
+    kind: regex
+    value: 'Reference #\d'
+  # CAPTCHA-Hosts
+  - name: hcaptcha
+    kind: substring
+    value: "hcaptcha.com"
+  - name: recaptcha
+    kind: substring
+    value: "google.com/recaptcha"
