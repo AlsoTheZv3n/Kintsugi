@@ -87,5 +87,22 @@ class JsonLdExtractor:
             return {}  # typisierter Fehltreffer -> Kette faellt durch
         return _map_fields(obj, source.fields) if source.fields else dict(obj)
 
+    def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
+        """JSON-LD ist von Natur aus einzeilig: der erste ``@type``-Treffer.
+
+        schema.org-Markup beschreibt in dieser Phase genau eine Entitaet je Seite
+        (ein Produkt, ein Rezept); mehr als einen Treffer zu einer Liste zu
+        entfalten (``ItemList``) ist bewusst nicht Teil von Phase 1. Daher liefert
+        ``extract_all`` hoechstens eine Zeile — die Kette bleibt uniform, ohne dass
+        jsonld ein Mehrzeilen-Verhalten vortaeuscht, das die realen Packs (#104
+        embedded_json, #105 xhr) gar nicht von jsonld verlangen.
+        """
+        assert isinstance(doc, LexborHTMLParser)
+        assert isinstance(source, JsonLdSource)
+        obj = _find(doc, source.type)
+        if obj is None:
+            return []
+        return [_map_fields(obj, source.fields) if source.fields else dict(obj)]
+
 
 register("jsonld", JsonLdExtractor())

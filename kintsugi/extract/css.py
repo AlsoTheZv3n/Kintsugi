@@ -56,8 +56,16 @@ class CssExtractor:
             return _row(node, source.fields)
         return _row(parser, source.fields)
 
-    def extract_all(self, doc: LexborHTMLParser, source: CssSource) -> list[dict[str, object]]:
-        """Alle Zeilen: bei row_selector eine je Treffer, sonst genau eine."""
+    def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
+        """Alle Zeilen: bei row_selector eine je Treffer, sonst genau eine.
+
+        row_selector gesetzt und **kein** Treffer -> leere Liste (0 Entitaeten,
+        z. B. eine leere Listenseite); das ist die Mehrzeilen-Entsprechung zu
+        ``extract``, das im selben Fall ein all-None-dict (eine leere Entitaet)
+        liefert. Der Unterschied ist gewollt: die Kette zaehlt hier keine Zeile.
+        """
+        assert isinstance(doc, LexborHTMLParser)
+        assert isinstance(source, CssSource)
         if source.row_selector is not None:
             return [_row(node, source.fields) for node in doc.css(source.row_selector)]
         return [_row(doc, source.fields)]

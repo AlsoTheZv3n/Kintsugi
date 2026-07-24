@@ -34,9 +34,16 @@ class Extractor(Protocol):
     strukturierte Quellen (jsonld/embedded_json/xhr) liefern auch verschachtelte
     Werte (Liste, Objekt), daher ``object`` — die Transform-/derived_from-Kette
     normalisiert danach.
+
+    ``extract`` liefert die **erste** Entitaet der Seite (die Einzeilen-Sicht der
+    Prioritaetskette, wie books); ``extract_all`` liefert **alle** Entitaeten
+    (Mehrzeilen-Seiten wie quotes/scrapethissite). Eine Seite ohne Entitaet ist
+    fuer ``extract_all`` eine leere Liste.
     """
 
     def extract(self, doc: object, source: object) -> dict[str, object]: ...
+
+    def extract_all(self, doc: object, source: object) -> list[dict[str, object]]: ...
 
 
 class _StubExtractor:
@@ -47,6 +54,9 @@ class _StubExtractor:
         self._phase = phase
 
     def extract(self, doc: object, source: object) -> dict[str, object]:
+        raise NotImplementedError(f"Extraktor fuer kind={self._kind!r} kommt in {self._phase}")
+
+    def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
         raise NotImplementedError(f"Extraktor fuer kind={self._kind!r} kommt in {self._phase}")
 
 

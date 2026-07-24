@@ -156,9 +156,9 @@ class EmbeddedJsonExtractor:
         rows = _rows(doc, source)
         return dict(rows[0]) if rows else {}
 
-    def extract_all(
-        self, doc: LexborHTMLParser, source: EmbeddedJsonSource
-    ) -> list[dict[str, object]]:
+    def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
+        assert isinstance(doc, LexborHTMLParser)
+        assert isinstance(source, EmbeddedJsonSource)
         return [dict(row) for row in _rows(doc, source)]
 
 
