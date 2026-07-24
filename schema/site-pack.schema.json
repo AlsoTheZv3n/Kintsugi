@@ -878,6 +878,18 @@
     "healing": {
       "$ref": "#/$defs/HealingSpec"
     },
+    "notes": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Notes"
+    },
     "quality": {
       "$ref": "#/$defs/QualitySpec"
     },

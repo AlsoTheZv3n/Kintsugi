@@ -11,6 +11,10 @@ apiVersion: kintsugi/v1
 domain: books.toscrape.com
 entity: book
 version: 1
+# UPC-Eindeutigkeit belegt, nicht angenommen: am 2026-07-21 ueber alle 1000
+# Detailseiten geprueft — 1000 Produkte, 1000 verschiedene UPCs, null Duplikate,
+# alle im Muster ^[a-f0-9]{16}$. natural_key: [upc] ist damit tragfaehig.
+notes: 'natural_key [upc] verifiziert 2026-07-21: 1000/1000 eindeutig, 0 Kollisionen'
 
 discovery:
   strategy: pagination

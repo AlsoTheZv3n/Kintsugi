@@ -317,6 +317,7 @@ class SitePack(_Model):
     domain: str
     entity: str
     version: int = Field(ge=1)
+    notes: str | None = None  # Freitext, z. B. Belege fuer Annahmen (docs/03 §Site-Packs)
     discovery: DiscoverySpec
     fetch: FetchSpec = Field(default_factory=FetchSpec)
     extract: ExtractSpec
