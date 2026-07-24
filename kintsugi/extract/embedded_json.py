@@ -161,7 +161,7 @@ def _resolved_rows(doc: LexborHTMLParser, source: EmbeddedJsonSource) -> list[di
     if source.fields is None:
         return rows
     compiled = compile_field_map(source.fields)
-    return [apply_field_map(compiled, row) for row in rows]
+    return [apply_field_map(compiled, row, source.transforms) for row in rows]
 
 
 class EmbeddedJsonExtractor:

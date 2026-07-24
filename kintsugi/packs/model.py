@@ -163,6 +163,8 @@ class JsonLdSource(_Model):
     # Optionale Feld-Map (Feldname -> jsonpath relativ zum getroffenen Objekt).
     # Fehlt sie, werden die Top-Level-Keys des Objekts direkt als Felder genommen.
     fields: dict[str, str] | None = None
+    # Optionale per-Feld-Transform-Kette (wie css), z. B. strip auf einen Rohwert.
+    transforms: dict[str, list[str]] = Field(default_factory=dict)
 
 
 class EmbeddedJsonSource(_Model):
@@ -177,6 +179,8 @@ class EmbeddedJsonSource(_Model):
     # wie bei jsonld. Fehlt sie, werden die Top-Level-Keys der Zeile direkt genommen.
     # #104: quotes' author ist ein verschachteltes Objekt, also author -> $.author.name.
     fields: dict[str, str] | None = None
+    # Optionale per-Feld-Transform-Kette (wie css), z. B. strip auf einen Rohwert.
+    transforms: dict[str, list[str]] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def _exactly_one_locator(self) -> EmbeddedJsonSource:
@@ -201,6 +205,8 @@ class XhrSource(_Model):
     # jsonpath auf die Zeilen (bare Array: '$[*]') und die Feld-Map je Zeile.
     row_root: str | None = None
     fields: dict[str, str] | None = None
+    # Optionale per-Feld-Transform-Kette (wie css), z. B. strip auf title.
+    transforms: dict[str, list[str]] = Field(default_factory=dict)
 
 
 class CssSource(_Model):

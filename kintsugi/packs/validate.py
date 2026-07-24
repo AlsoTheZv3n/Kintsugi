@@ -126,13 +126,22 @@ def _check_natural_key(pack: SitePack) -> list[Finding]:
 def _check_transform_chains(pack: SitePack) -> list[Finding]:
     findings: list[Finding] = []
     for i, source in enumerate(pack.extract.sources):
-        if not isinstance(source, CssSource):
+        if isinstance(source, CssSource):
+            for name, field in source.fields.items():
+                if not field.transform:
+                    continue
+                key_path = f"extract.sources[{i}].fields.{name}.transform"
+                for chain_finding in validate_chain(field.transform):
+                    findings.append(
+                        Finding("transform_chain", "error", key_path, chain_finding.message)
+                    )
             continue
-        for name, field in source.fields.items():
-            if not field.transform:
-                continue
-            key_path = f"extract.sources[{i}].fields.{name}.transform"
-            for chain_finding in validate_chain(field.transform):
+        # Strukturierte Quellen (jsonld/embedded_json/xhr) tragen ihre per-Feld-
+        # Transforms in einer eigenen ``transforms``-Map; auch die muessen typvertraeglich sein.
+        transforms: dict[str, list[str]] = getattr(source, "transforms", {})
+        for name, chain in transforms.items():
+            key_path = f"extract.sources[{i}].transforms.{name}"
+            for chain_finding in validate_chain(chain):
                 findings.append(
                     Finding("transform_chain", "error", key_path, chain_finding.message)
                 )

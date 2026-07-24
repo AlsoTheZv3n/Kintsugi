@@ -373,6 +373,16 @@
           "default": null,
           "title": "Script Id"
         },
+        "transforms": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Transforms",
+          "type": "object"
+        },
         "var_name": {
           "anyOf": [
             {
@@ -747,6 +757,16 @@
           "title": "Kind",
           "type": "string"
         },
+        "transforms": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Transforms",
+          "type": "object"
+        },
         "type": {
           "title": "Type",
           "type": "string"
@@ -1012,6 +1032,16 @@
           ],
           "default": null,
           "title": "Row Root"
+        },
+        "transforms": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Transforms",
+          "type": "object"
         }
       },
       "required": [

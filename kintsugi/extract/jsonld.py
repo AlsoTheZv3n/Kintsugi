@@ -75,7 +75,7 @@ class JsonLdExtractor:
         obj = _find(doc, source.type)
         if obj is None:
             return {}  # typisierter Fehltreffer -> Kette faellt durch
-        return map_fields(obj, source.fields) if source.fields else dict(obj)
+        return map_fields(obj, source.fields, source.transforms) if source.fields else dict(obj)
 
     def extract_all(self, doc: object, source: object) -> list[dict[str, object]]:
         """JSON-LD ist von Natur aus einzeilig: der erste ``@type``-Treffer.
@@ -92,7 +92,7 @@ class JsonLdExtractor:
         obj = _find(doc, source.type)
         if obj is None:
             return []
-        return [map_fields(obj, source.fields) if source.fields else dict(obj)]
+        return [map_fields(obj, source.fields, source.transforms) if source.fields else dict(obj)]
 
 
 register("jsonld", JsonLdExtractor())

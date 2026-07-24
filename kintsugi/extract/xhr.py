@@ -124,7 +124,7 @@ class XhrExtractor:
         if not source.fields:
             return [dict(row) for row in rows]
         compiled = compile_field_map(source.fields)
-        return [apply_field_map(compiled, row) for row in rows]
+        return [apply_field_map(compiled, row, source.transforms) for row in rows]
 
     def extract(self, source: object, *, page_url: str) -> dict[str, object]:
         """Die erste Zeile (Einzeilen-Sicht der Prioritaetskette)."""

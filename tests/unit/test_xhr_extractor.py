@@ -83,6 +83,19 @@ def test_ohne_fields_map_bleiben_die_rohen_keys():
     assert rows[0]["awards"] == {"best_picture": True}
 
 
+def test_transforms_strippen_den_feldwert():
+    # Strukturierte Quellen tragen dieselbe per-Feld-Transform-Kette wie css.
+    source = XhrSource(
+        kind="xhr",
+        endpoint="https://api.example.com/films",
+        row_root="$[*]",
+        fields={"title": "$.title"},
+        transforms={"title": ["strip"]},
+    )
+    rows = XhrExtractor(_FakeFetcher(_result(_FILMS))).extract_all(source, page_url="https://x.com/")
+    assert rows[0]["title"] == "Spotlight"  # aus "Spotlight  "
+
+
 def test_url_template_platzhalter_aus_der_seiten_url():
     source = XhrSource(
         kind="xhr", endpoint="https://api.example.com/films?year={year}", row_root="$[*]"
