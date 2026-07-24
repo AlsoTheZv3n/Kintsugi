@@ -133,6 +133,51 @@ def fixtures_capture(
     typer.echo(f"{domain}/{entity}: Fixture '{label}' aufgenommen.")
 
 
+@fixtures_app.command("import")
+def fixtures_import(
+    domain: Annotated[str, typer.Argument(help="Quelle mit aktivem Pack in der DB")],
+    entity: Annotated[str, typer.Option("--entity")] = "book",
+    root: Annotated[Path, typer.Option("--root")] = Path("fixtures"),
+) -> None:
+    """Spielt die Golden-Fixtures als is_golden-Snapshots ein (idempotent).
+
+    Verweigert mit Exit 3, wenn das aktive Pack ``personal_data=true`` traegt —
+    Golden-Snapshots sind fuer immer retention-befreit (COMPLIANCE.md).
+    """
+    from sqlalchemy import select
+
+    from kintsugi.config import get_settings
+    from kintsugi.harness.fixtures_cli import import_golden
+    from kintsugi.packs.model import SitePack
+    from kintsugi.storage.db import get_engine
+    from kintsugi.storage.snapshots import FilesystemSnapshotStore
+    from kintsugi.storage.tables import site_pack
+
+    settings = get_settings()
+    store = FilesystemSnapshotStore(settings.snapshot_root)
+    with get_engine(settings).connect() as conn:
+        row = conn.execute(
+            select(site_pack.c.id, site_pack.c.spec).where(
+                site_pack.c.domain == domain,
+                site_pack.c.entity == entity,
+                site_pack.c.status == "active",
+            )
+        ).one_or_none()
+        if row is None:
+            typer.echo(f"no active site pack: {domain}/{entity}", err=True)
+            raise typer.Exit(2)
+        pack = SitePack.model_validate(row.spec)
+        if pack.compliance.personal_data:
+            typer.echo(
+                f"Golden-Import verweigert: {domain}/{entity} traegt personal_data=true", err=True
+            )
+            raise typer.Exit(3)
+        count = import_golden(
+            conn, site_pack_id=row.id, domain=domain, entity=entity, root=root, store=store
+        )
+    typer.echo(f"{count} Golden-Snapshots importiert.")
+
+
 @app.command()
 def run(
     domain: Annotated[str, typer.Argument(help="Domain der Quelle, z. B. books.toscrape.com")],

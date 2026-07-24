@@ -32,7 +32,12 @@ from pydantic import ValidationError
 from kintsugi.harness.fixture_model import FixtureMeta
 
 if TYPE_CHECKING:
+    from uuid import UUID
+
+    from sqlalchemy import Connection
+
     from kintsugi.fetch.base import Fetcher
+    from kintsugi.storage.snapshots import SnapshotStore
 
 __all__ = [
     "DENY",
@@ -240,3 +245,79 @@ def write_index(root: Path) -> Path:
         json.dumps(build_index(root), indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     return index_path
+
+
+def import_golden(
+    conn: Connection,
+    *,
+    site_pack_id: UUID,
+    domain: str,
+    entity: str,
+    root: Path,
+    store: SnapshotStore,
+) -> int:
+    """Spielt die On-Disk-Golden-Fixtures als ``is_golden``-Snapshots ein.
+
+    Ein synthetischer ``replay``-Lauf traegt die Zeilen; jeder Blob geht durch den
+    Phase-0-Snapshot-Store. Idempotent auf ``content_hash``: ein zweiter Aufruf
+    importiert nichts neu. Fremde Golden-Formate (der CssExtractor-Baseline) ohne
+    ``FixtureMeta`` werden uebersprungen.
+    """
+    from sqlalchemy import func, insert, select
+
+    from kintsugi.storage.tables import run as run_table
+    from kintsugi.storage.tables import snapshot
+
+    golden_root = root / domain / entity / "golden"
+    if not golden_root.is_dir():
+        return 0
+
+    run_id: UUID | None = None
+    imported = 0
+    for meta_path in sorted(golden_root.rglob("meta.json")):
+        try:
+            meta = FixtureMeta.model_validate_json(meta_path.read_text(encoding="utf-8"))
+        except ValidationError:
+            continue
+        page = meta_path.parent / "page.html.gz"
+        if not page.is_file():
+            continue
+        content_hash = bytes.fromhex(meta.content_hash)
+        already = conn.execute(
+            select(func.count())
+            .select_from(snapshot)
+            .where(snapshot.c.content_hash == content_hash, snapshot.c.is_golden.is_(True))
+        ).scalar_one()
+        if already:
+            continue
+
+        if run_id is None:  # Lauf nur anlegen, wenn wirklich importiert wird.
+            run_id = conn.execute(
+                insert(run_table)
+                .values(
+                    site_pack_id=site_pack_id, trigger="replay", status="ok", finished_at=func.now()
+                )
+                .returning(run_table.c.id)
+            ).scalar_one()
+
+        body = gzip.decompress(page.read_bytes())
+        blob_key = store.build_key(domain, meta.fetched_at, content_hash)
+        store.put(blob_key, body)
+        conn.execute(
+            insert(snapshot).values(
+                run_id=run_id,
+                url=meta.url,
+                fetched_at=meta.fetched_at,
+                http_status=meta.http_status,
+                content_hash=content_hash,
+                content_type=meta.content_type,
+                byte_size=meta.byte_size,
+                blob_key=blob_key,
+                fetcher=meta.fetcher,
+                is_golden=True,
+                golden_label=meta.golden_label,
+            )
+        )
+        imported += 1
+    conn.commit()
+    return imported

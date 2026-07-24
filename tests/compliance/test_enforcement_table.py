@@ -88,7 +88,9 @@ def test_enforced_modulpfad_ist_importierbar(row: dict[str, str]):
 def test_enforced_test_node_loest_auf_genau_einen_fall_auf(row: dict[str, str]):
     node = row["test"]
     result = subprocess.run(
-        [sys.executable, "-m", "pytest", "--collect-only", "-q", node],
+        # ``-o addopts=`` leert die Default-Marker-Filter (``-m 'not integration'``),
+        # damit auch ein integration-markierter Enforcement-Node aufloest.
+        [sys.executable, "-m", "pytest", "-o", "addopts=", "--collect-only", "-q", node],
         cwd=str(PROJECT_ROOT),
         capture_output=True,
         text=True,
