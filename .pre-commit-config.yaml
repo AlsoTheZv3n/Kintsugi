@@ -53,3 +53,14 @@ repos:
         types: [python]
         pass_filenames: false
         require_serial: true
+
+      # Haelt schema/site-pack.schema.json mit dem Modell in Sync. Regeneriert
+      # in-memory und schlaegt mit Diff an, wenn das committete Artefakt
+      # abweicht. Derselbe Befehl laeuft in CI, damit --no-verify ihn nicht
+      # umgeht.
+      - id: site-pack-schema
+        name: site-pack schema drift
+        entry: uv run python -m kintsugi.packs.jsonschema --check
+        language: system
+        files: ^(kintsugi/packs/model\.py|schema/site-pack\.schema\.json)$
+        pass_filenames: false

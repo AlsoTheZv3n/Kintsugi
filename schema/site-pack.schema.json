@@ -1,0 +1,905 @@
+{
+  "$defs": {
+    "ApiSource": {
+      "additionalProperties": false,
+      "properties": {
+        "endpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Endpoint"
+        },
+        "kind": {
+          "const": "api",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "ApiSource",
+      "type": "object"
+    },
+    "BrowserSpec": {
+      "additionalProperties": false,
+      "description": "Optionaler Browser-Block des Fetch. Playwright kommt erst in Phase 5.",
+      "properties": {
+        "block_resources": {
+          "items": {
+            "enum": [
+              "image",
+              "font",
+              "media",
+              "stylesheet"
+            ],
+            "type": "string"
+          },
+          "title": "Block Resources",
+          "type": "array"
+        },
+        "wait_for": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wait For"
+        }
+      },
+      "title": "BrowserSpec",
+      "type": "object"
+    },
+    "ComplianceSpec": {
+      "additionalProperties": false,
+      "description": "Pflichtantworten auf die Compliance-Zusagen der README.\n\nEin Pack, das diese Fragen nicht beantwortet, laesst sich gar nicht laden.",
+      "properties": {
+        "legal_basis": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Basis"
+        },
+        "personal_data": {
+          "title": "Personal Data",
+          "type": "boolean"
+        },
+        "personal_data_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Personal Data Fields",
+          "type": "array"
+        },
+        "public_content": {
+          "title": "Public Content",
+          "type": "boolean"
+        },
+        "reviewed_by": {
+          "title": "Reviewed By",
+          "type": "string"
+        },
+        "robots_checked_at": {
+          "format": "date",
+          "title": "Robots Checked At",
+          "type": "string"
+        },
+        "tos_reviewed_at": {
+          "format": "date",
+          "title": "Tos Reviewed At",
+          "type": "string"
+        },
+        "tos_url": {
+          "title": "Tos Url",
+          "type": "string"
+        },
+        "tos_verdict": {
+          "enum": [
+            "permits",
+            "silent",
+            "forbids"
+          ],
+          "title": "Tos Verdict",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tos_url",
+        "tos_verdict",
+        "tos_reviewed_at",
+        "reviewed_by",
+        "robots_checked_at",
+        "public_content",
+        "personal_data"
+      ],
+      "title": "ComplianceSpec",
+      "type": "object"
+    },
+    "CssSource": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldExtract"
+          },
+          "title": "Fields",
+          "type": "object"
+        },
+        "kind": {
+          "const": "css",
+          "title": "Kind",
+          "type": "string"
+        },
+        "row_selector": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row Selector"
+        }
+      },
+      "required": [
+        "kind",
+        "fields"
+      ],
+      "title": "CssSource",
+      "type": "object"
+    },
+    "DeliverySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "sinks": {
+          "items": {
+            "enum": [
+              "postgres",
+              "webhook",
+              "parquet"
+            ],
+            "type": "string"
+          },
+          "title": "Sinks",
+          "type": "array"
+        },
+        "webhook_on_change": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Webhook On Change"
+        }
+      },
+      "title": "DeliverySpec",
+      "type": "object"
+    },
+    "DerivedFrom": {
+      "additionalProperties": false,
+      "description": "ADR-013: ein Feld ohne eigene Extraktionsquelle wird berechnet.\n\n``source`` nennt ein Feld oder eine Liste von Feldern, ``transform`` den\nregistrierten Transform (z. B. currency_from_symbol, sha256_slug).",
+      "properties": {
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "title": "Source"
+        },
+        "transform": {
+          "title": "Transform",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "transform"
+      ],
+      "title": "DerivedFrom",
+      "type": "object"
+    },
+    "DiscoverySpec": {
+      "additionalProperties": false,
+      "description": "Woher die URLs kommen. Getrennt vom Fetch, weil separat heilbar.\n\nF1: books.toscrape.com hat keine sitemap.xml (HTTP 404), deshalb ist\n``pagination`` eine vollwertige, erststufige Strategie mit ``url_template``\nund ``{n}``-Platzhalter — die Phase-0-DoD haengt daran.",
+      "properties": {
+        "max_urls_per_run": {
+          "default": 1000,
+          "minimum": 1,
+          "title": "Max Urls Per Run",
+          "type": "integer"
+        },
+        "page_start": {
+          "default": 1,
+          "title": "Page Start",
+          "type": "integer"
+        },
+        "page_stop": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page Stop"
+        },
+        "seeds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Seeds",
+          "type": "array"
+        },
+        "sitemap_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sitemap Url"
+        },
+        "strategy": {
+          "enum": [
+            "sitemap",
+            "pagination",
+            "seed_list",
+            "api"
+          ],
+          "title": "Strategy",
+          "type": "string"
+        },
+        "url_pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url Pattern"
+        },
+        "url_template": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url Template"
+        }
+      },
+      "required": [
+        "strategy"
+      ],
+      "title": "DiscoverySpec",
+      "type": "object"
+    },
+    "EmbeddedJsonSource": {
+      "additionalProperties": false,
+      "properties": {
+        "js_var": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Js Var"
+        },
+        "kind": {
+          "const": "embedded_json",
+          "title": "Kind",
+          "type": "string"
+        },
+        "root": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Root"
+        },
+        "script_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Script Id"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "EmbeddedJsonSource",
+      "type": "object"
+    },
+    "ExtractSpec": {
+      "additionalProperties": false,
+      "description": "Priorisierte Liste von Quellen; die Reihenfolge ist die Prioritaet.",
+      "properties": {
+        "sources": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "api": "#/$defs/ApiSource",
+                "css": "#/$defs/CssSource",
+                "embedded_json": "#/$defs/EmbeddedJsonSource",
+                "jsonld": "#/$defs/JsonLdSource",
+                "llm": "#/$defs/LlmSource",
+                "xhr": "#/$defs/XhrSource"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ApiSource"
+              },
+              {
+                "$ref": "#/$defs/JsonLdSource"
+              },
+              {
+                "$ref": "#/$defs/EmbeddedJsonSource"
+              },
+              {
+                "$ref": "#/$defs/XhrSource"
+              },
+              {
+                "$ref": "#/$defs/CssSource"
+              },
+              {
+                "$ref": "#/$defs/LlmSource"
+              }
+            ]
+          },
+          "title": "Sources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sources"
+      ],
+      "title": "ExtractSpec",
+      "type": "object"
+    },
+    "FetchSpec": {
+      "additionalProperties": false,
+      "description": "Wie geholt wird. Der Fetcher ist Eigenschaft des Packs, nicht global.",
+      "properties": {
+        "browser": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BrowserSpec"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "concurrency": {
+          "default": 2,
+          "minimum": 1,
+          "title": "Concurrency",
+          "type": "integer"
+        },
+        "conditional_requests": {
+          "default": true,
+          "title": "Conditional Requests",
+          "type": "boolean"
+        },
+        "proxy_pool": {
+          "anyOf": [
+            {
+              "enum": [
+                "residential",
+                "datacenter"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Proxy Pool"
+        },
+        "rate_limit_rps": {
+          "default": 0.5,
+          "exclusiveMinimum": 0,
+          "title": "Rate Limit Rps",
+          "type": "number"
+        },
+        "respect_robots": {
+          "anyOf": [
+            {
+              "const": true,
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/$defs/RobotsOverride"
+            }
+          ],
+          "default": true,
+          "title": "Respect Robots"
+        },
+        "strategy": {
+          "default": "http",
+          "enum": [
+            "http",
+            "browser"
+          ],
+          "title": "Strategy",
+          "type": "string"
+        }
+      },
+      "title": "FetchSpec",
+      "type": "object"
+    },
+    "FieldExtract": {
+      "additionalProperties": false,
+      "description": "Wie ein einzelnes Feld aus dem DOM geholt wird (css-Source).",
+      "properties": {
+        "anchor_hint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Anchor Hint"
+        },
+        "attr": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attr"
+        },
+        "selector": {
+          "title": "Selector",
+          "type": "string"
+        },
+        "transform": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Transform",
+          "type": "array"
+        }
+      },
+      "required": [
+        "selector"
+      ],
+      "title": "FieldExtract",
+      "type": "object"
+    },
+    "FieldSchema": {
+      "additionalProperties": false,
+      "description": "Vertrag eines einzelnen Zielfelds (docs/02 §Feldsemantik).",
+      "properties": {
+        "derived_from": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DerivedFrom"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "enum": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Enum"
+        },
+        "min_fill_rate": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Min Fill Rate",
+          "type": "number"
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "sane_range": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sane Range"
+        },
+        "type": {
+          "enum": [
+            "string",
+            "decimal",
+            "integer",
+            "boolean",
+            "datetime"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "min_fill_rate"
+      ],
+      "title": "FieldSchema",
+      "type": "object"
+    },
+    "HealingSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "canary_fraction": {
+          "default": 0.05,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Canary Fraction",
+          "type": "number"
+        },
+        "canary_min_rows": {
+          "default": 50,
+          "minimum": 0,
+          "title": "Canary Min Rows",
+          "type": "integer"
+        },
+        "enabled": {
+          "default": false,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "escalate_on": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Escalate On",
+          "type": "array"
+        },
+        "max_auto_versions_per_window": {
+          "default": 3,
+          "minimum": 0,
+          "title": "Max Auto Versions Per Window",
+          "type": "integer"
+        },
+        "require_golden_pass": {
+          "default": true,
+          "title": "Require Golden Pass",
+          "type": "boolean"
+        },
+        "window": {
+          "default": "7d",
+          "title": "Window",
+          "type": "string"
+        }
+      },
+      "title": "HealingSpec",
+      "type": "object"
+    },
+    "JsonLdSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "jsonld",
+          "title": "Kind",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "type"
+      ],
+      "title": "JsonLdSource",
+      "type": "object"
+    },
+    "LlmSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "llm",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "LlmSource",
+      "type": "object"
+    },
+    "QualitySpec": {
+      "additionalProperties": false,
+      "properties": {
+        "max_duplicate_rate": {
+          "default": 0.02,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Duplicate Rate",
+          "type": "number"
+        },
+        "max_range_violation_rate": {
+          "default": 0.05,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Max Range Violation Rate",
+          "type": "number"
+        },
+        "min_rows_per_run": {
+          "default": 1,
+          "minimum": 0,
+          "title": "Min Rows Per Run",
+          "type": "integer"
+        },
+        "row_count_deviation": {
+          "default": 0.3,
+          "minimum": 0,
+          "title": "Row Count Deviation",
+          "type": "number"
+        },
+        "thresholds_source": {
+          "default": "provisional",
+          "enum": [
+            "provisional",
+            "baseline"
+          ],
+          "title": "Thresholds Source",
+          "type": "string"
+        }
+      },
+      "title": "QualitySpec",
+      "type": "object"
+    },
+    "RobotsOverride": {
+      "additionalProperties": false,
+      "description": "Dokumentierte Ausnahme von der robots.txt (README: nicht ohne Eintrag).\n\n``respect_robots: false`` ist damit nicht darstellbar — die README-Zusage\n„nicht abschaltbar ohne dokumentierten Site-Pack-Eintrag\" wird eine\nTypbedingung statt einer Gewohnheit.",
+      "properties": {
+        "approved_at": {
+          "format": "date",
+          "title": "Approved At",
+          "type": "string"
+        },
+        "approved_by": {
+          "title": "Approved By",
+          "type": "string"
+        },
+        "evidence_url": {
+          "title": "Evidence Url",
+          "type": "string"
+        },
+        "override": {
+          "const": true,
+          "title": "Override",
+          "type": "boolean"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "override",
+        "reason",
+        "approved_by",
+        "approved_at",
+        "evidence_url"
+      ],
+      "title": "RobotsOverride",
+      "type": "object"
+    },
+    "SchemaSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "additionalProperties": {
+            "$ref": "#/$defs/FieldSchema"
+          },
+          "title": "Fields",
+          "type": "object"
+        },
+        "natural_key": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Natural Key",
+          "type": "array"
+        }
+      },
+      "required": [
+        "natural_key",
+        "fields"
+      ],
+      "title": "SchemaSpec",
+      "type": "object"
+    },
+    "XhrSource": {
+      "additionalProperties": false,
+      "properties": {
+        "endpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Endpoint"
+        },
+        "kind": {
+          "const": "xhr",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "XhrSource",
+      "type": "object"
+    }
+  },
+  "$id": "https://github.com/AlsoTheZv3n/Kintsugi/schema/site-pack.schema.json",
+  "additionalProperties": false,
+  "description": "Generiertes Build-Artefakt aus kintsugi/packs/model.py — nicht von Hand bearbeiten. Erzeugen mit `uv run python -m kintsugi.packs.jsonschema`.",
+  "properties": {
+    "apiVersion": {
+      "const": "kintsugi/v1",
+      "title": "Apiversion",
+      "type": "string"
+    },
+    "compliance": {
+      "$ref": "#/$defs/ComplianceSpec"
+    },
+    "delivery": {
+      "$ref": "#/$defs/DeliverySpec"
+    },
+    "discovery": {
+      "$ref": "#/$defs/DiscoverySpec"
+    },
+    "domain": {
+      "title": "Domain",
+      "type": "string"
+    },
+    "entity": {
+      "title": "Entity",
+      "type": "string"
+    },
+    "extract": {
+      "$ref": "#/$defs/ExtractSpec"
+    },
+    "fetch": {
+      "$ref": "#/$defs/FetchSpec"
+    },
+    "healing": {
+      "$ref": "#/$defs/HealingSpec"
+    },
+    "quality": {
+      "$ref": "#/$defs/QualitySpec"
+    },
+    "schema": {
+      "$ref": "#/$defs/SchemaSpec"
+    },
+    "version": {
+      "minimum": 1,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "domain",
+    "entity",
+    "version",
+    "discovery",
+    "extract",
+    "schema",
+    "compliance"
+  ],
+  "title": "Kintsugi Site Pack",
+  "type": "object"
+}
