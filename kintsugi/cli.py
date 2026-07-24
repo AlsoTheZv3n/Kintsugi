@@ -8,6 +8,7 @@ deshalb vor der Pipeline, die er spaeter startet — vorerst als No-op.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Annotated
 
 import typer
@@ -84,6 +85,52 @@ def pack_schema() -> None:
     from kintsugi.packs.jsonschema import generate
 
     typer.echo(json.dumps(generate(), indent=2, sort_keys=True, ensure_ascii=False))
+
+
+fixtures_app = typer.Typer(
+    name="fixtures",
+    help="Offline-Fixtures ueber den HttpFetcher aufnehmen.",
+    no_args_is_help=True,
+)
+app.add_typer(fixtures_app)
+
+
+@fixtures_app.command("capture")
+def fixtures_capture(
+    domain: Annotated[str, typer.Argument(help="Quelle, muss in der Allowlist stehen")],
+    entity: Annotated[str, typer.Option("--entity")],
+    label: Annotated[str, typer.Option("--label", help="baseline | edge:<slug> | corpus")],
+    url: Annotated[str, typer.Option("--url", help="Abzurufende URL")],
+    root: Annotated[Path, typer.Option("--root")] = Path("fixtures"),
+) -> None:
+    """Nimmt eine Fixture auf — ausschliesslich ueber den HttpFetcher."""
+    from kintsugi.harness.fixtures_cli import (
+        DomainNotAllowed,
+        capture_corpus,
+        capture_golden,
+        guard_domain,
+        write_index,
+    )
+
+    # Das Gate steht vor jedem HTTP-Verkehr: eine verbotene Domain kostet null
+    # Anfragen (F4).
+    try:
+        guard_domain(domain)
+    except DomainNotAllowed as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(2) from exc
+
+    from kintsugi.fetch.http import HttpFetcher
+
+    with HttpFetcher() as fetcher:
+        if label == "corpus":
+            capture_corpus(root, domain=domain, entity=entity, urls=[url], fetcher=fetcher)
+        else:
+            capture_golden(
+                root, domain=domain, entity=entity, label=label, url=url, fetcher=fetcher
+            )
+    write_index(root)
+    typer.echo(f"{domain}/{entity}: Fixture '{label}' aufgenommen.")
 
 
 @app.command()
