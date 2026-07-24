@@ -14,7 +14,10 @@ keywords = ["scraping", "self-healing", "data-quality", "provenance", "scd2"]
 # PostgreSQL 16, SQLAlchemy 2.0 Core auf dem synchronen psycopg3-Treiber.
 dependencies = [
     "httpx[http2]>=0.28.1",
-    "selectolax>=0.4.11",
+    # Exakt gepinnt (nicht >=): ein selectolax-Upgrade, das CSS- oder
+    # Text-Serialisierung verschiebt, wuerde die extrahierten Daten still
+    # aendern. Der Canary-Test faengt es, der Pin verhindert das Upgrade.
+    "selectolax==0.4.11",
     "pydantic>=2.13.4",
     "pydantic-settings>=2.7",
     "PyYAML>=6.0.2",

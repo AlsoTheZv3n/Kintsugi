@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+  "label": "baseline",
+  "captured_at": "2026-07-24",
+  "sha256": "a6e572bec156bf80ff3149b89b6d218cdcf8866ccc26ccf69a5431db8e142c6a",
+  "byte_size": 9279,
+  "expected": {
+    "title": "A Light in the Attic",
+    "price": "£51.77",
+    "availability": "In stock (22 available)",
+    "upc": "a897fe39b1053632"
+  }
+}

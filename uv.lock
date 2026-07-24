@@ -477,7 +477,7 @@ requires-dist = [
     { name = "pydantic", specifier = ">=2.13.4" },
     { name = "pydantic-settings", specifier = ">=2.7" },
     { name = "pyyaml", specifier = ">=6.0.2" },
-    { name = "selectolax", specifier = ">=0.4.11" },
+    { name = "selectolax", specifier = "==0.4.11" },
     { name = "setuptools", marker = "extra == 'profiling'", specifier = ">=75,<81" },
     { name = "sqlalchemy", specifier = ">=2.0.51" },
     { name = "structlog", specifier = ">=25.1" },
