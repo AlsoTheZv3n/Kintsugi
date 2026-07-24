@@ -23,6 +23,10 @@ SPOOFING_TOKENS = ("Mozilla/", "AppleWebKit", "Chrome/", "Safari/", "Gecko/")
 
 SEARCHED_DIRS = ("kintsugi", "packs", "ops")
 
+# Die Durchsetzungsstelle selbst nennt diese Tokens bewusst, um sie abzulehnen.
+# Sie darf der Guard nicht als Tarnung werten (kintsugi/fetch/http.py, I0.7.2).
+_ALLOWED = {Path("kintsugi") / "fetch" / "http.py"}
+
 
 def _python_and_config_files():
     for directory in SEARCHED_DIRS:
@@ -30,7 +34,9 @@ def _python_and_config_files():
         if not base.exists():
             continue
         for suffix in ("*.py", "*.yaml", "*.yml", "*.toml"):
-            yield from base.rglob(suffix)
+            for path in base.rglob(suffix):
+                if path.relative_to(PROJECT_ROOT) not in _ALLOWED:
+                    yield path
 
 
 def test_kein_getarnter_user_agent_im_quelltext():
