@@ -118,8 +118,8 @@ that are enforced name a single pytest node that proves it.
 | Secrets never surface in logs, reprs or dumps | `kintsugi.config` | leak guard fails the build | `tests/compliance/test_no_secret_leaks.py::test_keine_standarddarstellung_zeigt_den_klartext` | 0 |
 | robots.txt obeyed; 404/410 allow-all, 5xx/timeout deny | `kintsugi.fetch.robots` | fetch aborts or skips the URL | `tests/compliance/test_robots.py::test_404_robots_erlaubt_die_produktseite` | 0 |
 | Conservative rate limit; Crawl-delay only raises it | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_rate_limit.py` | 0 |
-| Conditional requests (ETag / If-Modified-Since) | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_conditional_requests.py` | 0 |
-| Consent wall / CAPTCHA detected by body signature (HTTP 200) | `kintsugi.fetch.block_detect` | fetch raises `Blocked`; run abort wired in E0.9 | `tests/compliance/test_block_detect.py::test_consent_wall_mit_status_200_wird_erkannt` | 0 |
+| Conditional requests (ETag / If-Modified-Since) | `kintsugi.fetch.http` | fetcher sends validators; `save_snapshot` looks them up and shapes the 304 row | `tests/compliance/test_conditional_requests.py::test_etag_wird_als_if_none_match_gesendet` | 0 |
+| Consent wall / CAPTCHA detected by body signature (HTTP 200) | `kintsugi.fetch.block_detect` | fetch raises `Blocked`; the runner aborts the domain (`run.status='failed'`, `error` starting `blocked:`) | `tests/compliance/test_block_detect.py::test_consent_wall_mit_status_200_wird_erkannt` | 0 |
 | No protection bypass (no CAPTCHA solving, no fingerprint rotation) | `kintsugi.fetch.block_detect` | blocking pages are surfaced, never learned from | `tests/compliance/test_block_detect.py::test_cloudflare_just_a_moment` | 0 |
 | No login-gated content | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_no_auth_fetch.py` | 0 |
 | Blocked sources are never healed | `UNENFORCED` | pre-heal check, Phase 2 | planned `tests/mutations/test_negatives.py` | 2 |
