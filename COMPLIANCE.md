@@ -73,6 +73,16 @@ verdict and robots-checked date mirror each pack's `compliance` block.
 | Source | ToS verdict | robots checked | personal data |
 |---|---|---|---|
 | books.toscrape.com | permits | 2026-07-21 (404 → allow all) | no |
+| quotes.toscrape.com | permits | 2026-07-24 (404 → allow all) | no |
+| scrapethissite.com | permits | 2026-07-24 (only /lessons/, /faq/ disallowed) | no |
+
+The robots verdicts above are re-checked in CI by `tools/check_sources.py --offline`
+(reusing `kintsugi.fetch.robots.RobotsGate`, no second robots parser) against the entry
+URL each pack declares: `https://books.toscrape.com/`, `https://quotes.toscrape.com/js/`
+and `https://www.scrapethissite.com/pages/ajax-javascript/`. The user agent carrying the
+check is `kintsugi/0.1 (+<KINTSUGI_CONTACT>)`. **`webscraper.io/test-sites/e-commerce/` is
+rejected** (its `robots.txt` disallows the path, see the *Blocked sources* section), so no
+pack declares it as an entry URL — enforced by `tests/unit/test_check_sources.py`.
 
 ## Personal data and deletion
 

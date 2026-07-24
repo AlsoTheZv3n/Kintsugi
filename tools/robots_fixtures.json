@@ -1,0 +1,22 @@
+{
+  "https://books.toscrape.com": {
+    "status": 404,
+    "body": "",
+    "note": "F1: books.toscrape.com liefert 404 fuer /robots.txt -> allow all (RFC 9309 2.3.1.3)"
+  },
+  "https://quotes.toscrape.com": {
+    "status": 404,
+    "body": "",
+    "note": "quotes.toscrape.com liefert ebenfalls 404 -> allow all"
+  },
+  "https://www.scrapethissite.com": {
+    "status": 200,
+    "body": "User-agent: *\nDisallow: /lessons/\nDisallow: /faq/\n",
+    "note": "verbietet nur /lessons/ und /faq/; /pages/ajax-javascript/ ist erlaubt"
+  },
+  "https://webscraper.io": {
+    "status": 200,
+    "body": "User-agent: *\nDisallow: /test-sites/e-commerce/\nDisallow: /test-sites/tables\n",
+    "note": "F4: verbietet /test-sites/e-commerce/ -> die AJAX-Sandbox ist unzulaessig"
+  }
+}

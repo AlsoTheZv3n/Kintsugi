@@ -92,7 +92,9 @@ def test_transforms_strippen_den_feldwert():
         fields={"title": "$.title"},
         transforms={"title": ["strip"]},
     )
-    rows = XhrExtractor(_FakeFetcher(_result(_FILMS))).extract_all(source, page_url="https://x.com/")
+    rows = XhrExtractor(_FakeFetcher(_result(_FILMS))).extract_all(
+        source, page_url="https://x.com/"
+    )
     assert rows[0]["title"] == "Spotlight"  # aus "Spotlight  "
 
 
