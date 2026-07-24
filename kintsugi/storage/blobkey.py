@@ -22,7 +22,7 @@ from datetime import UTC, datetime
 from pathlib import PurePosixPath
 from urllib.parse import urlsplit
 
-__all__ = ["build_blob_key", "domain_of"]
+__all__ = ["blob_key_for_domain", "build_blob_key", "domain_of"]
 
 
 def domain_of(url: str) -> str:
@@ -52,6 +52,16 @@ def build_blob_key(url: str, content_hash: bytes, fetched_at: datetime) -> str:
     Sonst laege identischer Inhalt vom 31. Januar und 1. Februar doppelt unter
     zwei ``<yyyy>/<mm>``-Praefixen.
     """
+    return blob_key_for_domain(domain_of(url), content_hash, fetched_at)
+
+
+def blob_key_for_domain(domain: str, content_hash: bytes, fetched_at: datetime) -> str:
+    """Wie ``build_blob_key``, aber mit bereits abgeleiteter Domain.
+
+    Der Snapshot-Store (``kintsugi/storage/snapshots.py``) hat die Domain schon
+    zur Hand und braucht ``urlsplit`` nicht erneut. Das Schluesselformat lebt
+    an genau dieser Stelle, damit Store und Fetch nie auseinanderdriften.
+    """
     if fetched_at.tzinfo is None:
         raise ValueError(
             "fetched_at ist zeitzonenlos. blob_key braucht einen UTC-Bezug, "
@@ -61,7 +71,6 @@ def build_blob_key(url: str, content_hash: bytes, fetched_at: datetime) -> str:
         raise ValueError(f"content_hash muss 32 sha256-Rohbytes sein, nicht {len(content_hash)}")
 
     moment = fetched_at.astimezone(UTC)
-    domain = domain_of(url)
     key = PurePosixPath(
         "raw",
         domain,
