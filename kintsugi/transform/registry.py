@@ -69,6 +69,20 @@ def resolve(name: str) -> Transform | None:
     return REGISTRY.get(name)
 
 
+def apply_transforms(names: Sequence[str], value: object) -> object:
+    """Wendet die Transform-Kette der Reihe nach auf ``value`` an.
+
+    ``validate_chain`` (statisch, zur Pack-Ladezeit) garantiert, dass die Namen
+    bekannt und typvertraeglich sind; zur Laufzeit reduziert diese Funktion den
+    Rohwert durch die Kette. Ein unbekannter Name hier waere ein Programmierfehler
+    (das Pack haette nicht laden duerfen) und fliegt als ``KeyError``.
+    """
+    for name in names:
+        transform = REGISTRY[name]
+        value = transform.fn(value)
+    return value
+
+
 def _types_of(spec: TypeSpec) -> frozenset[object]:
     args = get_args(spec)
     return frozenset(args) if args else frozenset({spec})

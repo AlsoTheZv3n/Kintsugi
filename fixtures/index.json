@@ -10,12 +10,12 @@
       "byte_size": 233
     },
     "books.toscrape.com/book/golden/edge__long_title": {
-      "content_hash": "28f73a0a076a2deea7d7debae4da992385ba664104f486dfca9efd407d52f717",
-      "byte_size": 640
+      "content_hash": "501acce262a5708b9f0e7ea75ef7a0382bee158ee848a7484b6b21ea2068caf8",
+      "byte_size": 1117
     },
     "books.toscrape.com/book/golden/edge__out_of_stock": {
-      "content_hash": "8b6ce03712eabfc117ae9d573c554a24361b7663f3952127433e717a10b92796",
-      "byte_size": 498
+      "content_hash": "934bc1f233919600cfd169dfdef8fc6a7bb3faeae42cc29ffe1b91b748b825e0",
+      "byte_size": 909
     }
   }
 }

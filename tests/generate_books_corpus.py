@@ -39,6 +39,16 @@ def _upc(seed: str) -> str:
 
 
 def _detail_html(*, title: str, price: str, upc: str, availability: str) -> str:
+    # Eine Produktbeschreibung, damit die Seite mehr als 200 Byte sichtbaren Text
+    # traegt — sonst flaggt block_detect eine legitime Seite als leere Blockade
+    # (empty_below_text_floor). Deterministisch aus dem Titel abgeleitet.
+    description = (
+        f"{title} is a compelling volume in the Kintsugi offline test corpus. "
+        "This synthetic product description exists so the rendered detail page "
+        "carries well over two hundred bytes of visible text, keeping the block "
+        "detector's empty-page floor satisfied for a genuine content page while "
+        "leaving the four extracted selectors untouched."
+    )
     return (
         '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8">'
         f"<title>{title} | Books to Scrape</title></head><body>\n"
@@ -51,7 +61,9 @@ def _detail_html(*, title: str, price: str, upc: str, availability: str) -> str:
         '<table class="table table-striped">\n'
         f"<tr><th>UPC</th><td>{upc}</td></tr>\n"
         f"<tr><th>Price (excl. tax)</th><td>£{price}</td></tr>\n"
-        "</table>\n</article>\n</body></html>\n"
+        "</table>\n"
+        f'<div id="product_description"><h2>Product Description</h2><p>{description}</p></div>\n'
+        "</article>\n</body></html>\n"
     )
 
 

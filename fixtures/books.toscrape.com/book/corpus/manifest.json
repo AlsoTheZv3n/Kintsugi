@@ -1,1681 +1,1681 @@
 {
   "/catalogue/book-001_1/index.html": {
-    "blob": "012dade9b0f5f6d0918530326b14e7b8b76e558926672c81724d07c6483a652a.html.gz",
+    "blob": "519213c5cc99adb9da6045f3df0c9f00739e562d111a27e861e5fbaaf8cca4c2.html.gz",
     "content_type": "text/html",
-    "etag": "\"012dade9b0f5f6d0\"",
+    "etag": "\"519213c5cc99adb9\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-002_2/index.html": {
-    "blob": "0a23543e4313e3f1d8f169f369bd728e64ea3d97c182e28268b8d6c94cafec9e.html.gz",
+    "blob": "af205339d5cd2ea3b2bf21fa508081b4b75e943b2b4cf28f0444cf518b3effa3.html.gz",
     "content_type": "text/html",
-    "etag": "\"0a23543e4313e3f1\"",
+    "etag": "\"af205339d5cd2ea3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-003_3/index.html": {
-    "blob": "f386bcd6d7f7566a0d8b493084a284912e9711911df963c2b836d48df395e4ec.html.gz",
+    "blob": "714894ea22e282be352f3e26555b4c72c036abd3d2e900b7fa2c8de655d008f6.html.gz",
     "content_type": "text/html",
-    "etag": "\"f386bcd6d7f7566a\"",
+    "etag": "\"714894ea22e282be\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-004_4/index.html": {
-    "blob": "35a63f267dae4bad024fe5d1f43bbaeb4f46b971843a0f3b3d50e6bd455deab2.html.gz",
+    "blob": "89ed6417d1eee725d2b534f6f4066c7b24bfe7647d17ab21f1d2d4cc5fde023f.html.gz",
     "content_type": "text/html",
-    "etag": "\"35a63f267dae4bad\"",
+    "etag": "\"89ed6417d1eee725\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-005_5/index.html": {
-    "blob": "87ae6121039b016987d010196006fc566b4f25db494296ee62e841c413fb1f8b.html.gz",
+    "blob": "b0ae62de239bf3a0bf3fa6f0005e1d5ac0ff730351e6e698075afa1d4d65a447.html.gz",
     "content_type": "text/html",
-    "etag": "\"87ae6121039b0169\"",
+    "etag": "\"b0ae62de239bf3a0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-006_6/index.html": {
-    "blob": "b86737e5e9ec6d82a40cacd6e77a022e16aa49011a57a8c99e9f78aace9c4b60.html.gz",
+    "blob": "8a7c9dfdf3daf549862aea64ae1193f25796243dc0971acfbbfe713d0133f20b.html.gz",
     "content_type": "text/html",
-    "etag": "\"b86737e5e9ec6d82\"",
+    "etag": "\"8a7c9dfdf3daf549\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-007_7/index.html": {
-    "blob": "95e56cccc47e74160bae6ba514d91f027497f91b993187bfb82384ab8482407b.html.gz",
+    "blob": "4bd1ec13bcb5a491df65433a365dac111809693f9a3422ade8d06065652258d2.html.gz",
     "content_type": "text/html",
-    "etag": "\"95e56cccc47e7416\"",
+    "etag": "\"4bd1ec13bcb5a491\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-008_8/index.html": {
-    "blob": "c5f5f013498006e8494e76279b042ea5cdc0b9c94b1e2c4df41afc6fe7553f6b.html.gz",
+    "blob": "ca67cef15e3cd976e4b8a641646b47b8396dae6d5590b3fd45c2cda8a5e8e3e8.html.gz",
     "content_type": "text/html",
-    "etag": "\"c5f5f013498006e8\"",
+    "etag": "\"ca67cef15e3cd976\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-009_9/index.html": {
-    "blob": "6169c5e96a27f8a9e8d21a5ee1b27b8f8792864a4cddc02f7099a60654eeb858.html.gz",
+    "blob": "585bbbf9ec7baf8fe76988af6b1725dddb4e88a24f75eb12ad411e9698caf07e.html.gz",
     "content_type": "text/html",
-    "etag": "\"6169c5e96a27f8a9\"",
+    "etag": "\"585bbbf9ec7baf8f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-010_10/index.html": {
-    "blob": "33abcb7ae74a18a84869ebdeea1d77b57534ce10f4e205684211fc3d3884ef30.html.gz",
+    "blob": "fd17081e06783d9e6bbd54f721a3a513c58f0ad2446e058cd705162f15441516.html.gz",
     "content_type": "text/html",
-    "etag": "\"33abcb7ae74a18a8\"",
+    "etag": "\"fd17081e06783d9e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-011_11/index.html": {
-    "blob": "8a1f7a99f8d67501e0df44c25cb6f0e4304fd340af0ae31fa8ff30e6455a2594.html.gz",
+    "blob": "137e2e013225b0766eede7f301dc5ebd25810b85eed56483e06f7ec8c26a128e.html.gz",
     "content_type": "text/html",
-    "etag": "\"8a1f7a99f8d67501\"",
+    "etag": "\"137e2e013225b076\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-012_12/index.html": {
-    "blob": "cdd374cf9f6f076712f1e8c4b0ab5375c0b8b0373adc84bcdfc39b9f031e6e27.html.gz",
+    "blob": "67f06eee50e2ccd5de8b542c0176abfa7b04c09134554df15803203b919db707.html.gz",
     "content_type": "text/html",
-    "etag": "\"cdd374cf9f6f0767\"",
+    "etag": "\"67f06eee50e2ccd5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-013_13/index.html": {
-    "blob": "5f652f488db9e8df914e8b505ad4d2b7dd8898e65130e42393538d6b85187510.html.gz",
+    "blob": "c1447b2ad0c532a799d66f16090ca3501f29a1f749570c4a254ce46825f8bb53.html.gz",
     "content_type": "text/html",
-    "etag": "\"5f652f488db9e8df\"",
+    "etag": "\"c1447b2ad0c532a7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-014_14/index.html": {
-    "blob": "574bf3be3a8ae17014e50f43084085b1dc9976a122e2947cd040a86071822040.html.gz",
+    "blob": "7c4ef015e1b19b986f2de7afd562d8017a7b4213ef8a374ad1514e96a8914a85.html.gz",
     "content_type": "text/html",
-    "etag": "\"574bf3be3a8ae170\"",
+    "etag": "\"7c4ef015e1b19b98\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-015_15/index.html": {
-    "blob": "b69b149d54203b4546d27266a6d33ca11f3677a4b19d25eeab5cd5fdfe59b3d5.html.gz",
+    "blob": "4502c2f0ddaaa3941479a501c1d9ade0e53bd766494111701ac6679faa2fc680.html.gz",
     "content_type": "text/html",
-    "etag": "\"b69b149d54203b45\"",
+    "etag": "\"4502c2f0ddaaa394\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-016_16/index.html": {
-    "blob": "7ecf2d99bd8a632baabbcf13fc3c8b04e82b55131bfe7a690166e2be426b39e4.html.gz",
+    "blob": "3acf29fe2e7aee5b8be75d77c57a60fc2084cb51503daa715cf19ec0a4febeab.html.gz",
     "content_type": "text/html",
-    "etag": "\"7ecf2d99bd8a632b\"",
+    "etag": "\"3acf29fe2e7aee5b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-017_17/index.html": {
-    "blob": "3fb5d4345d064440074d541c5b420a5ef96c5a6e422f138ed0e87f51fe13c2fa.html.gz",
+    "blob": "9626af8dd9578b21bd00aaab47cb6f1c559becfe5fcd8ff9a18439e4d8c7fe99.html.gz",
     "content_type": "text/html",
-    "etag": "\"3fb5d4345d064440\"",
+    "etag": "\"9626af8dd9578b21\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-018_18/index.html": {
-    "blob": "802e8bd479b96855412f5fb5fa5e08058bfe37c48990dbe15ecec28a69cdb580.html.gz",
+    "blob": "35a73ff5d50454c28db79a234f11c350027a9fd9ac6fe2ba2ee9868940b1b376.html.gz",
     "content_type": "text/html",
-    "etag": "\"802e8bd479b96855\"",
+    "etag": "\"35a73ff5d50454c2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-019_19/index.html": {
-    "blob": "2b3f6ec99bf4f08944d155cff2be7373d0d9dac087bbc6281cc3f76f91ba094b.html.gz",
+    "blob": "dab73836e937239df5c5d77aed47e07bb24fe5a670d31c49c38520eb569c65a8.html.gz",
     "content_type": "text/html",
-    "etag": "\"2b3f6ec99bf4f089\"",
+    "etag": "\"dab73836e937239d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-020_20/index.html": {
-    "blob": "d6cc801b8da27b9a97742fff5ebaec96fa54fd76e22a2c7f954e6b98e679c534.html.gz",
+    "blob": "f94a45edb9c86dfb0ecf1a2816b1956edb8e6dba286e5931764282e9c8f8a8ee.html.gz",
     "content_type": "text/html",
-    "etag": "\"d6cc801b8da27b9a\"",
+    "etag": "\"f94a45edb9c86dfb\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-021_21/index.html": {
-    "blob": "de21305f483af6742449a14be095af0be2ba038309a9146c911d823c7212a0e9.html.gz",
+    "blob": "c665003525cf6aa1ca7b48ccd842e882a6c43a1caa96e28f08a277263a025add.html.gz",
     "content_type": "text/html",
-    "etag": "\"de21305f483af674\"",
+    "etag": "\"c665003525cf6aa1\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-022_22/index.html": {
-    "blob": "93e3dea507e79256cc5bce1c1514bab13e8475e92b242e18914bfea62dd8c36f.html.gz",
+    "blob": "6f764eddf404c757e33331339285d5bdfdbb5b3c909de094601f7e9e5eb64055.html.gz",
     "content_type": "text/html",
-    "etag": "\"93e3dea507e79256\"",
+    "etag": "\"6f764eddf404c757\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-023_23/index.html": {
-    "blob": "0e4f72124f577cb5d3dc02ed3f27ef464eac757bd868564a672b27c4593f4a67.html.gz",
+    "blob": "305960b8f0ee35e5be313d5a557a8e3ec8be8f3914dcc71b94c72cac8ddc450a.html.gz",
     "content_type": "text/html",
-    "etag": "\"0e4f72124f577cb5\"",
+    "etag": "\"305960b8f0ee35e5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-024_24/index.html": {
-    "blob": "017d20528d6162f3213ec5101e9a00b5da555d7a852bc6a8e65895b623887abd.html.gz",
+    "blob": "7a39d428f455ae5bf3fae7d579e152547832f1197898b035c1b3a91a7176e939.html.gz",
     "content_type": "text/html",
-    "etag": "\"017d20528d6162f3\"",
+    "etag": "\"7a39d428f455ae5b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-025_25/index.html": {
-    "blob": "f673f56e40ee8ca4dba4ab057261b013fcb4142ec1763565eb4702d65b1316ff.html.gz",
+    "blob": "ab65743d46a5f23112915614ac440d0085333529e84cec8a416512418688b7f6.html.gz",
     "content_type": "text/html",
-    "etag": "\"f673f56e40ee8ca4\"",
+    "etag": "\"ab65743d46a5f231\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-026_26/index.html": {
-    "blob": "8d96d5194b27bbfadd2d1166b5724cd70404db1fbef9672260acc95f9a54f0c0.html.gz",
+    "blob": "4ab9031864a4f4e3f1b0b546ccfadc13094ff3c853ac346433fd49d43fdf9d8d.html.gz",
     "content_type": "text/html",
-    "etag": "\"8d96d5194b27bbfa\"",
+    "etag": "\"4ab9031864a4f4e3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-027_27/index.html": {
-    "blob": "501d93d28479d5aadd13b4d71205ad56cf378f85140ba1fede4536cee4c9a96c.html.gz",
+    "blob": "6ab844642836b860ad68b25721c5a8ab431739dded4606bdf2522f0c7f7dc01c.html.gz",
     "content_type": "text/html",
-    "etag": "\"501d93d28479d5aa\"",
+    "etag": "\"6ab844642836b860\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-028_28/index.html": {
-    "blob": "3c3491ff74066589daa3b76a78a8758664c3782b16414ff79582295a6d6ca4cf.html.gz",
+    "blob": "da37b9df8d22785ca7fdc789fce01ab2bac4b60ca26978fa11d015a5bc1102df.html.gz",
     "content_type": "text/html",
-    "etag": "\"3c3491ff74066589\"",
+    "etag": "\"da37b9df8d22785c\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-029_29/index.html": {
-    "blob": "2535c589d99ceeaa35d681d9178152a3ac19021e23df1e3730c95a0a940a093e.html.gz",
+    "blob": "da679f6281f95fde7ff787bef05c5b11067219ad63a12cbab9ecabf5087ae8b2.html.gz",
     "content_type": "text/html",
-    "etag": "\"2535c589d99ceeaa\"",
+    "etag": "\"da679f6281f95fde\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-030_30/index.html": {
-    "blob": "f4dd374df4728c18ad9613e670b964ce38fcc2bc0e9a69a8299671bd11ee9b92.html.gz",
+    "blob": "bf211a5ef16e978739efd26a9ab101dfba8366afc067135d6b69d9cc95ffcc9e.html.gz",
     "content_type": "text/html",
-    "etag": "\"f4dd374df4728c18\"",
+    "etag": "\"bf211a5ef16e9787\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-031_31/index.html": {
-    "blob": "3b5929ccb750388734fe52efd22a9c044fc1be9e85bb6236dd7afecb5eb84ccd.html.gz",
+    "blob": "27bec456a2054a2f01c99bd8d21419f6415a6556a54cfbaddffe61d439f2ee6c.html.gz",
     "content_type": "text/html",
-    "etag": "\"3b5929ccb7503887\"",
+    "etag": "\"27bec456a2054a2f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-032_32/index.html": {
-    "blob": "f07483433b9095c1bd39b4810247ae7c21d1bb50f0816b93019ebe087f84df7c.html.gz",
+    "blob": "a0eb2823e711696188483add11f0d274947db68f296649bc0d7b20fdb380ab1d.html.gz",
     "content_type": "text/html",
-    "etag": "\"f07483433b9095c1\"",
+    "etag": "\"a0eb2823e7116961\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-033_33/index.html": {
-    "blob": "dc45544008d3705d7217dae92802ca9b9fcbc43e018632ceb2f999cb63bce047.html.gz",
+    "blob": "7e3e92342f4bcc883bd9e8c3a7bd95bb0246d73f0a7374e6e4d5dff7d9775a6d.html.gz",
     "content_type": "text/html",
-    "etag": "\"dc45544008d3705d\"",
+    "etag": "\"7e3e92342f4bcc88\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-034_34/index.html": {
-    "blob": "0fe18206570d0cb3e9f7c8600a8dcb7a66648ba1bd1e8a41491cd1c335e636d8.html.gz",
+    "blob": "2d3d03522731d75407e2ef030502b2a73b07b7a5ad64cb431213f34cf57db8c7.html.gz",
     "content_type": "text/html",
-    "etag": "\"0fe18206570d0cb3\"",
+    "etag": "\"2d3d03522731d754\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-035_35/index.html": {
-    "blob": "5ad822fe85d186391cf8e75205c0127b4b1c8657fba6e6d009588be30e8e8b65.html.gz",
+    "blob": "d6a4b8c8f04fa3d0143789937d17b4ad92440cdf2b6d0b3078e1c259dec0bd58.html.gz",
     "content_type": "text/html",
-    "etag": "\"5ad822fe85d18639\"",
+    "etag": "\"d6a4b8c8f04fa3d0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-036_36/index.html": {
-    "blob": "7141bf5e110740f641b7e0fc906a340ceda21db70c9d8595a0260f5517327d2d.html.gz",
+    "blob": "74a7f6905db22c77f948660edd0f977cc1aad697e9e603ebd3f4082701f528de.html.gz",
     "content_type": "text/html",
-    "etag": "\"7141bf5e110740f6\"",
+    "etag": "\"74a7f6905db22c77\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-037_37/index.html": {
-    "blob": "ac357905e4a14e06380ab0adf172a23be7737ef84b515c59dee968e0f4bbe1ac.html.gz",
+    "blob": "f3cc99b4a6cae415567afebaca7edac9f1933eef7dbd60293717dd05435232aa.html.gz",
     "content_type": "text/html",
-    "etag": "\"ac357905e4a14e06\"",
+    "etag": "\"f3cc99b4a6cae415\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-038_38/index.html": {
-    "blob": "9ba5cc19d366269e0c9c2435f897683d9e726ab94381953ae824754012b5c359.html.gz",
+    "blob": "b8e4e83240840cf7dfde7201c521a4f0feb978b1dcabdb7f7d12e05afec4069c.html.gz",
     "content_type": "text/html",
-    "etag": "\"9ba5cc19d366269e\"",
+    "etag": "\"b8e4e83240840cf7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-039_39/index.html": {
-    "blob": "1fcd2133406de822e062b9b6c8679a8e03b9e722bb028f14b653f2a7a4a4d921.html.gz",
+    "blob": "a5b28cee52d7dc9fc1b669a85be634adcfe31b4f1f9c7a9a0ed373b7658eab66.html.gz",
     "content_type": "text/html",
-    "etag": "\"1fcd2133406de822\"",
+    "etag": "\"a5b28cee52d7dc9f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-040_40/index.html": {
-    "blob": "dcad8e85d02f5f326a7999f6c0f2f7b31139d060ae3b299a578e22210954eccc.html.gz",
+    "blob": "7dbe8199619f1afff449547246526c064589a0c4c363ea49655807f8d49f04c6.html.gz",
     "content_type": "text/html",
-    "etag": "\"dcad8e85d02f5f32\"",
+    "etag": "\"7dbe8199619f1aff\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-041_41/index.html": {
-    "blob": "1ac2c6762ba86bc04b897ec091d0365dd4ae1f2733035f86b62bb6ab60b7d704.html.gz",
+    "blob": "65aebad341ed634aedfcc9ba8238ab6a5a4b757fcdc1d304002e4d90840dc409.html.gz",
     "content_type": "text/html",
-    "etag": "\"1ac2c6762ba86bc0\"",
+    "etag": "\"65aebad341ed634a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-042_42/index.html": {
-    "blob": "4d8e3864b9332427efc5ce852791c3935030d0c8adf9ee1b0e7d2026f729d86e.html.gz",
+    "blob": "1588e0efcf43d00c3b4383fb8bcc6f20f7b3c1a8a5d5783e40ff69ddaab80a18.html.gz",
     "content_type": "text/html",
-    "etag": "\"4d8e3864b9332427\"",
+    "etag": "\"1588e0efcf43d00c\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-043_43/index.html": {
-    "blob": "edc25b99cf9afbba37d0ed05a2fd6f96f68fa30fe29f74c0d7a9fd6b328c58aa.html.gz",
+    "blob": "aa47c6f2ead4ce332b7693c4ec7c1cf1910dec79bc4206d02e24430c2b6f873d.html.gz",
     "content_type": "text/html",
-    "etag": "\"edc25b99cf9afbba\"",
+    "etag": "\"aa47c6f2ead4ce33\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-044_44/index.html": {
-    "blob": "ccd4c5f3989845af0cc4eb5387fb13b8339b35ca76d1817c92e7d9ac5fb24a9e.html.gz",
+    "blob": "97e6a6eb34a0727fca2ee9af284ab386bfcb93ab5f50a3865922cd91fbe6b11c.html.gz",
     "content_type": "text/html",
-    "etag": "\"ccd4c5f3989845af\"",
+    "etag": "\"97e6a6eb34a0727f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-045_45/index.html": {
-    "blob": "cf4be6b11dfc18383781f57f57fe6758384b1e8c67e9a755c0d2a9716b6eae89.html.gz",
+    "blob": "e0c09408e4b306d3ffe740c4df58bb48cbb17a949c86702cc64eb22071601e59.html.gz",
     "content_type": "text/html",
-    "etag": "\"cf4be6b11dfc1838\"",
+    "etag": "\"e0c09408e4b306d3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-046_46/index.html": {
-    "blob": "c11f9f3d5d449975944a83db5490bcb9f8e207e0c3fac022f8c5585e8b537664.html.gz",
+    "blob": "1bd3ee15d53fc24da344db3b4aace61947edd8dc06c6cbd73da86f1014b2d22e.html.gz",
     "content_type": "text/html",
-    "etag": "\"c11f9f3d5d449975\"",
+    "etag": "\"1bd3ee15d53fc24d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-047_47/index.html": {
-    "blob": "ae94d5019cd9d180a8f39c74f51738e33b6f6cb7475b0beb5dfe255c45648025.html.gz",
+    "blob": "f0d274aee1b5793fa27e756cceaba21f62b7b299d37b2a650102ec3c7a6a71d7.html.gz",
     "content_type": "text/html",
-    "etag": "\"ae94d5019cd9d180\"",
+    "etag": "\"f0d274aee1b5793f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-048_48/index.html": {
-    "blob": "362e1e653b8c16b88a42531feaa55e25b1235b98ad4069319c1a6caa8eb517ba.html.gz",
+    "blob": "e79b318f5891f46326fa80235b1b93cd0e68c5cc3afbd361ff3b2bbf8bed3420.html.gz",
     "content_type": "text/html",
-    "etag": "\"362e1e653b8c16b8\"",
+    "etag": "\"e79b318f5891f463\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-049_49/index.html": {
-    "blob": "e275c2710985858fcb8066dc37defe9cf316401b8863ef0222f90f5efa1895a9.html.gz",
+    "blob": "e11eb3edcea716ab511870195c5e55eba217e16fc8f5966a51a7bc85aef84a4a.html.gz",
     "content_type": "text/html",
-    "etag": "\"e275c2710985858f\"",
+    "etag": "\"e11eb3edcea716ab\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-050_50/index.html": {
-    "blob": "1c28c85575c4f2a2571116740e9d71ffa6f663dc9442f719987528db5cad458d.html.gz",
+    "blob": "dc4e08b74babbf07b35d41ce28d27ce3fac3e72692c939a7efb848d84f40a8ce.html.gz",
     "content_type": "text/html",
-    "etag": "\"1c28c85575c4f2a2\"",
+    "etag": "\"dc4e08b74babbf07\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-051_51/index.html": {
-    "blob": "af34128c4bf72d03a2913c912050ccbaecb68365b8a8378c3d3704cf575fbd94.html.gz",
+    "blob": "a995038f8eaae4946bd4ff8f0b48aa791a74ebef3ac29ea0be7ccd1c84f671b8.html.gz",
     "content_type": "text/html",
-    "etag": "\"af34128c4bf72d03\"",
+    "etag": "\"a995038f8eaae494\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-052_52/index.html": {
-    "blob": "1f5e5a806ef7027e0a8d56fbf4c92a806cc148af11669141a686288c7afbe091.html.gz",
+    "blob": "d4a77c9fb99b3cda5d24e37808476ee5006345221ae4e55d8809d246916617dc.html.gz",
     "content_type": "text/html",
-    "etag": "\"1f5e5a806ef7027e\"",
+    "etag": "\"d4a77c9fb99b3cda\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-053_53/index.html": {
-    "blob": "048c7f7d66f42ea07d1fc20351b649f1102fb593036ac96b09b61e52c501267b.html.gz",
+    "blob": "0657e18de5eb4cecf0419f59299cb226d4ecc1d338f28b3f643a54ce6df51c81.html.gz",
     "content_type": "text/html",
-    "etag": "\"048c7f7d66f42ea0\"",
+    "etag": "\"0657e18de5eb4cec\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-054_54/index.html": {
-    "blob": "1de0d58614c48dc62eb2cd5fe38d77d01d2f817a8829b193155f822ceb590cce.html.gz",
+    "blob": "43b55fdc780a80d5a1d962f53696099a0b98d97452d70993c06a103d6cd822e5.html.gz",
     "content_type": "text/html",
-    "etag": "\"1de0d58614c48dc6\"",
+    "etag": "\"43b55fdc780a80d5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-055_55/index.html": {
-    "blob": "70f463a457b48ab10c4a3e6f06a4d110256e825448e6217a49ff5c89acc0109b.html.gz",
+    "blob": "4e4b227c45b5442b54d6390b27a4b7002e6f93a27e231b57d58f37587754d8eb.html.gz",
     "content_type": "text/html",
-    "etag": "\"70f463a457b48ab1\"",
+    "etag": "\"4e4b227c45b5442b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-056_56/index.html": {
-    "blob": "bbc1e8fa9bfb80b5ce436ccc7c4e22a721517e156ad6c843d9e5f16d8f30f818.html.gz",
+    "blob": "61f2772b5bc5b2c9a7dcc75ac18d3a6d0da0baae406649c5d932f5da3933f292.html.gz",
     "content_type": "text/html",
-    "etag": "\"bbc1e8fa9bfb80b5\"",
+    "etag": "\"61f2772b5bc5b2c9\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-057_57/index.html": {
-    "blob": "a5b4c953532be570babf47231324d5fe78b5e3f4d092f93a965a5c8646203301.html.gz",
+    "blob": "6554f4bffa53de2f930aa8eda50a644a73266fbf6cb15a11387b7b13d95a45a6.html.gz",
     "content_type": "text/html",
-    "etag": "\"a5b4c953532be570\"",
+    "etag": "\"6554f4bffa53de2f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-058_58/index.html": {
-    "blob": "4712d3164046fedfe847e923e7beca1f71d997eb1247a521d68c9631a644c127.html.gz",
+    "blob": "7237056ae4246dd0437f1d7a9cf8a1e75ac6de847e772f5c24509dde8166835b.html.gz",
     "content_type": "text/html",
-    "etag": "\"4712d3164046fedf\"",
+    "etag": "\"7237056ae4246dd0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-059_59/index.html": {
-    "blob": "09ae2446694d3b4895d478bd8256dd3d89590210caca9bdcaeb7404cf7da097b.html.gz",
+    "blob": "e61cd063571da2a6914b72c5d7b67069b41965b85991ba096dd37743bced4dcc.html.gz",
     "content_type": "text/html",
-    "etag": "\"09ae2446694d3b48\"",
+    "etag": "\"e61cd063571da2a6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-060_60/index.html": {
-    "blob": "79ba16085ef84d63f2921ad86c485b3b46b01d069a9cf85b4402c273319a9f2e.html.gz",
+    "blob": "0b36d5a099732682d8c5c8e9d2569cf17be869026b7f3bcb70b9acf1e6e50aa9.html.gz",
     "content_type": "text/html",
-    "etag": "\"79ba16085ef84d63\"",
+    "etag": "\"0b36d5a099732682\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-061_61/index.html": {
-    "blob": "a4ce37a65c09f115c46eaeab4914a8b3d72a70f8209353ad4eaef79f8bbfb2fd.html.gz",
+    "blob": "b2bf827f45857361069562ccce81070c09c2d7370be367422625ef84bb6a0fd3.html.gz",
     "content_type": "text/html",
-    "etag": "\"a4ce37a65c09f115\"",
+    "etag": "\"b2bf827f45857361\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-062_62/index.html": {
-    "blob": "00cd54077ef46c7a94a0807dea7893d1067c692a9f4664cd4e086547771daa93.html.gz",
+    "blob": "10b8431a83b1b5df032a9062e73b533740c5c21fb7126a20a662472687734140.html.gz",
     "content_type": "text/html",
-    "etag": "\"00cd54077ef46c7a\"",
+    "etag": "\"10b8431a83b1b5df\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-063_63/index.html": {
-    "blob": "4d511275262e8b757a21b3da1c1a5fdb3d7ed068e7f0e03e465e4376e0588640.html.gz",
+    "blob": "42bd2b3e56bb2f288afff1a3e60901a11a1950d292e416e2ff0880e315a51ec6.html.gz",
     "content_type": "text/html",
-    "etag": "\"4d511275262e8b75\"",
+    "etag": "\"42bd2b3e56bb2f28\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-064_64/index.html": {
-    "blob": "ac4b62fa64385143345ca65e376cd630ee9ef49108fe70b830b7652476a2015b.html.gz",
+    "blob": "387ccbdf5eb3cad80cbc352885d4dd22f0e9e0f40f236d5a9f15dbf9818077a5.html.gz",
     "content_type": "text/html",
-    "etag": "\"ac4b62fa64385143\"",
+    "etag": "\"387ccbdf5eb3cad8\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-065_65/index.html": {
-    "blob": "f9ddc5dea4e41a30bdb471695e1f0004b1888998e443569fbbd854d1f70317a5.html.gz",
+    "blob": "ddf4fe1fed581154c3e66fa159cdbbfcfbe4fb9a88c2bbd0e4d89827c4984a0f.html.gz",
     "content_type": "text/html",
-    "etag": "\"f9ddc5dea4e41a30\"",
+    "etag": "\"ddf4fe1fed581154\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-066_66/index.html": {
-    "blob": "73768f4f8e755ce396d348017b9004f20035d9ca6945ac231b48fb4becd17a73.html.gz",
+    "blob": "019ff2fa0fede864fb4fc77b77621dbd94b03ddc11277d41e07aa11507f6a288.html.gz",
     "content_type": "text/html",
-    "etag": "\"73768f4f8e755ce3\"",
+    "etag": "\"019ff2fa0fede864\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-067_67/index.html": {
-    "blob": "292d888382951eae647f756c178f1a6a9eae495dd1e590c86faf65ca969b7642.html.gz",
+    "blob": "5cb106d72728b274f1f0ddcfa4dc6b4d6af71d769c5f197b514a80270ed56cc4.html.gz",
     "content_type": "text/html",
-    "etag": "\"292d888382951eae\"",
+    "etag": "\"5cb106d72728b274\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-068_68/index.html": {
-    "blob": "a6d635167a9eadd88edfe64b2012231f5b838a295b738e63e0acaf083996eeff.html.gz",
+    "blob": "f840c9d113f630dc6205b8fddb3b030a6d1c59c65a27a8f95f0cb347022e8399.html.gz",
     "content_type": "text/html",
-    "etag": "\"a6d635167a9eadd8\"",
+    "etag": "\"f840c9d113f630dc\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-069_69/index.html": {
-    "blob": "1895247a6f7a5e1c2a29f3c38080c8514e5d40818f39d628a138027c25451235.html.gz",
+    "blob": "4463ce3f8b813340f36f2ad63f219449cb44340b1512be4ed97f52ec52eaffb7.html.gz",
     "content_type": "text/html",
-    "etag": "\"1895247a6f7a5e1c\"",
+    "etag": "\"4463ce3f8b813340\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-070_70/index.html": {
-    "blob": "c64c9f3ff5ab398db20ad0bc52de198978ffb45f0914809c50e8c93d0fa93052.html.gz",
+    "blob": "604faefce4f20d60003018353718b81cd4b0df8cdeb3247f81d11862867b1132.html.gz",
     "content_type": "text/html",
-    "etag": "\"c64c9f3ff5ab398d\"",
+    "etag": "\"604faefce4f20d60\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-071_71/index.html": {
-    "blob": "17cfc939b42bf6e25b48b2dbabdba417e51688ec7f9a7ae9c85ca822abf4e7f9.html.gz",
+    "blob": "0c4950ea27753fd59859d40fc723b3d532c601ed1a29c70d731274403dabc184.html.gz",
     "content_type": "text/html",
-    "etag": "\"17cfc939b42bf6e2\"",
+    "etag": "\"0c4950ea27753fd5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-072_72/index.html": {
-    "blob": "c202f599d962fbc02699f07f611de02de04449b43bca5a3a52d253a8167f5f6d.html.gz",
+    "blob": "de55a81a4268b71861486d5806d6918abd1c2d33740f2852a41abdddaebd751e.html.gz",
     "content_type": "text/html",
-    "etag": "\"c202f599d962fbc0\"",
+    "etag": "\"de55a81a4268b718\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-073_73/index.html": {
-    "blob": "dbf20be6b022bf51e54116822a0bcf68e71ab638f130ad8fbaffb7b81d4c5ef4.html.gz",
+    "blob": "55e5816477837ea0ce477f13b48423950802622029fab47d48e505b80e7f2973.html.gz",
     "content_type": "text/html",
-    "etag": "\"dbf20be6b022bf51\"",
+    "etag": "\"55e5816477837ea0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-074_74/index.html": {
-    "blob": "ec7f3b2a6621264e645bdcd3f2d8860a826dbd3ca45d56a1f760f7198274596d.html.gz",
+    "blob": "3bce1d11da4429a62a789ec58fd18b6f62ae748e6a3596b5020c2157adbbe734.html.gz",
     "content_type": "text/html",
-    "etag": "\"ec7f3b2a6621264e\"",
+    "etag": "\"3bce1d11da4429a6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-075_75/index.html": {
-    "blob": "cddb464cbc8caf7726f1ac9eb31fee002c7c3f39fb2e522f490d6e3ddaab0f85.html.gz",
+    "blob": "14f8f6c0f110c60831b3877e71ec3580b4e2f38c4fac38e56cc1b832bbbab2aa.html.gz",
     "content_type": "text/html",
-    "etag": "\"cddb464cbc8caf77\"",
+    "etag": "\"14f8f6c0f110c608\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-076_76/index.html": {
-    "blob": "a1f8fb28b3ffd08718cdeca976610925236068e880a9549e72dff5ff207de44a.html.gz",
+    "blob": "aedf0bce169d7578b365281bc8628f922d8f25f8dd7fafa649a7337b7169e918.html.gz",
     "content_type": "text/html",
-    "etag": "\"a1f8fb28b3ffd087\"",
+    "etag": "\"aedf0bce169d7578\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-077_77/index.html": {
-    "blob": "0b939fcf6b06843588d5ec3a007376a7089eec22d32d395f037469a87b86551f.html.gz",
+    "blob": "d13d90917733a6af60854869b5533b410b3a17ba05d93ec460655f6aae227e86.html.gz",
     "content_type": "text/html",
-    "etag": "\"0b939fcf6b068435\"",
+    "etag": "\"d13d90917733a6af\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-078_78/index.html": {
-    "blob": "1a1db3d414b7eb7462c6517c4a8e2b78893acb4d1b31703b4d56cd7582f224c8.html.gz",
+    "blob": "ceee377f636eb0b1431af5be5b721b74b5998eb3abb182392315595d5dc8bec2.html.gz",
     "content_type": "text/html",
-    "etag": "\"1a1db3d414b7eb74\"",
+    "etag": "\"ceee377f636eb0b1\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-079_79/index.html": {
-    "blob": "668c7e9a86e46031c6bce72b91be74bd9547b59f61dbd4de3292b8b278c5dcbc.html.gz",
+    "blob": "2ec58ff2827d102ae5a1f0df552501a7c0c5a9a25bcc39585787be04840bfebb.html.gz",
     "content_type": "text/html",
-    "etag": "\"668c7e9a86e46031\"",
+    "etag": "\"2ec58ff2827d102a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-080_80/index.html": {
-    "blob": "b06ff0f7e625120fc2cb37e8a97eb4915e277af22ec4ce36556c9638cbf5acf7.html.gz",
+    "blob": "82787ade3f9d1495f888837d3b0ca18ee70873237c54cb03637950a80ccaca88.html.gz",
     "content_type": "text/html",
-    "etag": "\"b06ff0f7e625120f\"",
+    "etag": "\"82787ade3f9d1495\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-081_81/index.html": {
-    "blob": "2a8d7d87d8b1fc69aaf3d37823a9afecf06d51e121cd4da5810a2b4d3cffb6a2.html.gz",
+    "blob": "66ff20535f30929a945ef7936a58c085820ad28f722e2cbca24b36477bd6e6ca.html.gz",
     "content_type": "text/html",
-    "etag": "\"2a8d7d87d8b1fc69\"",
+    "etag": "\"66ff20535f30929a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-082_82/index.html": {
-    "blob": "278e0415b4ccaf43ba9ca68756e8c92278671dfc13e049ead965c3ecd3eff445.html.gz",
+    "blob": "47403a9bf16317829eb4e0ecf538bfefda8e63758581474afe737c15089dac6b.html.gz",
     "content_type": "text/html",
-    "etag": "\"278e0415b4ccaf43\"",
+    "etag": "\"47403a9bf1631782\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-083_83/index.html": {
-    "blob": "c249eb3599e6332b2691e370784098423ab3dd094375762ef36e37e7554ab479.html.gz",
+    "blob": "fc781881a0c736d2f78f9a039459daee959dc26bcd03e87eed6b966111dbb359.html.gz",
     "content_type": "text/html",
-    "etag": "\"c249eb3599e6332b\"",
+    "etag": "\"fc781881a0c736d2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-084_84/index.html": {
-    "blob": "12f787c36357ee42f5c1a939680a786c35fbc494848de3d8f916dc5d6dc69ca8.html.gz",
+    "blob": "3ecd31c6be29356c16b5b9fe5a3e38caf7204db42e71b55950767a66a60a0248.html.gz",
     "content_type": "text/html",
-    "etag": "\"12f787c36357ee42\"",
+    "etag": "\"3ecd31c6be29356c\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-085_85/index.html": {
-    "blob": "0c5728b19fb9bab69b883e7a0c7ac825fc87b25ea9b421376d0d93e9f5ef5f26.html.gz",
+    "blob": "af898d3cfddcf757670fa3beba06dbe691b8715ec017eb0de2d1ce766d3f1053.html.gz",
     "content_type": "text/html",
-    "etag": "\"0c5728b19fb9bab6\"",
+    "etag": "\"af898d3cfddcf757\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-086_86/index.html": {
-    "blob": "d42e461041a5cfcc287c5d3b291067ea22388ff046f15fd04168449746db55f0.html.gz",
+    "blob": "be20314569b5999a54ddda922412d138a70597823aadc59f7883e618eb5918f1.html.gz",
     "content_type": "text/html",
-    "etag": "\"d42e461041a5cfcc\"",
+    "etag": "\"be20314569b5999a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-087_87/index.html": {
-    "blob": "8a119bab856a502c1163143af87796837b9a6b301369856b563ed1aecc2bb943.html.gz",
+    "blob": "f11f30598c8480cc0e8802ac6a6ec074aba186ee4cc265f1ca2cdbf1cad92bc1.html.gz",
     "content_type": "text/html",
-    "etag": "\"8a119bab856a502c\"",
+    "etag": "\"f11f30598c8480cc\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-088_88/index.html": {
-    "blob": "a7a81ed15e38882ae1d85863eae513dbf4dff24fa31720439c8ab299d0fe3a67.html.gz",
+    "blob": "69518f6f4cc059fd174cb6ed398c9dbf4e8d48f5ea47a6c7be96c4e005862575.html.gz",
     "content_type": "text/html",
-    "etag": "\"a7a81ed15e38882a\"",
+    "etag": "\"69518f6f4cc059fd\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-089_89/index.html": {
-    "blob": "23df88823719158d7e7ef6ccdc63595e91b73b875e24450a5f38d0d99765054d.html.gz",
+    "blob": "1b7613401ca2d420ffc9716dd0e5897f6bcd891c6c6f14910d4df5078ab5cccf.html.gz",
     "content_type": "text/html",
-    "etag": "\"23df88823719158d\"",
+    "etag": "\"1b7613401ca2d420\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-090_90/index.html": {
-    "blob": "b99a0b21dc57554fa00fc8be9d89c64766e64a41a8ffb9664875a6993e5bbbb1.html.gz",
+    "blob": "343aec4ea3861e4b8b5866e03fa1153c877bfd85110ee4f8b9b41e42c60688ff.html.gz",
     "content_type": "text/html",
-    "etag": "\"b99a0b21dc57554f\"",
+    "etag": "\"343aec4ea3861e4b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-091_91/index.html": {
-    "blob": "c09600267b579e21adbd2a84880db7e7400c77517efc3ab788ef7a1c4b98dffc.html.gz",
+    "blob": "06abf52f78e0f96783194f9063b4b57fd7941a971b452ec502e08b0a05376951.html.gz",
     "content_type": "text/html",
-    "etag": "\"c09600267b579e21\"",
+    "etag": "\"06abf52f78e0f967\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-092_92/index.html": {
-    "blob": "b1893c9f2cc3a37b5689233bb4543de00d06c3e239558841a0e5eacdacc1d8a8.html.gz",
+    "blob": "f8c561a32defcaff4575ce873015a1af79c7336e771fa346416c8ac0e318bb3a.html.gz",
     "content_type": "text/html",
-    "etag": "\"b1893c9f2cc3a37b\"",
+    "etag": "\"f8c561a32defcaff\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-093_93/index.html": {
-    "blob": "386f0e4b18a7828e0b222bdbab781474693974751e1ff096923d6ce79b2dab4e.html.gz",
+    "blob": "f3d3bd6885fcbde078b83d6a27d8ee010bf38af935f50daaba14ca75877ae24c.html.gz",
     "content_type": "text/html",
-    "etag": "\"386f0e4b18a7828e\"",
+    "etag": "\"f3d3bd6885fcbde0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-094_94/index.html": {
-    "blob": "455eeb8f26ee6916194c8e19c42e3b78c564a5fcdc65ac17d445b0ae898cf970.html.gz",
+    "blob": "b1ddf5cdde76cb4a8d31ca68a0c1740992b69d495615a226ff775926794e4f95.html.gz",
     "content_type": "text/html",
-    "etag": "\"455eeb8f26ee6916\"",
+    "etag": "\"b1ddf5cdde76cb4a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-095_95/index.html": {
-    "blob": "3a67ce63d3aad81aece824b9f3dcb204c63c03468c6292a01893687883f468c0.html.gz",
+    "blob": "c8c804b5c4cebcf7c4b1a31587dada54084cc69ac18dac3c4298737c2dcc7cfd.html.gz",
     "content_type": "text/html",
-    "etag": "\"3a67ce63d3aad81a\"",
+    "etag": "\"c8c804b5c4cebcf7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-096_96/index.html": {
-    "blob": "f76659ba218bd08f4af1c21241cde0758f856c45bd6e5ca8a0955280f346d19e.html.gz",
+    "blob": "7418c62978abd2f3e1200a5bea6c95ce39b46993e738c65768a639d13a842613.html.gz",
     "content_type": "text/html",
-    "etag": "\"f76659ba218bd08f\"",
+    "etag": "\"7418c62978abd2f3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-097_97/index.html": {
-    "blob": "710336aa9f6cbe09911fd3fc6a4defe1a2ec703ebc56ed7ef5b88ac24e6db8e3.html.gz",
+    "blob": "d79ff4aafbc3b2c8405562f362c9ef608bd392354f1c15bcb32fa2d20aeb6201.html.gz",
     "content_type": "text/html",
-    "etag": "\"710336aa9f6cbe09\"",
+    "etag": "\"d79ff4aafbc3b2c8\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-098_98/index.html": {
-    "blob": "e009c68a2c436dc4fa1a0d1ac27a86a0166a8bdfeaf26e5496789c0f052afce8.html.gz",
+    "blob": "75560fb31601a9dd814457f63d073f7d5fe00a9fa0ddc7bc5de7f8a970d38e06.html.gz",
     "content_type": "text/html",
-    "etag": "\"e009c68a2c436dc4\"",
+    "etag": "\"75560fb31601a9dd\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-099_99/index.html": {
-    "blob": "90526620c57525d2bbd5e3654f7004eb01e704f5fef54c680c2ae38f36aa425b.html.gz",
+    "blob": "2200f611f0ac1d88c0c54f197eb1f6798659c5c30da4d1384aa69bde32d54223.html.gz",
     "content_type": "text/html",
-    "etag": "\"90526620c57525d2\"",
+    "etag": "\"2200f611f0ac1d88\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-100_100/index.html": {
-    "blob": "271fd1c08fc010229bcbb2e70e0e0ec971e16639c8ddd55a3864b57f83ed41d3.html.gz",
+    "blob": "efc02993f2236744ecbb43f65ea19f8aa5f94fd805e1cba046cc7de9514e5274.html.gz",
     "content_type": "text/html",
-    "etag": "\"271fd1c08fc01022\"",
+    "etag": "\"efc02993f2236744\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-101_101/index.html": {
-    "blob": "3712a54997c48e573dfa07333f95efac666ed63702edf29a09805037d6e78bd7.html.gz",
+    "blob": "acb25f30859ce039728687017010343a44f8473109df7e361f7a8a95c3ef8af8.html.gz",
     "content_type": "text/html",
-    "etag": "\"3712a54997c48e57\"",
+    "etag": "\"acb25f30859ce039\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-102_102/index.html": {
-    "blob": "7e995d16c036eb2f6307b53b2c628b0f72c808b4883a416a73130c73c92f9522.html.gz",
+    "blob": "8084f1e88a939bfac2e05a5135051c920211d6f17697bd8e446c50c42585d920.html.gz",
     "content_type": "text/html",
-    "etag": "\"7e995d16c036eb2f\"",
+    "etag": "\"8084f1e88a939bfa\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-103_103/index.html": {
-    "blob": "24303b902cb28a8f70ab72e33419b2af33c9a248f14467ea0102107806a8e744.html.gz",
+    "blob": "7ab7385e4dfb7dc720c162db917325d6241c98cb5b786740266db836b8491564.html.gz",
     "content_type": "text/html",
-    "etag": "\"24303b902cb28a8f\"",
+    "etag": "\"7ab7385e4dfb7dc7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-104_104/index.html": {
-    "blob": "fa3f9db524a7abc93ad67259e0a90a3d6959ee8166eba734fa335d589478b594.html.gz",
+    "blob": "42862d5876bc0e6badc986d53c0e2f3d1a65dac24e5360db0bc811e1cee20443.html.gz",
     "content_type": "text/html",
-    "etag": "\"fa3f9db524a7abc9\"",
+    "etag": "\"42862d5876bc0e6b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-105_105/index.html": {
-    "blob": "adaaec825d7b73441abe390fa034fa6426a7d4f5fbe8be715364248f17373946.html.gz",
+    "blob": "33ec0dcfcd0022d989012f54b86db5f042f198b8e78d3586372e51f4926b156f.html.gz",
     "content_type": "text/html",
-    "etag": "\"adaaec825d7b7344\"",
+    "etag": "\"33ec0dcfcd0022d9\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-106_106/index.html": {
-    "blob": "edf8bc40a372e1ff87346f2e72ec3dc7a473e58f9b46f9f13190f74c1d3995f1.html.gz",
+    "blob": "7aff4b7fdad11359a1e3c48d6ab85a7e55c1c5b8b0183440b0fd0b5e256291b5.html.gz",
     "content_type": "text/html",
-    "etag": "\"edf8bc40a372e1ff\"",
+    "etag": "\"7aff4b7fdad11359\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-107_107/index.html": {
-    "blob": "41083ace49dc83fbe33ef20be4bc53ea12a72b49771c1b0b88b22d59296c8b5d.html.gz",
+    "blob": "beef74e96902748606e667c1800bc849a4a42fcc3eb7e24a50acbb18289ee28e.html.gz",
     "content_type": "text/html",
-    "etag": "\"41083ace49dc83fb\"",
+    "etag": "\"beef74e969027486\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-108_108/index.html": {
-    "blob": "9e18d85914ad5c35b5da3cb00921a002bc3e2b9ae2767aa5f6850bcfa0d3e251.html.gz",
+    "blob": "adc974644a5d2340fd55743990d785291aaa8fe7191a32f4057083b1db97317c.html.gz",
     "content_type": "text/html",
-    "etag": "\"9e18d85914ad5c35\"",
+    "etag": "\"adc974644a5d2340\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-109_109/index.html": {
-    "blob": "ac2981c9301a81d9c3eead23a019c99d189f4762a148782029240f058594dc52.html.gz",
+    "blob": "3e9b5c21531ad76dac60b94739de23bd39691fb773519915e68e53873fbdbe14.html.gz",
     "content_type": "text/html",
-    "etag": "\"ac2981c9301a81d9\"",
+    "etag": "\"3e9b5c21531ad76d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-110_110/index.html": {
-    "blob": "ebf83112dd6ab1d5b9a931e41126e781796b2c0cf16207fbf0a632037f0d3bd2.html.gz",
+    "blob": "725983b8dc492b2a343baf05275f84d664c8a7ce51568c1061064ff1a9de9990.html.gz",
     "content_type": "text/html",
-    "etag": "\"ebf83112dd6ab1d5\"",
+    "etag": "\"725983b8dc492b2a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-111_111/index.html": {
-    "blob": "96c85da969c935f4cf550e19e23d6b9af753b579a676fc9518a84725d36dffae.html.gz",
+    "blob": "08cd14be4db02eed0342ad7e064372801a0870537c1730f1f475edd504bc77d7.html.gz",
     "content_type": "text/html",
-    "etag": "\"96c85da969c935f4\"",
+    "etag": "\"08cd14be4db02eed\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-112_112/index.html": {
-    "blob": "d03bcd5d28c416eb28dbfd6c083816963752458f9ca919313c38ded1ae9ebf4c.html.gz",
+    "blob": "cf8eddd70939ebd7f97292efee5d6d64bad171ffe4fb1aaef13fa6cdae609096.html.gz",
     "content_type": "text/html",
-    "etag": "\"d03bcd5d28c416eb\"",
+    "etag": "\"cf8eddd70939ebd7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-113_113/index.html": {
-    "blob": "43faa1393512fd0810fc2f86478c417b36339693b81e031e3c20d274984e5e71.html.gz",
+    "blob": "05f33f3e994dfdce2e8fd427984e1bd8833a2713d1e986f1dab61e2482c294f4.html.gz",
     "content_type": "text/html",
-    "etag": "\"43faa1393512fd08\"",
+    "etag": "\"05f33f3e994dfdce\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-114_114/index.html": {
-    "blob": "e64ef5d17941d841697e9678a51d79fa99841500adf6777166b018a47391efba.html.gz",
+    "blob": "c1a00f2bd2fa71278184d7dd66f9e5ca3ed1730edb0422d79839fd08e5314150.html.gz",
     "content_type": "text/html",
-    "etag": "\"e64ef5d17941d841\"",
+    "etag": "\"c1a00f2bd2fa7127\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-115_115/index.html": {
-    "blob": "66aae4a3da7fcc1375b5897207ee84647b8d8b6529a3783e47e21ac305aea585.html.gz",
+    "blob": "14200bcaa42dee5b199c0314a6756642f8805bed9b31a9ea0c2f3e4850b5368c.html.gz",
     "content_type": "text/html",
-    "etag": "\"66aae4a3da7fcc13\"",
+    "etag": "\"14200bcaa42dee5b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-116_116/index.html": {
-    "blob": "019ba98b0b95f86fbc702f64f5f715d8a3fe584025472c51afa59727d1d1db28.html.gz",
+    "blob": "e8f9f76aa4da98b55c9fbe60679581b4d981d139c42877d6d89c61539ae9b4e2.html.gz",
     "content_type": "text/html",
-    "etag": "\"019ba98b0b95f86f\"",
+    "etag": "\"e8f9f76aa4da98b5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-117_117/index.html": {
-    "blob": "3d6df1eea9d4848e69a54dcf101e539ce8a8aac84ca0c49e2ec4ed4cd270347d.html.gz",
+    "blob": "e41e4ce10d8112795d595105aa5886f4b8951563704e770c4550bdc7516a17bc.html.gz",
     "content_type": "text/html",
-    "etag": "\"3d6df1eea9d4848e\"",
+    "etag": "\"e41e4ce10d811279\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-118_118/index.html": {
-    "blob": "8745c97cd979c0c53ac8f9c9bf63bb74650ddef55715e30fdb244aab03f98e75.html.gz",
+    "blob": "0eb5f82d752008f6f32c2ecefa9d9f1acad616f7a1c03e0411ed2c149ac7b346.html.gz",
     "content_type": "text/html",
-    "etag": "\"8745c97cd979c0c5\"",
+    "etag": "\"0eb5f82d752008f6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-119_119/index.html": {
-    "blob": "ebdebdc3aeee2b5b2a1d35ef9bed40c1f8436e481bd5bd2f60ee723ae889fb06.html.gz",
+    "blob": "9d0b01d2d798bd767b812b7bc4e66c272151f884b9c1819d0d55676ec0b95108.html.gz",
     "content_type": "text/html",
-    "etag": "\"ebdebdc3aeee2b5b\"",
+    "etag": "\"9d0b01d2d798bd76\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-120_120/index.html": {
-    "blob": "9f1bed9ccde21a0ee2246411c9d0162f13ff953bee3f6d124daf64890806918e.html.gz",
+    "blob": "1b717e7b1587346da44496bb2206f06fb8b1bb824b90a401b501b10b54c1447c.html.gz",
     "content_type": "text/html",
-    "etag": "\"9f1bed9ccde21a0e\"",
+    "etag": "\"1b717e7b1587346d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-121_121/index.html": {
-    "blob": "f30cc249ff203daae8390fc45207d931690c6080c434c7d4d00729f019699144.html.gz",
+    "blob": "cf94c1d0253a7b195de1f1fceb6e4598041c4d5eb9ea1192f7924467e9897430.html.gz",
     "content_type": "text/html",
-    "etag": "\"f30cc249ff203daa\"",
+    "etag": "\"cf94c1d0253a7b19\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-122_122/index.html": {
-    "blob": "e35d3bd19d0eaca15030529d2e053a95a4b9f93b2a793dae49ecef8de13ab90b.html.gz",
+    "blob": "2c0eeda2e52fc4e239d27be0ad37db08637de9d215168bb2c72b5d009e302dc0.html.gz",
     "content_type": "text/html",
-    "etag": "\"e35d3bd19d0eaca1\"",
+    "etag": "\"2c0eeda2e52fc4e2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-123_123/index.html": {
-    "blob": "1cfde35e7c6ca067ed2ae18d7362ed19e2462f3b79f0b817cf901e282baed583.html.gz",
+    "blob": "9f181e11cc1dd3b1e356c63dbeefd0dcf4e79afd485ed45abfdbdd5eba014751.html.gz",
     "content_type": "text/html",
-    "etag": "\"1cfde35e7c6ca067\"",
+    "etag": "\"9f181e11cc1dd3b1\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-124_124/index.html": {
-    "blob": "3238b50d9c55c09b1605b128fe647effde55ac9d4e54085c7cb777956392e6ed.html.gz",
+    "blob": "6e74081527d0b2f6e1ea4ccb4efbf79469aff77287a9eb0fc9ece6b23ec9051d.html.gz",
     "content_type": "text/html",
-    "etag": "\"3238b50d9c55c09b\"",
+    "etag": "\"6e74081527d0b2f6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-125_125/index.html": {
-    "blob": "69302f70ac30ee4e913c1a57209736bec107f8c35b64a216cc5670990e4c5c07.html.gz",
+    "blob": "5def4e6f66be4ad7213295a881bf56971bfcb1b22bf0755d256aa328244a8717.html.gz",
     "content_type": "text/html",
-    "etag": "\"69302f70ac30ee4e\"",
+    "etag": "\"5def4e6f66be4ad7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-126_126/index.html": {
-    "blob": "bb0424fe50886aa7b3ba0229bc07860a3b78707460d2b8bece01ef1bb5f8a6a0.html.gz",
+    "blob": "96e3cfbd3aa214bb021e7c9c3ad201bb790a1302813f9da4b1479443d5d9f9d5.html.gz",
     "content_type": "text/html",
-    "etag": "\"bb0424fe50886aa7\"",
+    "etag": "\"96e3cfbd3aa214bb\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-127_127/index.html": {
-    "blob": "e7b87d60c82234f004f151472516be9902358457b194bde7b74faabe0da74005.html.gz",
+    "blob": "65d2bfb370b76e2d96a2cf211a9127c3a0492a33a962a80d0b41811eb96fa247.html.gz",
     "content_type": "text/html",
-    "etag": "\"e7b87d60c82234f0\"",
+    "etag": "\"65d2bfb370b76e2d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-128_128/index.html": {
-    "blob": "bc71b8f9672e0e37ab44cad4b3d2fcf3352d8fe1c234a330e92ea188c7f9eae3.html.gz",
+    "blob": "1de14045f029f023c61181dffb007c4551bd8491665ab6ac686e49d52353259f.html.gz",
     "content_type": "text/html",
-    "etag": "\"bc71b8f9672e0e37\"",
+    "etag": "\"1de14045f029f023\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-129_129/index.html": {
-    "blob": "6dd6c40dc71415c52bd0d8876b9ee38c02c6ff1eb201d9325dc5277ed2f39c87.html.gz",
+    "blob": "d68b6168d520621e92907a1da5e70f4c0f3b54abde897c4683e6167df99a223a.html.gz",
     "content_type": "text/html",
-    "etag": "\"6dd6c40dc71415c5\"",
+    "etag": "\"d68b6168d520621e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-130_130/index.html": {
-    "blob": "7f493a2f2a13231b8bcdf85578f9747d40b79d9e2af5dfc84a935d77d8e93627.html.gz",
+    "blob": "f0da58c738d4883d68eb3404b23dbafc4e7464cad2da33d28e90652c818d4e16.html.gz",
     "content_type": "text/html",
-    "etag": "\"7f493a2f2a13231b\"",
+    "etag": "\"f0da58c738d4883d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-131_131/index.html": {
-    "blob": "330d11b6ee07aaf009d3e86aee44f907bad10ee4c8a21163fe4ce27838181d5d.html.gz",
+    "blob": "4efb02deb07953e1375239e1fcf6942181f8030998612599d3305c54a003e85b.html.gz",
     "content_type": "text/html",
-    "etag": "\"330d11b6ee07aaf0\"",
+    "etag": "\"4efb02deb07953e1\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-132_132/index.html": {
-    "blob": "d57b13d5e39491f2b1e2f0910c0ba4ebde016a48e7f1e1f1eff06f5faaff5d76.html.gz",
+    "blob": "b874476903efde8979e20c8e355df7afdd732435bfcc7e396a41449b3283d357.html.gz",
     "content_type": "text/html",
-    "etag": "\"d57b13d5e39491f2\"",
+    "etag": "\"b874476903efde89\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-133_133/index.html": {
-    "blob": "40c1cd9c26635f1adac5504afc269ae282e45e9a91e1577e871d3d0405969c1d.html.gz",
+    "blob": "f1848c8116484cafb9aa0b13ce9518704ac9e8d6f0538e801defe4fbf4985008.html.gz",
     "content_type": "text/html",
-    "etag": "\"40c1cd9c26635f1a\"",
+    "etag": "\"f1848c8116484caf\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-134_134/index.html": {
-    "blob": "848619890730d90cddf27456e35717924c4726a75cbe3f2610740ad3c3d1d718.html.gz",
+    "blob": "ec03f1567da7cafbab7483e113df7a28cc89309e72875199ec54096db72a199b.html.gz",
     "content_type": "text/html",
-    "etag": "\"848619890730d90c\"",
+    "etag": "\"ec03f1567da7cafb\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-135_135/index.html": {
-    "blob": "038f031763103d1ff50f30e0795d2dcbae2643329ff8e642c0856797824e6df8.html.gz",
+    "blob": "7010c55b9d7a5a4b25528bfe0916f3e995096a8f3f94a2190ef7532825c6e0e9.html.gz",
     "content_type": "text/html",
-    "etag": "\"038f031763103d1f\"",
+    "etag": "\"7010c55b9d7a5a4b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-136_136/index.html": {
-    "blob": "11a7116c3c402aec6c8bc64f8f1aab46efed6077c9e8d6cb3a804066f470e616.html.gz",
+    "blob": "b6af236e63ef176753affcb3c44968d386624e70df54bd2255f352569f492444.html.gz",
     "content_type": "text/html",
-    "etag": "\"11a7116c3c402aec\"",
+    "etag": "\"b6af236e63ef1767\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-137_137/index.html": {
-    "blob": "8ea5b6c7fb86215bdb3f9db1115afc0f39c35bdd04af7dd118d9ff356c5ab25d.html.gz",
+    "blob": "049f8cba3bbbbf7e51d948dd9f426caeb96094cdcfafedbdc204d40ba5c0ef8b.html.gz",
     "content_type": "text/html",
-    "etag": "\"8ea5b6c7fb86215b\"",
+    "etag": "\"049f8cba3bbbbf7e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-138_138/index.html": {
-    "blob": "ae0b22031d8076e34c045f7eeb3a393fcf63fecf5484aff4cb40b45236ec6ebf.html.gz",
+    "blob": "e153dd876d7e02ef7f2d5bb9ccbe46c5ace8744f250dbcbbda2808061373fa45.html.gz",
     "content_type": "text/html",
-    "etag": "\"ae0b22031d8076e3\"",
+    "etag": "\"e153dd876d7e02ef\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-139_139/index.html": {
-    "blob": "7a90932e8e98b058b0d0d7ac0558a8655424b6ac1c79195d5ae5962ce4dc6948.html.gz",
+    "blob": "d27a1c473bb72ea3ea5966a9db474653300518a6874cc3c76d8277016aa02f39.html.gz",
     "content_type": "text/html",
-    "etag": "\"7a90932e8e98b058\"",
+    "etag": "\"d27a1c473bb72ea3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-140_140/index.html": {
-    "blob": "d0a1086b79f52515f0717ed4ab39ae0cca22778d5980cf1df3b433d5a8a71f61.html.gz",
+    "blob": "45a8484750bfe69b7d291345889598e97f6a6404b9ae253ca7fd1f826593d7cd.html.gz",
     "content_type": "text/html",
-    "etag": "\"d0a1086b79f52515\"",
+    "etag": "\"45a8484750bfe69b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-141_141/index.html": {
-    "blob": "5e9693d1f2617681a8ab0c3f6afb2d1a849ec08d25f91581d1cb3b8785fa4a36.html.gz",
+    "blob": "343e9a46982a7590c7a0377203078b22d8e6b4bd0b9c07cf60ccf575837b9d31.html.gz",
     "content_type": "text/html",
-    "etag": "\"5e9693d1f2617681\"",
+    "etag": "\"343e9a46982a7590\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-142_142/index.html": {
-    "blob": "be4c1adddcaab462e002e6ca66fc37e199a3681eb2d850a7d398fa055167eea6.html.gz",
+    "blob": "1f93bb2904cbe045285104c83a9e83592d15371e26ea4d164fd689d40da351b1.html.gz",
     "content_type": "text/html",
-    "etag": "\"be4c1adddcaab462\"",
+    "etag": "\"1f93bb2904cbe045\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-143_143/index.html": {
-    "blob": "bdb618e73e0584f4263f587b8655ff6eef82566c4dec25d96f8f7530c33f1b15.html.gz",
+    "blob": "9763e5ae02ec785e2c0ef1fac1cef001416de05b9c5532474646a61a6285fbb2.html.gz",
     "content_type": "text/html",
-    "etag": "\"bdb618e73e0584f4\"",
+    "etag": "\"9763e5ae02ec785e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-144_144/index.html": {
-    "blob": "6ae3d324a42a8e0374fb17bce21adb710090d5cb676e3453a62a9fe17aa435c8.html.gz",
+    "blob": "26c1f615708cc4645094c72881b2de86a412054fdfab7ca90bd5763cb36b2613.html.gz",
     "content_type": "text/html",
-    "etag": "\"6ae3d324a42a8e03\"",
+    "etag": "\"26c1f615708cc464\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-145_145/index.html": {
-    "blob": "7fc524cf3664d3f0285c37d64757259eddf6a15111dbf3cf04c59ce78be1672d.html.gz",
+    "blob": "0755c3bb77891e749e20db2cc695949478a14a045646a1daa3ce42636a618042.html.gz",
     "content_type": "text/html",
-    "etag": "\"7fc524cf3664d3f0\"",
+    "etag": "\"0755c3bb77891e74\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-146_146/index.html": {
-    "blob": "a07919370697b57f57100485da9abc06e1412e88f63293d9c2ddf552cc535b5b.html.gz",
+    "blob": "25625bfefdb983194234e619c836d011d8a387f52733559d384d46415ff03d80.html.gz",
     "content_type": "text/html",
-    "etag": "\"a07919370697b57f\"",
+    "etag": "\"25625bfefdb98319\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-147_147/index.html": {
-    "blob": "4326dfbdf4b763d5ab63647ba1bad88f11d5965d1435565943ba872d911607ce.html.gz",
+    "blob": "4810025965758916c0fb9c83f43ef50f8d6c53c6d799edd5d857ed1f7edacef0.html.gz",
     "content_type": "text/html",
-    "etag": "\"4326dfbdf4b763d5\"",
+    "etag": "\"4810025965758916\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-148_148/index.html": {
-    "blob": "95f81dd6d3e04ce66a473566ef1e53a987b555327d511b6698a7da1927ba8cc8.html.gz",
+    "blob": "642b483768d15e0e7593fd8c2bb8befa85f7d4a05506c76e4e6a4695ba8b095b.html.gz",
     "content_type": "text/html",
-    "etag": "\"95f81dd6d3e04ce6\"",
+    "etag": "\"642b483768d15e0e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-149_149/index.html": {
-    "blob": "17323c505486d1c2e1acfcc28835e259909e6af6d580431cfd51d6a188a8285e.html.gz",
+    "blob": "94b8d7fab15e7cec599adca5a669661cfb955073e474d5c07f225e1dbcdc7974.html.gz",
     "content_type": "text/html",
-    "etag": "\"17323c505486d1c2\"",
+    "etag": "\"94b8d7fab15e7cec\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-150_150/index.html": {
-    "blob": "2c5ae87a8bf5823f12d459b855bd02cc2baabc77d27dd15681a114323565c1bc.html.gz",
+    "blob": "3e0e88c8bfa33c1813c76ccb44178fea941b23acee6ac40fbb3dd1552bd03cef.html.gz",
     "content_type": "text/html",
-    "etag": "\"2c5ae87a8bf5823f\"",
+    "etag": "\"3e0e88c8bfa33c18\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-151_151/index.html": {
-    "blob": "bf7f750823ee4addd9f7474c4ee6da918426109b0cafb3dc88ae997f9cc97119.html.gz",
+    "blob": "402283512a29c09ea98d86814b0e6a7ce839f79ed78134379e5f574005972e75.html.gz",
     "content_type": "text/html",
-    "etag": "\"bf7f750823ee4add\"",
+    "etag": "\"402283512a29c09e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-152_152/index.html": {
-    "blob": "803f04e64f4d60372922ed202bdb43e2021cdfcb5a79e6bed0490a1fb12fbbdb.html.gz",
+    "blob": "2dcbc0525a3a59d34fdc3745842ba351201d0eac6af28f6d4fc560858fa2031f.html.gz",
     "content_type": "text/html",
-    "etag": "\"803f04e64f4d6037\"",
+    "etag": "\"2dcbc0525a3a59d3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-153_153/index.html": {
-    "blob": "96f0a13c192e96875f8193726d8c29f0f005bfc1fa45bc9adcf0cae759c57471.html.gz",
+    "blob": "9e1dac19c92a40fd06cacbb3692a24cf4b94e5413b4c7f6bc1b9ea086426bc2a.html.gz",
     "content_type": "text/html",
-    "etag": "\"96f0a13c192e9687\"",
+    "etag": "\"9e1dac19c92a40fd\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-154_154/index.html": {
-    "blob": "52e169d31c1bfb1af9ce588685bee53c4fd1b8335d7440aeb8ce800eef89f39d.html.gz",
+    "blob": "7eb0b84d03b131f6e2ebbecd2d64e43b8837d1f4074b65a1ced9ea5db7de9308.html.gz",
     "content_type": "text/html",
-    "etag": "\"52e169d31c1bfb1a\"",
+    "etag": "\"7eb0b84d03b131f6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-155_155/index.html": {
-    "blob": "dbd6c7f41e86e99fc094566cf78c5c5e131921b662be36d1d3d8aec383ce8ff9.html.gz",
+    "blob": "14623ba7b6ebc875b51b06c9d71386e9a12b81f730d05598926dc172b14a469b.html.gz",
     "content_type": "text/html",
-    "etag": "\"dbd6c7f41e86e99f\"",
+    "etag": "\"14623ba7b6ebc875\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-156_156/index.html": {
-    "blob": "c80f8b5f46b4ffc346e157bb6dce77dbfad05ba80af7a9f297da9b6a949fcd2b.html.gz",
+    "blob": "74765ccad81d85d69062058a90da5667b52dfa2c5e17b56f810022fe3fa9fc1f.html.gz",
     "content_type": "text/html",
-    "etag": "\"c80f8b5f46b4ffc3\"",
+    "etag": "\"74765ccad81d85d6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-157_157/index.html": {
-    "blob": "f477cc8124bd0cee425b39b8858f7f93cecb8912ab080412da104799f5794127.html.gz",
+    "blob": "8978b00a4d203c75f6a21ebd4ffecbdfd8cba75a15641d36d57cffd36a8c206c.html.gz",
     "content_type": "text/html",
-    "etag": "\"f477cc8124bd0cee\"",
+    "etag": "\"8978b00a4d203c75\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-158_158/index.html": {
-    "blob": "c6e327035f126138153965e448b92e75f41290faf98060775e62a2f6e4cb7055.html.gz",
+    "blob": "d112fc97aeb256aca81fa9697b558945bc0c0cf27b8a8fb4d63fca90c33b126d.html.gz",
     "content_type": "text/html",
-    "etag": "\"c6e327035f126138\"",
+    "etag": "\"d112fc97aeb256ac\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-159_159/index.html": {
-    "blob": "e6dc9965a0581d1608b3c4995659265ed3424c80449bfaac429ee40ece28bfdc.html.gz",
+    "blob": "ba9714abf5031341d4358d811dd7597e5bd76960fd7fc6530c5278c4c43a0b1b.html.gz",
     "content_type": "text/html",
-    "etag": "\"e6dc9965a0581d16\"",
+    "etag": "\"ba9714abf5031341\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-160_160/index.html": {
-    "blob": "f9da4c548834c61ea0d4a8692790087968f8067e4daf642553a23fec7eb986de.html.gz",
+    "blob": "aad5ef4d3f99c5e3ac15380a009b712ec86433102e8e7c954929bae71dcf4bbe.html.gz",
     "content_type": "text/html",
-    "etag": "\"f9da4c548834c61e\"",
+    "etag": "\"aad5ef4d3f99c5e3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-161_161/index.html": {
-    "blob": "e5d379d0cc2d4f8dd594776c5941d8cb528d247530d9cc5ce1ca610643523b28.html.gz",
+    "blob": "18ec536e77c48af4cd60b191e31c5e9a5a75a6bd263e495b3d13e73b7a81489e.html.gz",
     "content_type": "text/html",
-    "etag": "\"e5d379d0cc2d4f8d\"",
+    "etag": "\"18ec536e77c48af4\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-162_162/index.html": {
-    "blob": "9574eba616bb5db3d5368ea311062c218ec6a30134ce0e017f885e13c6c50c45.html.gz",
+    "blob": "222d2bda0f4dd6533f48359e04a9165c754c28023332a93978c6103a95b6bf47.html.gz",
     "content_type": "text/html",
-    "etag": "\"9574eba616bb5db3\"",
+    "etag": "\"222d2bda0f4dd653\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-163_163/index.html": {
-    "blob": "ab35a742d35a873835cbd79d8df8f54f36c70f261ec1b658052eaaedcf577828.html.gz",
+    "blob": "009410d4d3d2436bddfcd4b5730c17bd17ae08a78a49a649e3e9465e0b3e5a0c.html.gz",
     "content_type": "text/html",
-    "etag": "\"ab35a742d35a8738\"",
+    "etag": "\"009410d4d3d2436b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-164_164/index.html": {
-    "blob": "736cdf03cb0adfae538da1998819b25ec4f6b1dd4913e9a9775d36bd55c94fe9.html.gz",
+    "blob": "9acdd89170b47d8ec1ad59b9db9931d61f4a365190c2987e3bcee99307499279.html.gz",
     "content_type": "text/html",
-    "etag": "\"736cdf03cb0adfae\"",
+    "etag": "\"9acdd89170b47d8e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-165_165/index.html": {
-    "blob": "4d33a45cb5419d0c6d98d012cbb0911a6a9d78cca06c701ef19f90ff94e7933f.html.gz",
+    "blob": "e7fdf6ae02879c1a168d0420c1d3ab7b5eaf0ecd2cf98646a5a05aac3404f1ec.html.gz",
     "content_type": "text/html",
-    "etag": "\"4d33a45cb5419d0c\"",
+    "etag": "\"e7fdf6ae02879c1a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-166_166/index.html": {
-    "blob": "87d992175cd5b3319d174dc68e14ca2d98fb54927a38d6be30e4247dcfac8fe5.html.gz",
+    "blob": "736957148196a8f2d29d0ceae5cd3a00ea849079dfc192ba3183bbe8a631280a.html.gz",
     "content_type": "text/html",
-    "etag": "\"87d992175cd5b331\"",
+    "etag": "\"736957148196a8f2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-167_167/index.html": {
-    "blob": "4bddcea0157e106c6a3f6b701cece016aafabcd31d15c6ecc2eaa7afafa8daee.html.gz",
+    "blob": "0a03f8c19d0f49d5046484841b317bb08df6ac7a0938e1d9aea536ad86603efc.html.gz",
     "content_type": "text/html",
-    "etag": "\"4bddcea0157e106c\"",
+    "etag": "\"0a03f8c19d0f49d5\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-168_168/index.html": {
-    "blob": "531d5e5a5e44302373bdb166ac987aebc55850eb1ad2f59cd95497646c39d0d5.html.gz",
+    "blob": "0b49f5879818400e8d8662b4131607c83c9be1a001d75c1f34e47013a299205a.html.gz",
     "content_type": "text/html",
-    "etag": "\"531d5e5a5e443023\"",
+    "etag": "\"0b49f5879818400e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-169_169/index.html": {
-    "blob": "9ff6604081f3551bbaa9114968c96e8e786f3f18bbd34639a7d621527c594b4f.html.gz",
+    "blob": "38f824e5749dc0051433c8ea2f21273ab1ca6b6534b77464956994c013d1a3e4.html.gz",
     "content_type": "text/html",
-    "etag": "\"9ff6604081f3551b\"",
+    "etag": "\"38f824e5749dc005\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-170_170/index.html": {
-    "blob": "7222af8e2f5b9723d82c4087204d37bbaf6514d21ff58ec91efe1c0ffae52b61.html.gz",
+    "blob": "b38a7aa4bb55e111bc8c9c84a5b6ebb9bc579d5b0d5652924badd3e38610b3eb.html.gz",
     "content_type": "text/html",
-    "etag": "\"7222af8e2f5b9723\"",
+    "etag": "\"b38a7aa4bb55e111\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-171_171/index.html": {
-    "blob": "9d306f821a4f164a59bfa71b9a9df69c48210afeda98e799c707616e408614e7.html.gz",
+    "blob": "8ef97fcc6c06ad7bf50f2a25ae907c152c894abc91c1910e6b35b82612dd900b.html.gz",
     "content_type": "text/html",
-    "etag": "\"9d306f821a4f164a\"",
+    "etag": "\"8ef97fcc6c06ad7b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-172_172/index.html": {
-    "blob": "b06d99dd1a74bceed66499370e044108c79b8cabc87bc6acfbbd7c74ebe3971d.html.gz",
+    "blob": "3b54d4a511f33a6f2ddf39f7970f59658d785b77940d17c17c72e24da6719c86.html.gz",
     "content_type": "text/html",
-    "etag": "\"b06d99dd1a74bcee\"",
+    "etag": "\"3b54d4a511f33a6f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-173_173/index.html": {
-    "blob": "659c2e58a3c4d3f087632951fb59284b7be2d529446de9f356616aaf9141e769.html.gz",
+    "blob": "3c25f57e69ec55dafb2d030852bb5d589049c5b2e4c50d3b10568b3a628d0d83.html.gz",
     "content_type": "text/html",
-    "etag": "\"659c2e58a3c4d3f0\"",
+    "etag": "\"3c25f57e69ec55da\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-174_174/index.html": {
-    "blob": "684eec38f4792541ba7a847de0ede7268e59fc2cd1173bdf7e20d65e01f17605.html.gz",
+    "blob": "48fc42b8e7fbb9c75c30f1ba353e4b57179844cf81e8b9b6c7c6288dc8e4562d.html.gz",
     "content_type": "text/html",
-    "etag": "\"684eec38f4792541\"",
+    "etag": "\"48fc42b8e7fbb9c7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-175_175/index.html": {
-    "blob": "9d2b17c138058ceace2068a80a46b191ecadd8683ccd26b79ad69f4cee76b285.html.gz",
+    "blob": "d2944183aa7c428338061c6ab438492f36c47509a9a32252817af5bf8e6a28b1.html.gz",
     "content_type": "text/html",
-    "etag": "\"9d2b17c138058cea\"",
+    "etag": "\"d2944183aa7c4283\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-176_176/index.html": {
-    "blob": "a6cb3cd88cd87a0636e831dc42619c471f7f6ce223d128d4e650e16bac099188.html.gz",
+    "blob": "16e0f41722dfe5ca5f4f8831c71c3577cd647e4902854e8b9f58cfffbf7eac75.html.gz",
     "content_type": "text/html",
-    "etag": "\"a6cb3cd88cd87a06\"",
+    "etag": "\"16e0f41722dfe5ca\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-177_177/index.html": {
-    "blob": "8f52d634fe84534f24449bbaeee77cd46a47c80a136210463e4a1f02ccdde4c8.html.gz",
+    "blob": "2b9547ca4153ee2394c8535445bb3ee08da353f5d9bad3dfe80ed3c0d6db4900.html.gz",
     "content_type": "text/html",
-    "etag": "\"8f52d634fe84534f\"",
+    "etag": "\"2b9547ca4153ee23\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-178_178/index.html": {
-    "blob": "f99bcd7f77478feb4af48c74f2da4f1ae6517d3a5f149cb78fab90fd3cb503bd.html.gz",
+    "blob": "af8d9342c9de5c0176cb84fb99dc36edf6c17653a7d72b82256194fe7605bfaf.html.gz",
     "content_type": "text/html",
-    "etag": "\"f99bcd7f77478feb\"",
+    "etag": "\"af8d9342c9de5c01\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-179_179/index.html": {
-    "blob": "3ee54eaf880d61b26403bc28aca7c48cd53bf400a794f79772f91d3ac1584433.html.gz",
+    "blob": "301d9ee70c7b89dba546ee51770038d072e199bebfcc6a7ac0218372b37c052e.html.gz",
     "content_type": "text/html",
-    "etag": "\"3ee54eaf880d61b2\"",
+    "etag": "\"301d9ee70c7b89db\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-180_180/index.html": {
-    "blob": "8d7239c10c1b59cbfbcfd992d526e2a8c4f22baec88164d8b219d0b5e850d2c9.html.gz",
+    "blob": "596fe47a4ee7d52ece732adb1d2d357fc38b3ac96788d174ebdcb188ac1e81cc.html.gz",
     "content_type": "text/html",
-    "etag": "\"8d7239c10c1b59cb\"",
+    "etag": "\"596fe47a4ee7d52e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-181_181/index.html": {
-    "blob": "86e180e5404b32279a35854a1580e3018119f442758729708b84f05b24f9a652.html.gz",
+    "blob": "5445785ff31d14c7c1ec9788a433f16e6fca9b976126aa4ab9de134af8c94f4c.html.gz",
     "content_type": "text/html",
-    "etag": "\"86e180e5404b3227\"",
+    "etag": "\"5445785ff31d14c7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-182_182/index.html": {
-    "blob": "5a07fdc3039572026eb1a527d3d0e49a45f7f966b447d6f48eff787aab70dab2.html.gz",
+    "blob": "250937c3fd22d52b09ca49b956702f34bc5ec8ecf8ee85a57ef7c119b3cc1909.html.gz",
     "content_type": "text/html",
-    "etag": "\"5a07fdc303957202\"",
+    "etag": "\"250937c3fd22d52b\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-183_183/index.html": {
-    "blob": "7f2093a22b5a0f33328ee1a385e01b8705357e6d829fa919e0597a130aca0cac.html.gz",
+    "blob": "1200b0f88d8ba38727b6fa3896a06176aa44881a3ab5e3c4d12764987ceb0ca1.html.gz",
     "content_type": "text/html",
-    "etag": "\"7f2093a22b5a0f33\"",
+    "etag": "\"1200b0f88d8ba387\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-184_184/index.html": {
-    "blob": "7915fa7eec4f854c7642931f974b584408a6ca815752c74de99a16c35a5516d1.html.gz",
+    "blob": "af067906f3d544ad32ac0d8ca5d16a651a75d551f0216c69088fca798082532d.html.gz",
     "content_type": "text/html",
-    "etag": "\"7915fa7eec4f854c\"",
+    "etag": "\"af067906f3d544ad\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-185_185/index.html": {
-    "blob": "84bcda21247fca4f957c7ae0d34f770b8600379447045ae603dd0a88aee906ef.html.gz",
+    "blob": "1af8e7ecce5e104946b62ec6ca252a607ab94bd47daa8fc970712fe26b516a0b.html.gz",
     "content_type": "text/html",
-    "etag": "\"84bcda21247fca4f\"",
+    "etag": "\"1af8e7ecce5e1049\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-186_186/index.html": {
-    "blob": "ceb50d1a6108155ad4a5edea44dc5cb074f2f3d9e4f6c7dcbff06b3c187f3aaa.html.gz",
+    "blob": "b42745e2120fa2bc6bcd6529749fc9b8ec8eeb573efb00257387979a3faa0cca.html.gz",
     "content_type": "text/html",
-    "etag": "\"ceb50d1a6108155a\"",
+    "etag": "\"b42745e2120fa2bc\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-187_187/index.html": {
-    "blob": "79ba9a7653d0ddc6151373ea6eb6c5ba4405f09662a165cfb3507c62c0873bae.html.gz",
+    "blob": "8bb35c3a2d924ce849465380ec98782e9bf36ef4530d8bfbf60f7fcae96e76f4.html.gz",
     "content_type": "text/html",
-    "etag": "\"79ba9a7653d0ddc6\"",
+    "etag": "\"8bb35c3a2d924ce8\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-188_188/index.html": {
-    "blob": "7b337f82184aa56a94c79d0171018b273cb3cf4d1b16f5226ca58fd0cf82e3da.html.gz",
+    "blob": "0ddcd5010909989a8f5a52a7f110299424bf1854651b28eeb181bdfd401b0c36.html.gz",
     "content_type": "text/html",
-    "etag": "\"7b337f82184aa56a\"",
+    "etag": "\"0ddcd5010909989a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-189_189/index.html": {
-    "blob": "88c95a457f7de7b4a3880e29ff7a8e53b3568ec7feb3f9e505b380ba2efa309f.html.gz",
+    "blob": "51397537e754c34117bca92e750f2e4aa3bdbb26d9424841341fd16c3ca847de.html.gz",
     "content_type": "text/html",
-    "etag": "\"88c95a457f7de7b4\"",
+    "etag": "\"51397537e754c341\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-190_190/index.html": {
-    "blob": "18108e06212426fc4ee1f2e249f5b0462b585190caa9dab8ece21f955308e583.html.gz",
+    "blob": "da1b9e35ae305dce26cd76de4f84b4873fe992274601468ca9f1e882fc84dc27.html.gz",
     "content_type": "text/html",
-    "etag": "\"18108e06212426fc\"",
+    "etag": "\"da1b9e35ae305dce\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-191_191/index.html": {
-    "blob": "177001127205f52ee3f5b56d2af202bceecaa935165c464b78a1d883b84e83b3.html.gz",
+    "blob": "7ebd1ec4999e6e404d7ee2b503575d1526075aa169c3680a34cc513221dca1e0.html.gz",
     "content_type": "text/html",
-    "etag": "\"177001127205f52e\"",
+    "etag": "\"7ebd1ec4999e6e40\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-192_192/index.html": {
-    "blob": "08969e903cedda16f463b8293e6339db80e0650aacc37011126a132f24ce77c1.html.gz",
+    "blob": "f5f8f0cbc3381057d97a3e1eb3badfd8efc8ba595aaebef205021ee5660bf0b2.html.gz",
     "content_type": "text/html",
-    "etag": "\"08969e903cedda16\"",
+    "etag": "\"f5f8f0cbc3381057\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-193_193/index.html": {
-    "blob": "f8eeb9263aecc5066d0f572ad0a8e6c49425b7f155f92cf072a5e965cd40c77f.html.gz",
+    "blob": "665c6ffeab3d6d7cb6b3966d930a9bce847ced6e79b0a658950b3d584f40c16a.html.gz",
     "content_type": "text/html",
-    "etag": "\"f8eeb9263aecc506\"",
+    "etag": "\"665c6ffeab3d6d7c\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-194_194/index.html": {
-    "blob": "ab9c0fd46d9ffad06c5db23fde7b3cee40a4b09f9c0feb9c4007e03ed839ae5f.html.gz",
+    "blob": "22311c0817c9fd365bd18e284923dfdf7f802c8b138d346fe368881e3c22a05e.html.gz",
     "content_type": "text/html",
-    "etag": "\"ab9c0fd46d9ffad0\"",
+    "etag": "\"22311c0817c9fd36\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-195_195/index.html": {
-    "blob": "2ecdc48bcd2f207b99c3c48f9ba44c223109ead9637e86f8cb51b939474882d6.html.gz",
+    "blob": "9396ac7b7decbaa3fb3f32e2b5bd22920014fc6955abf29c3d6c1125c9172fd5.html.gz",
     "content_type": "text/html",
-    "etag": "\"2ecdc48bcd2f207b\"",
+    "etag": "\"9396ac7b7decbaa3\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-196_196/index.html": {
-    "blob": "2184ae5ed787424213ceea8185a92cda869865956cd41d604ee52c6eecc8c54d.html.gz",
+    "blob": "5e7efedbc2c0b3967e2b4b990dfdee93b533f9d2fcc6871d9a40363e05bc95d8.html.gz",
     "content_type": "text/html",
-    "etag": "\"2184ae5ed7874242\"",
+    "etag": "\"5e7efedbc2c0b396\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-197_197/index.html": {
-    "blob": "4d084cf00d26b11d1dc92ac32120d274142abd196d6f911e474e38bfdd45464a.html.gz",
+    "blob": "f72a7c5976140547470cb23eb5ea9f34ee0f76f26db2b4bf0e1e2bbe83fa8fbf.html.gz",
     "content_type": "text/html",
-    "etag": "\"4d084cf00d26b11d\"",
+    "etag": "\"f72a7c5976140547\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-198_198/index.html": {
-    "blob": "b04b41e9b302c5f093900c9d7b1799f74a2e8ed5cbf0ea1a6c91cd457927672a.html.gz",
+    "blob": "2f036b157623476427fbd7a2a4663cdb6f84962050f57701b3171a841cc4c928.html.gz",
     "content_type": "text/html",
-    "etag": "\"b04b41e9b302c5f0\"",
+    "etag": "\"2f036b1576234764\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-199_199/index.html": {
-    "blob": "04e7cb3ad10ca3302fb273b4f887af52d1cf94ab44fddc21ad2b9fe18278824d.html.gz",
+    "blob": "d7455096e48bc9079ad76068db33b0a91da466945db0f9727329e4721b9ddce8.html.gz",
     "content_type": "text/html",
-    "etag": "\"04e7cb3ad10ca330\"",
+    "etag": "\"d7455096e48bc907\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-200_200/index.html": {
-    "blob": "6e5786fbdb0dbdf97737f72a260c23bf6f80f82e3d35bd3d54fdc2b220401081.html.gz",
+    "blob": "b377a59726dd0d27a47dec02c58e1a710d8f0ee611bca6b0ec2402778ebd8b39.html.gz",
     "content_type": "text/html",
-    "etag": "\"6e5786fbdb0dbdf9\"",
+    "etag": "\"b377a59726dd0d27\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-201_201/index.html": {
-    "blob": "db8168acef6f2d7af70599a256fd505d62324119f9f315d342e3b82e88de1f90.html.gz",
+    "blob": "ef8909abcf80f15d7bf4d849e64e76a08e34232989508d5250ef7a538a1b638f.html.gz",
     "content_type": "text/html",
-    "etag": "\"db8168acef6f2d7a\"",
+    "etag": "\"ef8909abcf80f15d\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-202_202/index.html": {
-    "blob": "d6df8367cbaf5f0c9e0b8cbe98c04e2207f250fb8fd4ab21ce2a831ed4e5d353.html.gz",
+    "blob": "9668463e5418ac12015950398d7928b71806d82383b1b3e925bd161180290062.html.gz",
     "content_type": "text/html",
-    "etag": "\"d6df8367cbaf5f0c\"",
+    "etag": "\"9668463e5418ac12\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-203_203/index.html": {
-    "blob": "54500efc07c806ef43f745d6c60b317c38baac45ad352a277b064be1a26e576f.html.gz",
+    "blob": "74219871a389696ad2bb4d8b6f99255057a39279a7113e33090be0336302b4a7.html.gz",
     "content_type": "text/html",
-    "etag": "\"54500efc07c806ef\"",
+    "etag": "\"74219871a389696a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-204_204/index.html": {
-    "blob": "e2fc5d5727baa4c2cb50ce5e3984fcdb237411933919d62a09267b2a9b3ed42a.html.gz",
+    "blob": "2ce0551012c3db323b951cc57152caddbefff83becddc02e1734906015b676eb.html.gz",
     "content_type": "text/html",
-    "etag": "\"e2fc5d5727baa4c2\"",
+    "etag": "\"2ce0551012c3db32\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-205_205/index.html": {
-    "blob": "b214bf5b4d1a6f70195feee4e0a4cff5e9b06691605f08eeac76247361d8d8f0.html.gz",
+    "blob": "01d8d1963589cc848ee6d27291335c389b3b1963af3253db49a7c251ba42f876.html.gz",
     "content_type": "text/html",
-    "etag": "\"b214bf5b4d1a6f70\"",
+    "etag": "\"01d8d1963589cc84\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-206_206/index.html": {
-    "blob": "7f6bbe2647e3c31c0445841123d177332d69264f8dd1c3b8fa2d2b81f3d38778.html.gz",
+    "blob": "0bce0fc98c7a52bda455b283dd11c7966dea3bcb25f6dd9be0b65c7a8802b2b2.html.gz",
     "content_type": "text/html",
-    "etag": "\"7f6bbe2647e3c31c\"",
+    "etag": "\"0bce0fc98c7a52bd\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-207_207/index.html": {
-    "blob": "8c4f5b5510d776bc87e294bdffc526ebe3ddf52cfbd238a635187fc1227bd5fe.html.gz",
+    "blob": "4ee6167b9032a17a91e2696cbe2651f59f95331dc2029de158d12a47be557b03.html.gz",
     "content_type": "text/html",
-    "etag": "\"8c4f5b5510d776bc\"",
+    "etag": "\"4ee6167b9032a17a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-208_208/index.html": {
-    "blob": "24caac6b146867c22a5c10851ee0777a6da624b2496e16ca2eb5193e59ca78a6.html.gz",
+    "blob": "b90c069e151f5b8ed8d638307f7bb7031488ebb3d1f8c4da756eb1fe57ef02df.html.gz",
     "content_type": "text/html",
-    "etag": "\"24caac6b146867c2\"",
+    "etag": "\"b90c069e151f5b8e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-209_209/index.html": {
-    "blob": "d81ba503c6c958e8a4f0445956d01a3f9aea79202f6081ee6b77f1b06cd52512.html.gz",
+    "blob": "4c355b3d42b05b183649883e0a81c8cd6643202c75ce048c85c5f4e10ce4ffdc.html.gz",
     "content_type": "text/html",
-    "etag": "\"d81ba503c6c958e8\"",
+    "etag": "\"4c355b3d42b05b18\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-210_210/index.html": {
-    "blob": "51d5f9c7c7735ff6b92630c6a7082b33a3c5e96b19398f89667f7a327d07037a.html.gz",
+    "blob": "75301756d1a1184344efe6c8e919c1f56d97398c1ece11f0b0af82e62d307c51.html.gz",
     "content_type": "text/html",
-    "etag": "\"51d5f9c7c7735ff6\"",
+    "etag": "\"75301756d1a11843\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-211_211/index.html": {
-    "blob": "2689de148c43281efffb65556a6134e08834eaf9e24cbb19d6d5659d3556a72e.html.gz",
+    "blob": "f8eba0b0fdc89ddf2fd3affc52ee07435ec97b0ee87628969bd3cc7df124a0ee.html.gz",
     "content_type": "text/html",
-    "etag": "\"2689de148c43281e\"",
+    "etag": "\"f8eba0b0fdc89ddf\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-212_212/index.html": {
-    "blob": "9540f435d4ebdf4b8e92ae465b49bb5f37ae0f89b02795bea73c07fc1ba20020.html.gz",
+    "blob": "eb30af9a9123879136956a98620ed678fe856856a220635c0885d1b46388ca00.html.gz",
     "content_type": "text/html",
-    "etag": "\"9540f435d4ebdf4b\"",
+    "etag": "\"eb30af9a91238791\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-213_213/index.html": {
-    "blob": "b676b3c3ce20a96a28887f72c7beaa5ffd73b47048dea461e8fc6207f0e4912a.html.gz",
+    "blob": "af127a2d69b17df0b55d04c395a194dbcc41c73f6db6e7915a968ae2c469a873.html.gz",
     "content_type": "text/html",
-    "etag": "\"b676b3c3ce20a96a\"",
+    "etag": "\"af127a2d69b17df0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-214_214/index.html": {
-    "blob": "8a73f0c184f726469b24cb646f9f5f8a18d0cf83ea6155f12e191d0da1c3c7c9.html.gz",
+    "blob": "3c2b2b3a52d9ef81779745190ebedc72c17cf2b87d59584e1ee6de27cc824fd5.html.gz",
     "content_type": "text/html",
-    "etag": "\"8a73f0c184f72646\"",
+    "etag": "\"3c2b2b3a52d9ef81\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-215_215/index.html": {
-    "blob": "018078595c6963d1ebbeeabdc34583fff185517119ab6613729134695639273f.html.gz",
+    "blob": "ca13c600df64dd886e750aaf3b986f6a13343cfc4126820193ee4a62b0bb0847.html.gz",
     "content_type": "text/html",
-    "etag": "\"018078595c6963d1\"",
+    "etag": "\"ca13c600df64dd88\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-216_216/index.html": {
-    "blob": "25a44102d5877df2e1237d949a7735366a82c690257cc2f3ea988aafe09be719.html.gz",
+    "blob": "c0cf49098eb48dadf838eee5b92c1cba275825506c4a29df01eff68298b6b8bc.html.gz",
     "content_type": "text/html",
-    "etag": "\"25a44102d5877df2\"",
+    "etag": "\"c0cf49098eb48dad\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-217_217/index.html": {
-    "blob": "bc6d0861bd7ef28627e48bef98b9c199c4646767f845b9f15f2c058d112fe633.html.gz",
+    "blob": "c0bc6060475d74e6cfdd40a73c7abdfbda4c99246445cf7ac4464ebbce547ead.html.gz",
     "content_type": "text/html",
-    "etag": "\"bc6d0861bd7ef286\"",
+    "etag": "\"c0bc6060475d74e6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-218_218/index.html": {
-    "blob": "2f0e3979d77abc831fac59b66754e0b8865387481b9c92edb9ef0681a690746a.html.gz",
+    "blob": "5b3e0db91dfe50a0a7874ebb6ce754e4f148672af8bd59c51f56c81a3b98ad10.html.gz",
     "content_type": "text/html",
-    "etag": "\"2f0e3979d77abc83\"",
+    "etag": "\"5b3e0db91dfe50a0\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-219_219/index.html": {
-    "blob": "67864c287f5fdafdc452a73dece643251bb0f2b9d04db02769438ebd5d0a76a9.html.gz",
+    "blob": "ba9cb59bc24ad04a81293494f66e150162698aef7056ae5cbf1f8b202852b5df.html.gz",
     "content_type": "text/html",
-    "etag": "\"67864c287f5fdafd\"",
+    "etag": "\"ba9cb59bc24ad04a\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-220_220/index.html": {
-    "blob": "58ac12ae5fb1a7cc218dff5b1f55d66b288a2a03f92f986a8ee1f4cf04936d54.html.gz",
+    "blob": "fcf3f194437593c2cad4cb44e9700f9cf140effee5e82d030b0924ccfeb4da38.html.gz",
     "content_type": "text/html",
-    "etag": "\"58ac12ae5fb1a7cc\"",
+    "etag": "\"fcf3f194437593c2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-221_221/index.html": {
-    "blob": "ed37abd66e97933d428dbc403fddcd6ff3ffaa6b2635df575f84cc92a6cacc6b.html.gz",
+    "blob": "ee97069bdd30c8656649d56948d9bfed24d6d91a66d7c8cc788734e59dc41a43.html.gz",
     "content_type": "text/html",
-    "etag": "\"ed37abd66e97933d\"",
+    "etag": "\"ee97069bdd30c865\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-222_222/index.html": {
-    "blob": "b3f6f1f9ae510aada28b6c9f0dae65bce83e09685a272ddb29450e5a0f105c72.html.gz",
+    "blob": "5c5a1b74d26310bc55aec0b10f39cccf658e16a6055ffb6c402161b8527d93f5.html.gz",
     "content_type": "text/html",
-    "etag": "\"b3f6f1f9ae510aad\"",
+    "etag": "\"5c5a1b74d26310bc\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-223_223/index.html": {
-    "blob": "ccaa49ed6fcd41e313564c8ffb68d59693f2897187d5cd3ea951b8ece7cee66e.html.gz",
+    "blob": "1712d85916c79018749ea858e76de30771ed087606bff92f4feb9bb94f98ad99.html.gz",
     "content_type": "text/html",
-    "etag": "\"ccaa49ed6fcd41e3\"",
+    "etag": "\"1712d85916c79018\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-224_224/index.html": {
-    "blob": "b25773534e42a7f848591ba36e15935b05999bdd479159cce7b7b0121f543e1a.html.gz",
+    "blob": "2d9825d9454f0f6e8f7d82373d4cd26924f3b163f327a97c06787fcad36658ad.html.gz",
     "content_type": "text/html",
-    "etag": "\"b25773534e42a7f8\"",
+    "etag": "\"2d9825d9454f0f6e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-225_225/index.html": {
-    "blob": "5f66fe8bbb59e23d8d0598c0e95e2f7c32766416872939556ff85a1ef54de5ef.html.gz",
+    "blob": "8748c754a6c3d3aec2b87b3acc1b02e962fd3c09359cc446908475f5f03db0cd.html.gz",
     "content_type": "text/html",
-    "etag": "\"5f66fe8bbb59e23d\"",
+    "etag": "\"8748c754a6c3d3ae\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-226_226/index.html": {
-    "blob": "8af28c411f178e36f431673367447aa055d321b5e4a64697bd0c619ac6000201.html.gz",
+    "blob": "9463697454669289e0dd517b939573dd2d1d521b2506bb9279a252e8af2dcab5.html.gz",
     "content_type": "text/html",
-    "etag": "\"8af28c411f178e36\"",
+    "etag": "\"9463697454669289\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-227_227/index.html": {
-    "blob": "026c171b6a05bfca06e4e5d485183ec239908111ad2015ad26eec633c6db566c.html.gz",
+    "blob": "56307e91a69a746eae57e989057e79689a1e0e0dc41fe377dc456c0be8372f83.html.gz",
     "content_type": "text/html",
-    "etag": "\"026c171b6a05bfca\"",
+    "etag": "\"56307e91a69a746e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-228_228/index.html": {
-    "blob": "e25ad514b963f1e1fec62a7a27fcedea7e02bec0125f401bb6c50df84a7c9689.html.gz",
+    "blob": "fee4ee8355933ebdebbdd4f4797dd73e0672a4623652cf7f5a8830c5107ffeb5.html.gz",
     "content_type": "text/html",
-    "etag": "\"e25ad514b963f1e1\"",
+    "etag": "\"fee4ee8355933ebd\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-229_229/index.html": {
-    "blob": "ffec5879e26c88e59a7367a41470b006e597393c414ee4a147f2abe363a06c53.html.gz",
+    "blob": "2f4ad3e39d67523421722960f9abb7ae4f9f53a6c62e1f0aa0652324a02b1965.html.gz",
     "content_type": "text/html",
-    "etag": "\"ffec5879e26c88e5\"",
+    "etag": "\"2f4ad3e39d675234\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-230_230/index.html": {
-    "blob": "570f45b9d1bcaa0499fae6655a73ad95aea70addc7f5e07ca0cf0595f72888bb.html.gz",
+    "blob": "ebe3340f31ede5aa7783993c3acb70df0069d2d4c6256dd1c067bb1202be8cc5.html.gz",
     "content_type": "text/html",
-    "etag": "\"570f45b9d1bcaa04\"",
+    "etag": "\"ebe3340f31ede5aa\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-231_231/index.html": {
-    "blob": "6164a056504c5903377d1ecf5b45153e00facdcb7e7c7755ebeb40069f4e9203.html.gz",
+    "blob": "b06c4083f4bbf9f61bf56f63a472b881284ce62a106d48e790b012ca2ab783cc.html.gz",
     "content_type": "text/html",
-    "etag": "\"6164a056504c5903\"",
+    "etag": "\"b06c4083f4bbf9f6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-232_232/index.html": {
-    "blob": "ba2018cef0c40f53ee210d87d2026a577187faba40929144755df8dba63ea72e.html.gz",
+    "blob": "de469b006af640b6c1617a4048fbbacd3b61943ec57cd6f00850bc4e53bc1956.html.gz",
     "content_type": "text/html",
-    "etag": "\"ba2018cef0c40f53\"",
+    "etag": "\"de469b006af640b6\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-233_233/index.html": {
-    "blob": "a61effebb42b03b393eb08eb6a9d12f959c8deca35bb21e44056ddb736287ef6.html.gz",
+    "blob": "e85225101b210568637c504b9c36ef4cfd8464dfcedc41c5c5f437c7661bac37.html.gz",
     "content_type": "text/html",
-    "etag": "\"a61effebb42b03b3\"",
+    "etag": "\"e85225101b210568\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-234_234/index.html": {
-    "blob": "2d1ae1ca1943852630f4c487a32b4c17ffacf369440af00c78036231649d375e.html.gz",
+    "blob": "3a583558a51479bc571bc69c1bbf957c709bb6cf47a4301695bf262939198057.html.gz",
     "content_type": "text/html",
-    "etag": "\"2d1ae1ca19438526\"",
+    "etag": "\"3a583558a51479bc\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-235_235/index.html": {
-    "blob": "d5bb18d061a185c1750dc765b02d0dcc39fadb22b962c7920d60e0487cd2c6e5.html.gz",
+    "blob": "72d97a2ea86f3903ad6d199d253ab12e7cd4cef4249903cfa9a3b6548cb10b40.html.gz",
     "content_type": "text/html",
-    "etag": "\"d5bb18d061a185c1\"",
+    "etag": "\"72d97a2ea86f3903\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-236_236/index.html": {
-    "blob": "824515a0661729d87fef15a9ec0700bc70220fb2d3beeabda6f9e48723112054.html.gz",
+    "blob": "0bb30d8ca546a5c7e55c98e9ac136eaf62ee93f264868fa6e89dab3bae3136ed.html.gz",
     "content_type": "text/html",
-    "etag": "\"824515a0661729d8\"",
+    "etag": "\"0bb30d8ca546a5c7\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-237_237/index.html": {
-    "blob": "063284ff2477f0f5d876ca8498a96058746a57a447c64f96020461ab2c80cc70.html.gz",
+    "blob": "4e4561fc4f5d6748d749f545a2a76b41f5f36db69dd0e9bda3388f1bdfe35603.html.gz",
     "content_type": "text/html",
-    "etag": "\"063284ff2477f0f5\"",
+    "etag": "\"4e4561fc4f5d6748\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-238_238/index.html": {
-    "blob": "f4adab51d04df51774d42c282d9ee04e04134ee353d3134cebf36c2afede356f.html.gz",
+    "blob": "44d81c2438edba1f561144be2e7a28d1ffb9a75d9d15d4d52f080155f6580982.html.gz",
     "content_type": "text/html",
-    "etag": "\"f4adab51d04df517\"",
+    "etag": "\"44d81c2438edba1f\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-239_239/index.html": {
-    "blob": "9ee494d6e74910c3b250bb7e28b43468df4986dea13fb28115c92ec5c5ad0b3e.html.gz",
+    "blob": "b0bdf0f1604caf8eb6af778da4387aca96b4a31811570c3260fd567e8101c3c2.html.gz",
     "content_type": "text/html",
-    "etag": "\"9ee494d6e74910c3\"",
+    "etag": "\"b0bdf0f1604caf8e\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
   "/catalogue/book-240_240/index.html": {
-    "blob": "66325d7952795c14144ce2d5f22cfb1bfa7139df79e7ba4fdb4f2d3383f4422f.html.gz",
+    "blob": "e61a789b6cb4c7a25f4c311dce65e6f2cfce8aced9a351d2021476131d1fabf3.html.gz",
     "content_type": "text/html",
-    "etag": "\"66325d7952795c14\"",
+    "etag": "\"e61a789b6cb4c7a2\"",
     "http_status": 200,
     "last_modified": "Mon, 20 Jul 2026 00:00:00 GMT"
   },
