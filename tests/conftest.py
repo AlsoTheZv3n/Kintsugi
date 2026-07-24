@@ -66,3 +66,12 @@ def _no_network(request: pytest.FixtureRequest, monkeypatch: pytest.MonkeyPatch)
     monkeypatch.setattr(socket.socket, "connect", guarded_connect)
     monkeypatch.setattr(socket.socket, "connect_ex", guarded_connect_ex)
     yield
+
+
+@pytest.fixture(scope="session")
+def books_fixture_base_url() -> Iterator[str]:
+    """Basis-URL des lokalen books-Corpus-Servers (127.0.0.1, ephemerer Port)."""
+    from tests.fixture_server import FixtureServer
+
+    with FixtureServer() as server:
+        yield server.base_url

@@ -39,8 +39,19 @@ __all__ = [
     "capture_corpus",
     "capture_golden",
     "guard_domain",
+    "label_dirname",
     "write_index",
 ]
+
+
+def label_dirname(label: str) -> str:
+    """Dateisystem-sicherer Verzeichnisname fuer ein Label.
+
+    Windows verbietet ``:`` in Pfaden, das echte Label ``edge:<slug>`` kann also
+    nicht direkt Verzeichnis sein. Das wahre Label bleibt in ``meta.json`` unter
+    ``golden_label`` erhalten; nur der Ordnername wird entschaerft.
+    """
+    return label.replace(":", "__")
 
 ALLOWLIST = frozenset({"books.toscrape.com", "quotes.toscrape.com", "scrapethissite.com"})
 # webscraper.io ist bewusst NICHT freigeschaltet: robots.txt verbietet den
@@ -92,7 +103,7 @@ def capture_golden(
     guard_domain(domain)
     result = fetcher.fetch(url)
     body = result.body
-    dest = root / domain / entity / "golden" / label
+    dest = root / domain / entity / "golden" / label_dirname(label)
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "page.html.gz").write_bytes(gzip.compress(body, mtime=0))
     meta = FixtureMeta(

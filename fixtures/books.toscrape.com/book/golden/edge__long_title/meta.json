@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-long-title_9001/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "28f73a0a076a2deea7d7debae4da992385ba664104f486dfca9efd407d52f717",
+  "byte_size": 640,
+  "fetcher": "httpx",
+  "golden_label": "edge:long_title",
+  "synthetic": false,
+  "derived_from": null,
+  "edit": null
+}
