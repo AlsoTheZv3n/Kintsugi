@@ -205,14 +205,12 @@ def sources() -> None:
             .where(site_pack.c.status == "active")
             .order_by(site_pack.c.domain, site_pack.c.entity)
         ).all()
-        counts: dict[str, int] = {
-            entity: count
-            for entity, count in conn.execute(
-                select(record.c.entity, func.count())
-                .where(record.c.valid_to.is_(None))
-                .group_by(record.c.entity)
-            ).all()
-        }
+        count_rows = conn.execute(
+            select(record.c.entity, func.count().label("n"))
+            .where(record.c.valid_to.is_(None))
+            .group_by(record.c.entity)
+        ).all()
+        counts: dict[str, int] = {row.entity: row.n for row in count_rows}
     if not rows:
         typer.echo("keine aktiven Packs.")
         return
