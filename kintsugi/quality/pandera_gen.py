@@ -86,7 +86,7 @@ def schema_from_sitepack(pack: SitePack, *, median_14d: int | None = None) -> pa
     )
 
 
-def _row_count(data: Any) -> int:
+def _row_count(data: pa.PolarsData) -> int:
     return int(data.lazyframe.select(pl.len()).collect().item())
 
 
@@ -108,14 +108,14 @@ def _frame_checks(pack: SitePack, median_14d: int | None) -> list[pa.Check]:
 
     min_rows = quality.min_rows_per_run
 
-    def _check_min_rows(data: Any) -> bool:
+    def _check_min_rows(data: pa.PolarsData) -> bool:
         return _row_count(data) >= min_rows
 
     checks.append(pa.Check(_check_min_rows, name="min_rows_per_run"))
 
     max_dup = quality.max_duplicate_rate
 
-    def _check_duplicates(data: Any) -> bool:
+    def _check_duplicates(data: pa.PolarsData) -> bool:
         total = _row_count(data)
         if total == 0:
             return True
@@ -126,7 +126,7 @@ def _frame_checks(pack: SitePack, median_14d: int | None) -> list[pa.Check]:
 
     max_range = quality.max_range_violation_rate
 
-    def _check_range_rate(data: Any) -> bool:
+    def _check_range_rate(data: pa.PolarsData) -> bool:
         total = _row_count(data)
         if total == 0 or not range_fields:
             return True
@@ -144,7 +144,7 @@ def _frame_checks(pack: SitePack, median_14d: int | None) -> list[pa.Check]:
         limit = quality.row_count_deviation
         median = median_14d
 
-        def _check_deviation(data: Any) -> bool:
+        def _check_deviation(data: pa.PolarsData) -> bool:
             return abs(_row_count(data) - median) / median <= limit
 
         checks.append(pa.Check(_check_deviation, name="row_count_deviation"))
