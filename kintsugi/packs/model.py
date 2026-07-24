@@ -81,6 +81,11 @@ class FetchSpec(_Model):
     browser: BrowserSpec | None = None
 
 
+# Ein benannter Alias, damit die Discovery-Registry (kintsugi/discovery) und das
+# Pack-Schema aus derselben Quelle lesen und nie auseinanderdriften koennen.
+DiscoveryStrategyName = Literal["sitemap", "pagination", "seed_list", "api"]
+
+
 class DiscoverySpec(_Model):
     """Woher die URLs kommen. Getrennt vom Fetch, weil separat heilbar.
 
@@ -89,7 +94,7 @@ class DiscoverySpec(_Model):
     und ``{n}``-Platzhalter — die Phase-0-DoD haengt daran.
     """
 
-    strategy: Literal["sitemap", "pagination", "seed_list", "api"]
+    strategy: DiscoveryStrategyName
     sitemap_url: str | None = None
     url_template: str | None = None
     page_start: int = 1
