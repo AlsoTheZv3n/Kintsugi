@@ -54,9 +54,7 @@ def test_embedded_json_braucht_locator():
 
 def test_embedded_json_akzeptiert_js_var():
     """F5: quotes.toscrape.com/js legt Daten als var-Zuweisung ohne id ab."""
-    spec = ExtractSpec.model_validate(
-        {"sources": [{"kind": "embedded_json", "js_var": "data"}]}
-    )
+    spec = ExtractSpec.model_validate({"sources": [{"kind": "embedded_json", "js_var": "data"}]})
     assert spec.sources[0].js_var == "data"
 
 

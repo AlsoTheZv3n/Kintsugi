@@ -59,9 +59,7 @@ def _try_selector(tree: LexborHTMLParser, selector: str, key_path: str) -> list[
     try:
         tree.css(selector)
     except Exception as exc:  # selectolax: SelectolaxError bei ungueltigem Selektor
-        return [
-            Finding("selector_parse", "error", key_path, f"Selektor parst nicht: {exc}")
-        ]
+        return [Finding("selector_parse", "error", key_path, f"Selektor parst nicht: {exc}")]
     return []
 
 

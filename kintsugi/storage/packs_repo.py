@@ -108,8 +108,6 @@ def get_active(conn: Connection, domain: str, entity: str) -> Row[Any] | None:
 def list_packs(conn: Connection) -> list[Row[Any]]:
     return list(
         conn.execute(
-            select(site_pack).order_by(
-                site_pack.c.domain, site_pack.c.entity, site_pack.c.version
-            )
+            select(site_pack).order_by(site_pack.c.domain, site_pack.c.entity, site_pack.c.version)
         ).all()
     )

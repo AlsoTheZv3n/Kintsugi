@@ -55,8 +55,7 @@ def check_domain(domain: str) -> None:
     for label in _normalise(domain).split("."):
         if label in DENIED_BRANDS:
             raise DeniedTargetError(
-                f"Domain {domain!r} steht auf der docs/07-'Nicht anfassen'-Liste "
-                f"(Marke {label!r})"
+                f"Domain {domain!r} steht auf der docs/07-'Nicht anfassen'-Liste (Marke {label!r})"
             )
 
 

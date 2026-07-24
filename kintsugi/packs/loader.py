@@ -77,9 +77,7 @@ def load_packs(root: Path | None = None) -> list[SitePack]:
             )
         key = (pack.domain, pack.entity)
         if key in seen:
-            raise PackLoadError(
-                f"Doppeltes (domain, entity) {key}: {seen[key]} und {path}"
-            )
+            raise PackLoadError(f"Doppeltes (domain, entity) {key}: {seen[key]} und {path}")
         seen[key] = path
         packs.append(pack)
     return packs
