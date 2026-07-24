@@ -67,11 +67,15 @@ def test_walk_erreicht_mindestens_240_detailseiten():
 
 
 def test_golden_kanten_nicht_ascii_und_out_of_stock():
-    metas = {
-        json.loads((d / "meta.json").read_text(encoding="utf-8"))["golden_label"]: d
-        for d in (BOOK / "golden").iterdir()
-        if d.is_dir()
-    }
+    metas = {}
+    for d in (BOOK / "golden").iterdir():
+        if not d.is_dir():
+            continue
+        meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
+        # baseline traegt das aeltere CssExtractor-Format (Key 'label'); die
+        # FixtureMeta-Kanten tragen 'golden_label'.
+        if "golden_label" in meta:
+            metas[meta["golden_label"]] = d
     # Mindestens ein Golden-Titel traegt ein Nicht-ASCII-Zeichen.
     import gzip
 

@@ -101,6 +101,8 @@ class DiscoverySpec(_Model):
     page_stop: int | None = None
     seeds: list[str] = Field(default_factory=list)
     url_pattern: str | None = None
+    # CSS-Selektor der Produktlinks auf einer Index-Seite (nur pagination).
+    link_selector: str | None = None
     max_urls_per_run: int = Field(default=1000, ge=1)
 
     @field_validator("url_pattern")

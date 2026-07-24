@@ -231,6 +231,18 @@
       "additionalProperties": false,
       "description": "Woher die URLs kommen. Getrennt vom Fetch, weil separat heilbar.\n\nF1: books.toscrape.com hat keine sitemap.xml (HTTP 404), deshalb ist\n``pagination`` eine vollwertige, erststufige Strategie mit ``url_template``\nund ``{n}``-Platzhalter — die Phase-0-DoD haengt daran.",
       "properties": {
+        "link_selector": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Link Selector"
+        },
         "max_urls_per_run": {
           "default": 1000,
           "minimum": 1,

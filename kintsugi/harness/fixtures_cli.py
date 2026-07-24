@@ -27,6 +27,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 from urllib.parse import urlsplit
 
+from pydantic import ValidationError
+
 from kintsugi.harness.fixture_model import FixtureMeta
 
 if TYPE_CHECKING:
@@ -52,6 +54,7 @@ def label_dirname(label: str) -> str:
     ``golden_label`` erhalten; nur der Ordnername wird entschaerft.
     """
     return label.replace(":", "__")
+
 
 ALLOWLIST = frozenset({"books.toscrape.com", "quotes.toscrape.com", "scrapethissite.com"})
 # webscraper.io ist bewusst NICHT freigeschaltet: robots.txt verbietet den
@@ -176,7 +179,12 @@ def build_index(root: Path) -> dict[str, object]:
             rel = meta_path.parent.relative_to(root)
             if _is_exempt_dir(rel):
                 continue
-            meta = FixtureMeta.model_validate_json(meta_path.read_text(encoding="utf-8"))
+            try:
+                meta = FixtureMeta.model_validate_json(meta_path.read_text(encoding="utf-8"))
+            except ValidationError:
+                # Fremdes Golden-Format (z. B. der CssExtractor-Baseline mit
+                # 'expected'-Block) — nicht von diesem Index verwaltet.
+                continue
             golden[rel.as_posix()] = {
                 "content_hash": meta.content_hash,
                 "byte_size": meta.byte_size,

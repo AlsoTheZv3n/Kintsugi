@@ -5,9 +5,10 @@ hat keine ``sitemap.xml`` (HTTP 404), also weicht das Pack auf ``pagination`` au
 — aber ``sitemap`` muss ein gueltiges Literal bleiben, das zur Laufzeit **laut**
 mit Phasennennung scheitert, statt in einen opaken ``KeyError`` zu kippen.
 
-``pagination`` ist hier nur ein Platzhalter, damit die Registry in Phase 0
-bereits alle vier Literale traegt; ``kintsugi/discovery/pagination.py`` (I0.9.5)
-ersetzt ihn durch die echte Strategie, sobald das Paket es zuletzt importiert.
+``pagination`` ist die einzige in Phase 0 implementierte Strategie und wird von
+``kintsugi/discovery/pagination.py`` (I0.9.5) registriert — sie steht deshalb
+nicht hier. Jede Strategie wird genau einmal registriert, die Import-Reihenfolge
+im Paket ist also bedeutungslos.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from kintsugi.discovery.base import DiscoveryContext, register
 if TYPE_CHECKING:
     from kintsugi.packs.model import SitePack
 
-__all__ = ["ApiDiscovery", "PaginationStub", "SitemapDiscovery"]
+__all__ = ["ApiDiscovery", "SitemapDiscovery"]
 
 
 @register("sitemap")
@@ -42,15 +43,4 @@ class ApiDiscovery:
         raise NotImplementedError(
             "discovery.strategy 'api' ist erst ab Phase 5 implementiert "
             "(docs/08, 'Stufe-3-Ziele mit API-Gegenprobe')."
-        )
-
-
-@register("pagination")
-class PaginationStub:
-    """Phase-0-Platzhalter; von I0.9.5 (pagination.py) ersetzt."""
-
-    def discover(self, pack: SitePack, ctx: DiscoveryContext) -> Iterator[str]:
-        raise NotImplementedError(
-            "discovery.strategy 'pagination' wird von kintsugi/discovery/"
-            "pagination.py (I0.9.5, Phase 0) bereitgestellt."
         )

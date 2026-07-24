@@ -148,17 +148,9 @@ def main() -> None:
     )
 
     # Golden-Kanten (ausserhalb des page-{n}-Walks, sie zaehlen also nie mit).
+    # 'baseline' gehoert dem CssExtractor-Test (I0.8.1, eigenes meta-Format mit
+    # 'expected') und wird hier bewusst NICHT ueberschrieben.
     base = "https://books.toscrape.com/catalogue"
-    _write_golden(
-        "baseline",
-        _detail_html(
-            title="A Light in the Attic",
-            price="51.77",
-            upc=_upc("baseline"),
-            availability="In stock (22 available)",
-        ).encode(),
-        {"url": f"{base}/a-light-in-the-attic_1000/index.html"},
-    )
     _write_golden(
         "edge:long_title",
         _detail_html(

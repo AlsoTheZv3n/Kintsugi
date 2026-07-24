@@ -22,6 +22,7 @@ discovery:
   page_start: 1
   page_stop: 50
   url_pattern: '^https://books\.toscrape\.com/catalogue/[^/]+/index\.html$'
+  link_selector: 'article.product_pod h3 a'
   max_urls_per_run: 1000
 
 fetch:

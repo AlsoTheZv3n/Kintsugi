@@ -5,10 +5,6 @@
     "books.toscrape.com/book/corpus/"
   ],
   "golden": {
-    "books.toscrape.com/book/golden/baseline": {
-      "content_hash": "578da66ef1dbc135f9ff14a140c5f974b038d77888a172f470f4c3e7aca457b9",
-      "byte_size": 511
-    },
     "books.toscrape.com/book/golden/edge__empty_index": {
       "content_hash": "6b73ded6d9192c11c1d91654e4877cc07eaea6c27d6235f23c3e1263f832c632",
       "byte_size": 233
