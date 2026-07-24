@@ -24,10 +24,13 @@ if TYPE_CHECKING:
 
 __all__ = ["schema_from_sitepack"]
 
-# polars-Dtypes, gegen die pandera die Spalte prueft (ADR-011).
+# polars-Dtypes, gegen die pandera die Spalte prueft (ADR-011). ``decimal`` faellt
+# bewusst auf ``Float64``: polars' Decimal-Dtype ist auf Precision/Scale streng und
+# machte die Schema-Validierung gegen echte extrahierte Werte bruechig — fuer die
+# Bereichs- und Enum-Qualitaetspruefungen genuegt Float64.
 _DTYPE: dict[str, Any] = {
     "string": pl.Utf8,
-    "decimal": pl.Decimal,
+    "decimal": pl.Float64,
     "integer": pl.Int64,
     "boolean": pl.Boolean,
     "datetime": pl.Datetime,
@@ -35,14 +38,18 @@ _DTYPE: dict[str, Any] = {
 
 
 def _column_checks(fschema: object) -> list[pa.Check]:
+    """Harte Zeilen-Checks: Enum und Pattern.
+
+    ``sane_range`` steht **nicht** hier: docs/04 toleriert „Bereichsverletzungen
+    ueber 5 % der Zeilen" — eine harte Spaltenpruefung liesse aber schon eine
+    einzige Verletzung durchfallen und machte die 5%-Frame-Schwelle (I1.2.2)
+    unerreichbar. Der Bereich wird deshalb ausschliesslich als
+    ``max_range_violation_rate``-Frame-Check ausgewertet.
+    """
     checks: list[pa.Check] = []
     enum = getattr(fschema, "enum", None)
     if enum is not None:
         checks.append(pa.Check.isin(list(enum), name="enum"))
-    sane_range = getattr(fschema, "sane_range", None)
-    if sane_range is not None:
-        lo, hi = sane_range
-        checks.append(pa.Check.in_range(lo, hi, name="sane_range"))
     pattern = getattr(fschema, "pattern", None)
     if pattern is not None:
         checks.append(pa.Check.str_matches(pattern, name="pattern"))
@@ -67,14 +74,79 @@ def schema_from_sitepack(pack: SitePack, *, median_14d: int | None = None) -> pa
             nullable=nullable,
         )
 
+    # Kein pandera-``unique=``: dessen String-Failure-Cases kollidieren beim
+    # Concat mit den Bool-Failure-Cases der Frame-Checks (pandera.polars-Limit),
+    # und strikte Eindeutigkeit widerspraeche der 2%-Duplikat-Toleranz. Die
+    # Natural-Key-Eindeutigkeit traegt der ``max_duplicate_rate``-Frame-Check; die
+    # echte Garantie ist ohnehin der DB-Index ``record_current`` (docs/03).
     return pa.DataFrameSchema(
         columns,
         checks=_frame_checks(pack, median_14d),
-        unique=list(schema.natural_key),  # Frame-Level-Eindeutigkeit des Natural Key
         strict=False,
     )
 
 
+def _row_count(data: Any) -> int:
+    return int(data.lazyframe.select(pl.len()).collect().item())
+
+
 def _frame_checks(pack: SitePack, median_14d: int | None) -> list[pa.Check]:
-    """Aggregatpruefungen aus dem ``quality:``-Block (I1.2.2 fuellt das)."""
-    return []
+    """Aggregatpruefungen aus dem ``quality:``-Block (I1.2.2).
+
+    Frame-Level: sie schlagen als Frame-Fehler mit stabilem Check-Namen fehl,
+    nie als Zeilenfehler. ``row_count_deviation`` erscheint nur mit gereichtem
+    Median — bei ``median_14d=None`` fehlt der Check ganz, statt still zu bestehen.
+    """
+    quality = pack.quality
+    natural_key = list(pack.schema_.natural_key)
+    range_fields = [
+        (name, fschema.sane_range)
+        for name, fschema in pack.schema_.fields.items()
+        if fschema.sane_range is not None
+    ]
+    checks: list[pa.Check] = []
+
+    min_rows = quality.min_rows_per_run
+
+    def _check_min_rows(data: Any) -> bool:
+        return _row_count(data) >= min_rows
+
+    checks.append(pa.Check(_check_min_rows, name="min_rows_per_run"))
+
+    max_dup = quality.max_duplicate_rate
+
+    def _check_duplicates(data: Any) -> bool:
+        total = _row_count(data)
+        if total == 0:
+            return True
+        unique = int(data.lazyframe.select(natural_key).unique().select(pl.len()).collect().item())
+        return (total - unique) / total <= max_dup
+
+    checks.append(pa.Check(_check_duplicates, name="max_duplicate_rate"))
+
+    max_range = quality.max_range_violation_rate
+
+    def _check_range_rate(data: Any) -> bool:
+        total = _row_count(data)
+        if total == 0 or not range_fields:
+            return True
+        mask = pl.lit(False)
+        for name, (lo, hi) in range_fields:
+            mask = mask | (pl.col(name) < lo) | (pl.col(name) > hi)
+        violators = int(
+            data.lazyframe.select(mask.alias("_v")).select(pl.col("_v").sum()).collect().item()
+        )
+        return violators / total <= max_range
+
+    checks.append(pa.Check(_check_range_rate, name="max_range_violation_rate"))
+
+    if median_14d is not None and median_14d > 0:
+        limit = quality.row_count_deviation
+        median = median_14d
+
+        def _check_deviation(data: Any) -> bool:
+            return abs(_row_count(data) - median) / median <= limit
+
+        checks.append(pa.Check(_check_deviation, name="row_count_deviation"))
+
+    return checks

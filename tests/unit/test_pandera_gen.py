@@ -29,7 +29,10 @@ def test_upc_pattern_und_teil_der_eindeutigkeit():
     schema = _schema()
     pattern = _check(schema.columns["upc"], "pattern")
     assert pattern.statistics["pattern"] == "^[a-f0-9]{16}$"
-    assert schema.unique == ["upc"]
+    # Natural-Key-Eindeutigkeit als Frame-Check (nicht pandera-``unique=``, das mit
+    # den Bool-Frame-Checks beim Concat kollidierte); die harte Garantie ist der
+    # DB-Index record_current.
+    assert "max_duplicate_rate" in {c.name for c in schema.checks}
 
 
 def test_required_wird_nullable_false():
