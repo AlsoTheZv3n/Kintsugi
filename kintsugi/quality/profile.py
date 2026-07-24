@@ -28,7 +28,12 @@ Snapshot plattformstabil ist.
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from pydantic import BaseModel, ConfigDict, field_serializer
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 __all__ = ["QualityProfile", "RangeViolation", "RowCount"]
 
@@ -88,3 +93,46 @@ class QualityProfile(BaseModel):
     @field_serializer("duplicate_rate")
     def _ser_duplicate_rate(self, value: float) -> float:
         return _round6(value)
+
+    def iter_metrics(
+        self,
+        domain: str,
+        entity: str,
+        *,
+        duration_seconds: float = 0.0,
+        status: str = "ok",
+        fetcher: str = "httpx",
+    ) -> Iterator[tuple[str, dict[str, str], float]]:
+        """Flache Prometheus-Tupel (Name, Labels, Wert) — docs/06 §Metriken.
+
+        Der Phase-3-Exporter ist ein reiner Adapter darueber; kein
+        ``prometheus_client`` in Phase 1. ``duration`` und der Fetcher-Namensraum
+        stehen nicht im 11-Schluessel-Profil und werden hereingereicht — sonst
+        erreichten sie den Exporter nie. ``row_count_deviation`` wird bei
+        ``insufficient_baseline`` gar nicht emittiert (0.0 laese sich als „keine
+        Abweichung").
+        """
+        de = {"domain": domain, "entity": entity}
+        for field_name, rate in self.fill_rate.items():
+            yield "kintsugi_field_fill_rate", {**de, "field": field_name}, rate
+        for field_name, violation in self.range_violations.items():
+            yield (
+                "kintsugi_range_violations_total",
+                {**de, "field": field_name},
+                float(violation.count),
+            )
+        if not self.insufficient_baseline and self.row_count.deviation is not None:
+            yield "kintsugi_row_count_deviation", de, self.row_count.deviation
+        yield "kintsugi_duplicate_rate", de, self.duplicate_rate
+        yield "kintsugi_rows_extracted_total", de, float(self.rows_written)
+        yield (
+            "kintsugi_run_duration_seconds",
+            {**de, "status": status},
+            duration_seconds,
+        )
+        for http_status, count in self.http.items():
+            yield (
+                "kintsugi_pages_fetched_total",
+                {"domain": domain, "fetcher": fetcher, "http_status": http_status},
+                float(count),
+            )

@@ -140,6 +140,9 @@ def run(
     limit: Annotated[int | None, typer.Option("--limit")] = None,
     max_urls: Annotated[int | None, typer.Option("--max-urls")] = None,
     dry_run: Annotated[bool, typer.Option("--dry-run")] = False,
+    as_json: Annotated[
+        bool, typer.Option("--json", help="Qualitaetsprofil als rohes JSON")
+    ] = False,
 ) -> None:
     """Fuehrt einen Lauf fuer die angegebene Domain aus.
 
@@ -164,6 +167,21 @@ def run(
         f"rows_valid={c.rows_valid} rows_inserted={c.rows_inserted} "
         f"rows_versioned={c.rows_versioned} rows_unchanged={c.rows_unchanged}"
     )
+    if result.profile is not None:
+        if as_json:
+            typer.echo(result.profile.model_dump_json(indent=2))
+        else:
+            prof = result.profile
+            typer.echo("  Qualitaetsprofil:")
+            for field_name, rate in sorted(prof.fill_rate.items()):
+                typer.echo(f"    fill_rate {field_name}: {rate:.4f}")
+            typer.echo(f"    duplicate_rate: {prof.duplicate_rate:.4f}")
+            typer.echo(
+                f"    row_count: actual={prof.row_count.actual} "
+                f"median_14d={prof.row_count.median_14d}"
+            )
+            if prof.enum_violations:
+                typer.echo(f"    enum_violations: {prof.enum_violations}")
     if result.status == "failed":
         typer.echo(f"FAILED: {result.error}", err=True)
         raise typer.Exit(1)

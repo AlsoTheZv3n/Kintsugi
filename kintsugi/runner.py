@@ -44,6 +44,9 @@ from kintsugi.fetch.ratelimit import DomainLimiter
 from kintsugi.fetch.robots import RobotsDenied
 from kintsugi.packs.model import SitePack
 from kintsugi.quality.counters import RunCounters
+from kintsugi.quality.history import load_history
+from kintsugi.quality.metrics import FetchStats, compute_profile, triggers
+from kintsugi.quality.profile import QualityProfile
 from kintsugi.storage.db import get_engine
 from kintsugi.storage.records import RecordRow, touch_last_seen, write_records
 from kintsugi.storage.snapshot_repo import save_snapshot
@@ -59,7 +62,7 @@ if TYPE_CHECKING:
 
     from kintsugi.fetch.base import Fetcher
 
-__all__ = ["NoActivePackError", "RunResult", "run"]
+__all__ = ["NoActivePackError", "RunResult", "load_profile", "run"]
 
 
 class NoActivePackError(Exception):
@@ -74,6 +77,7 @@ class RunResult:
     status: str
     counters: RunCounters
     error: str | None
+    profile: QualityProfile | None = None
 
 
 def _json_safe(payload: dict[str, object]) -> dict[str, object]:
@@ -91,6 +95,16 @@ def _json_safe(payload: dict[str, object]) -> dict[str, object]:
         else:
             out[key] = str(value)  # Decimal u. Ae.
     return out
+
+
+def load_profile(conn: Connection, run_id: UUID) -> QualityProfile:
+    """Liest den Qualitaetsblock strikt: ``ValidationError`` propagiert.
+
+    Ein gespeichertes Dokument, das nicht mehr zum Modell passt, ist ein
+    Schema-Drift-Bug und muss laut sein, nie stillschweigend zu ``{}`` gecoerct.
+    """
+    doc = conn.execute(select(run_table.c.metrics).where(run_table.c.id == run_id)).scalar_one()
+    return QualityProfile.model_validate(doc["quality"])
 
 
 def _resolve_active_pack(conn: Connection, domain: str, entity: str | None) -> list[Row[Any]]:
@@ -144,6 +158,7 @@ def run(
             )
 
         collected: list[RecordRow] = []
+        accepted_payloads: list[dict[str, object]] = []  # typisiert, fuer compute_profile
         unchanged_urls: list[str] = []
         partial_failures = 0
         error: str | None = None
@@ -206,6 +221,7 @@ def run(
                     continue
                 counters.rows_valid += 1
                 assert result.payload is not None
+                accepted_payloads.append(result.payload)
                 natural_key = encode_natural_key(pack.schema_.natural_key, result.payload)
                 quality: dict[str, object] | None = (
                     {"violations": result.reasons} if result.reasons else None
@@ -228,6 +244,7 @@ def run(
                 fetcher.close()
 
         valid_from = datetime.now(UTC)
+        duplicates = 0
         if blocked_reason is None and error is None and not dry_run:
             counters_write = write_records(
                 conn,
@@ -240,20 +257,40 @@ def run(
             counters.rows_inserted = counters_write.inserted
             counters.rows_versioned = counters_write.versioned
             counters.rows_unchanged += counters_write.unchanged
+            duplicates = counters_write.duplicates
             if unchanged_urls:
                 keys = _natural_keys_for_urls(conn, pack_entity, unchanged_urls)
                 touch_last_seen(
                     conn, entity=pack_entity, natural_keys=keys, run_id=run_id, seen_at=valid_from
                 )
-            conn.commit()
+            # Kein Commit hier: die Records und der Lauf-Abschluss (metrics/status)
+            # committen zusammen (#86). Ein Fehler dazwischen rollt beide zurueck.
+
+        # Qualitaetsprofil (I1.1.4): reine Funktion ueber die betrachteten Seiten,
+        # der 14-Tage-Median als Baseline. Vorlaeufige Laeufe (running) sind aus
+        # load_history ausgeschlossen, dieser Lauf faellt also nicht in seine
+        # eigene Baseline.
+        history = load_history(conn, domain, pack_entity, valid_from)
+        fetch_stats = FetchStats(
+            rows_considered=counters.rows_considered,
+            # JSON-Objektschluessel sind Strings; HTTP-Status als String (wie to_metrics).
+            http={str(status_code): count for status_code, count in counters.http.items()},
+            fetch_ms_p95=int(counters.fetch_ms_p95),
+            duplicates=duplicates,
+            natural_key_missing=counters.rows_rejected.get("natural_key_missing", 0),
+        )
+        profile = compute_profile(accepted_payloads, pack, history, fetch_stats)
 
         # Ein dry_run ist ein Smoke-Test und scheitert nicht an min_rows; ein
-        # echter (auch gekappter) Lauf setzt die Schwelle durch.
+        # echter (auch gekappter) Lauf setzt die Schwelle durch. Trigger machen den
+        # Lauf degraded — aber nur, wenn ueberhaupt neu extrahiert wurde (ein
+        # reiner unchanged-Lauf hat ein degeneriertes Profil und bleibt ok).
         meets_min = dry_run or counters.meets_min_rows(pack.quality.min_rows_per_run)
+        fired = counters.rows_extracted > 0 and bool(triggers(profile, pack, history))
         status = _final_status(
             blocked=blocked_reason is not None,
             has_error=error is not None,
-            partial=partial_failures > 0,
+            partial=partial_failures > 0 or fired,
             meets_min=meets_min,
         )
         if status == "failed" and error is None:
@@ -273,15 +310,18 @@ def run(
                 error=func.concat_ws("\n", run_table.c.error, error)
                 if error
                 else run_table.c.error,
-                # namespaced (#82): der counters-Block; quality kommt in I1.1.4 dazu.
-                metrics={"counters": counters.to_metrics()},
+                # namespaced (#82): Betriebs- und Qualitaetsblock in einem Dokument.
+                metrics={
+                    "counters": counters.to_metrics(),
+                    "quality": profile.model_dump(mode="json"),
+                },
                 pages_fetched=counters.pages_fetched,
                 rows_extracted=counters.rows_extracted,
             )
         )
         conn.commit()
 
-    return RunResult(run_id=run_id, status=status, counters=counters, error=error)
+    return RunResult(run_id=run_id, status=status, counters=counters, error=error, profile=profile)
 
 
 def _natural_keys_for_urls(conn: Connection, entity: str, urls: list[str]) -> list[str]:
