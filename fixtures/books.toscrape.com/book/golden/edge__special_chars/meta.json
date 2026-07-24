@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-special-chars_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "f39cc7aa24f0650eb1a55a9b01c2aa1548c472aa59feb633956acc991da515bc",
+  "byte_size": 965,
+  "fetcher": "httpx",
+  "golden_label": "edge:special_chars",
+  "synthetic": true,
+  "derived_from": "baseline; title mit Sonderzeichen und HTML-Entities",
+  "edit": "title mit Sonderzeichen und HTML-Entities"
+}

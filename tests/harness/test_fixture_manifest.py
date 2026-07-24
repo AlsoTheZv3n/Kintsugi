@@ -37,11 +37,12 @@ def test_committeter_baum_passt_zum_manifest():
 def test_editiertes_byte_wird_erkannt(tmp_path):
     root = tmp_path / "fixtures"
     shutil.copytree(FIXTURES, root)
-    target = root / "books.toscrape.com" / "book" / "golden" / "edge__long_title" / "page.html.gz"
+    rel = "books.toscrape.com/book/golden/edge__very_long_value"
+    target = root / Path(rel) / "page.html.gz"
     body = gzip.decompress(target.read_bytes())
     target.write_bytes(gzip.compress(body + b"<!-- getampert -->", mtime=0))
     offenders = verify_index(root)
-    assert "books.toscrape.com/book/golden/edge__long_title" in offenders
+    assert rel in offenders
 
 
 def test_ausnahmeliste_und_fehlende_eintraege(tmp_path):

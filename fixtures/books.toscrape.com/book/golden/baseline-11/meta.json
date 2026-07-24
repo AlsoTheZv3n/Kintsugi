@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/baseline-book-11_8011/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "f7292f7def3fd13f2d8a44ef5db0d493f9ca6b388643fb25039b85f3a90d8c67",
+  "byte_size": 911,
+  "fetcher": "httpx",
+  "golden_label": "baseline",
+  "synthetic": false,
+  "derived_from": null,
+  "edit": null
+}

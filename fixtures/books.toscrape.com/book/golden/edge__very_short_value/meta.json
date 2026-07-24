@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-very-short-value_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "dec102d5737babfea5d890a17ac45310f0f81ba7670a973fe0137e423dabeb81",
+  "byte_size": 863,
+  "fetcher": "httpx",
+  "golden_label": "edge:very_short_value",
+  "synthetic": true,
+  "derived_from": "baseline; title auf ein Zeichen gekuerzt",
+  "edit": "title auf ein Zeichen gekuerzt"
+}

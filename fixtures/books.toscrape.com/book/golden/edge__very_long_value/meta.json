@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-very-long-value_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "e9624b2d544bc430dd4c8ad1805c8775fda160706918f4689a0beadf67fa651e",
+  "byte_size": 1552,
+  "fetcher": "httpx",
+  "golden_label": "edge:very_long_value",
+  "synthetic": true,
+  "derived_from": "baseline; title auf ueber 200 Zeichen verlaengert",
+  "edit": "title auf ueber 200 Zeichen verlaengert"
+}

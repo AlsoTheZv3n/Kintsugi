@@ -104,10 +104,8 @@ def _manifest_entry(digest: str) -> dict[str, object]:
     }
 
 
-def _write_golden(label: str, body: bytes, meta: dict[str, object]) -> None:
-    from kintsugi.harness.fixtures_cli import label_dirname
-
-    dest = ROOT / "golden" / label_dirname(label)
+def _write_golden(dirname: str, golden_label: str, body: bytes, meta: dict[str, object]) -> None:
+    dest = ROOT / "golden" / dirname
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "page.html.gz").write_bytes(gzip.compress(body, mtime=0))
     digest = hashlib.sha256(body).hexdigest()
@@ -119,13 +117,117 @@ def _write_golden(label: str, body: bytes, meta: dict[str, object]) -> None:
         "content_hash": digest,
         "byte_size": len(body),
         "fetcher": "httpx",
-        "golden_label": label,
+        "golden_label": golden_label,
         "synthetic": meta.get("synthetic", False),
         "derived_from": meta.get("derived_from"),
         "edit": meta.get("edit"),
     }
     (dest / "meta.json").write_text(
         json.dumps(full, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+
+
+def _write_taxonomy() -> None:
+    """23 baseline-Fixtures + die 7 Edge-Klassen (I1.3.3), >=30 Verzeichnisse.
+
+    'baseline' (CssExtractor, eigenes meta-Format) bleibt unangetastet; diese
+    FixtureMeta-Fixtures liegen daneben. Jede Edge-Fixture behaelt das echte DOM
+    und editiert genau eine Region (synthetic + derived_from + edit).
+    """
+    from kintsugi.harness.fixtures_cli import label_dirname
+
+    base = "https://books.toscrape.com/catalogue"
+
+    for n in range(1, 24):  # 23 baselines
+        _write_golden(
+            f"baseline-{n:02d}",
+            "baseline",
+            _detail_html(
+                title=f"Baseline Book {n:02d}",
+                price=f"{10 + n}.{n % 100:02d}",
+                upc=_upc(f"baseline-{n}"),
+                availability=f"In stock ({(n % 20) + 1} available)",
+            ).encode(),
+            {"url": f"{base}/baseline-book-{n:02d}_{8000 + n}/index.html"},
+        )
+
+    def edge(slug: str, body: bytes, edit: str) -> None:
+        _write_golden(
+            label_dirname(f"edge:{slug}"),
+            f"edge:{slug}",
+            body,
+            {
+                "url": f"{base}/edge-{slug.replace('_', '-')}_9000/index.html",
+                "synthetic": True,
+                "derived_from": f"baseline; {edit}",
+                "edit": edit,
+            },
+        )
+
+    edge(
+        "out_of_stock",
+        _detail_html(
+            title="Out Of Stock Sample",
+            price="19.99",
+            upc=_upc("out_of_stock"),
+            availability="Out of stock",
+        ).encode(),
+        "availability: 'In stock (22 available)' -> 'Out of stock'",
+    )
+    edge(
+        "missing_optional",
+        _detail_html(
+            title="No Availability Count",
+            price="12.34",
+            upc=_upc("missing_optional"),
+            availability="In stock",
+        ).encode(),  # kein '(N available)' -> int None
+        "availability ohne Zahl, optionales Feld null",
+    )
+    edge(
+        "special_chars",
+        _detail_html(
+            title="Cœur &amp; Ægis: &lt;Über&gt; ½",
+            price="7.77",
+            upc=_upc("special_chars"),
+            availability="In stock (3 available)",
+        ).encode(),
+        "title mit Sonderzeichen und HTML-Entities",
+    )
+    edge(
+        "very_long_value",
+        _detail_html(
+            title=LONG_TITLE + " " + "Fortsetzung " * 12,
+            price="42.00",
+            upc=_upc("very_long_value"),
+            availability="In stock (5 available)",
+        ).encode(),
+        "title auf ueber 200 Zeichen verlaengert",
+    )
+    edge(
+        "very_short_value",
+        _detail_html(
+            title="A",
+            price="1.00",
+            upc=_upc("very_short_value"),
+            availability="In stock (1 available)",
+        ).encode(),
+        "title auf ein Zeichen gekuerzt",
+    )
+    edge(
+        "multilingual",
+        _detail_html(
+            title="日本語 книга café Ærø Straße Ω",
+            price="33.33",
+            upc=_upc("multilingual"),
+            availability="In stock (9 available)",
+        ).encode(),
+        "title mehrsprachig/Nicht-ASCII",
+    )
+    edge(
+        "zero_results",
+        _index_html(99, []).encode(),  # Listenseite ohne Produkte
+        "Index-Seite ohne product_pod-Eintraege",
     )
 
 
@@ -159,40 +261,20 @@ def main() -> None:
         encoding="utf-8",
     )
 
-    # Golden-Kanten (ausserhalb des page-{n}-Walks, sie zaehlen also nie mit).
-    # 'baseline' gehoert dem CssExtractor-Test (I0.8.1, eigenes meta-Format mit
-    # 'expected') und wird hier bewusst NICHT ueberschrieben.
-    base = "https://books.toscrape.com/catalogue"
-    _write_golden(
-        "edge:long_title",
-        _detail_html(
-            title=LONG_TITLE,
-            price="42.00",
-            upc=_upc("long_title"),
-            availability="In stock (5 available)",
-        ).encode(),
-        {"url": f"{base}/edge-long-title_9001/index.html"},
-    )
-    _write_golden(
-        "edge:out_of_stock",
-        _detail_html(
-            title="Out Of Stock Sample",
-            price="19.99",
-            upc=_upc("out_of_stock"),
-            availability="Out of stock",
-        ).encode(),
-        {
-            "url": f"{base}/edge-out-of-stock_9002/index.html",
-            "synthetic": True,
-            "derived_from": "baseline; availability-Element auf 'Out of stock' editiert",
-            "edit": "availability: 'In stock (22 available)' -> 'Out of stock'",
-        },
-    )
-    _write_golden(
-        "edge:empty_index",
-        _index_html(99, []).encode(),
-        {"url": f"{base}/page-empty.html"},
-    )
+    # Golden-Fixturebestand mit Edge-Taxonomie (I1.3.3). 'baseline' (CssExtractor,
+    # eigenes meta-Format) bleibt daneben unangetastet.
+    golden_root = ROOT / "golden"
+    for child in sorted(golden_root.iterdir()) if golden_root.is_dir() else []:
+        # Alte FixtureMeta-Edges/baselines aufraeumen; die CssExtractor-'baseline'
+        # (Key 'label') behalten.
+        meta_file = child / "meta.json"
+        if child.is_dir() and meta_file.is_file():
+            import json as _json
+
+            data = _json.loads(meta_file.read_text(encoding="utf-8"))
+            if "golden_label" in data:  # FixtureMeta-Format
+                shutil.rmtree(child)
+    _write_taxonomy()
 
     # Regenerierbaren Index schreiben.
     from kintsugi.harness.fixtures_cli import write_index

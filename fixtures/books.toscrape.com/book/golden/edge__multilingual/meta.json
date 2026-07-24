@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-multilingual_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "b1f5585b67721a04ff6add255840e7af851eb06aa4cdfd981f2b757467e06b25",
+  "byte_size": 991,
+  "fetcher": "httpx",
+  "golden_label": "edge:multilingual",
+  "synthetic": true,
+  "derived_from": "baseline; title mehrsprachig/Nicht-ASCII",
+  "edit": "title mehrsprachig/Nicht-ASCII"
+}

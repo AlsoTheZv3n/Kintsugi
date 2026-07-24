@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-zero-results_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "6b73ded6d9192c11c1d91654e4877cc07eaea6c27d6235f23c3e1263f832c632",
+  "byte_size": 233,
+  "fetcher": "httpx",
+  "golden_label": "edge:zero_results",
+  "synthetic": true,
+  "derived_from": "baseline; Index-Seite ohne product_pod-Eintraege",
+  "edit": "Index-Seite ohne product_pod-Eintraege"
+}

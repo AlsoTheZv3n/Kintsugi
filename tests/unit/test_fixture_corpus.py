@@ -110,7 +110,7 @@ def test_dateibudget_und_endungen():
     total = 0
     for path in (BOOK.parents[1]).rglob("*"):
         if path.is_file() and "books.toscrape.com" in path.parts:
-            assert path.suffix in {".gz", ".json"}, path
+            assert path.suffix in {".gz", ".json", ".yaml"}, path  # coverage.yaml (I1.3.3)
             size = path.stat().st_size
             assert size <= 512 * 1024, path
             total += size

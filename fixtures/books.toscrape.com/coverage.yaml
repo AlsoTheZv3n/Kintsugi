@@ -1,0 +1,20 @@
+# Erforderliche Edge-Taxonomie fuer den Golden-Bestand (I1.3.3).
+#
+# docs/07 §Stufe 0: „Fuenfzig identisch aufgebaute Normalfaelle pruefen nichts."
+# Jedes hier gelistete Label muss im Golden-Baum vorkommen; fehlt es, ist das
+# nur mit einem waived_because-Grund erlaubt. Der Test liest den Verzeichnisbaum,
+# nicht diese Liste, und meldet das fehlende Label namentlich.
+#
+# Schwellen (docs/04 §Freigabe-Gate): Ziel 30, harter Boden 20. Unter 20 wird der
+# Bestand mit Grund `insufficient_fixtures` abgelehnt.
+required:
+  - edge:out_of_stock
+  - edge:missing_optional
+  - edge:special_chars
+  - edge:very_long_value
+  - edge:very_short_value
+  - edge:multilingual
+  - edge:zero_results
+
+# Label -> Begruendung. Leer: keine Ausnahmen.
+waivers: {}

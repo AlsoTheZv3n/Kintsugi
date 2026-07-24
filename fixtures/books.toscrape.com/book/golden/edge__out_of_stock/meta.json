@@ -1,5 +1,5 @@
 {
-  "url": "https://books.toscrape.com/catalogue/edge-out-of-stock_9002/index.html",
+  "url": "https://books.toscrape.com/catalogue/edge-out-of-stock_9000/index.html",
   "fetched_at": "2026-07-20T00:00:00+00:00",
   "http_status": 200,
   "content_type": "text/html",
@@ -8,6 +8,6 @@
   "fetcher": "httpx",
   "golden_label": "edge:out_of_stock",
   "synthetic": true,
-  "derived_from": "baseline; availability-Element auf 'Out of stock' editiert",
+  "derived_from": "baseline; availability: 'In stock (22 available)' -> 'Out of stock'",
   "edit": "availability: 'In stock (22 available)' -> 'Out of stock'"
 }

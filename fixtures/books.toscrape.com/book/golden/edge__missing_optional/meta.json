@@ -1,0 +1,13 @@
+{
+  "url": "https://books.toscrape.com/catalogue/edge-missing-optional_9000/index.html",
+  "fetched_at": "2026-07-20T00:00:00+00:00",
+  "http_status": 200,
+  "content_type": "text/html",
+  "content_hash": "7e8dfbe16325429441fc274a00ea2f5e0184277f5af0fbeb9f6cb24c55fcf1a7",
+  "byte_size": 911,
+  "fetcher": "httpx",
+  "golden_label": "edge:missing_optional",
+  "synthetic": true,
+  "derived_from": "baseline; availability ohne Zahl, optionales Feld null",
+  "edit": "availability ohne Zahl, optionales Feld null"
+}
