@@ -86,7 +86,7 @@ def load_history(conn: Connection, domain: str, entity: str, now: datetime) -> H
     fill_rate_median = {
         r.field: float(r.median) for r in conn.execute(_FILL_RATE_MEDIAN_SQL, params)
     }
-    median_rows = None if row.median_rows is None else int(round(row.median_rows))
+    median_rows = None if row.median_rows is None else round(row.median_rows)
     return HistoryStats(
         median_14d=median_rows, fill_rate_median=fill_rate_median, qualifying_runs=qualifying
     )
