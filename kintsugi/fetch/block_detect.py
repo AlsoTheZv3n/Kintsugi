@@ -65,15 +65,12 @@ def detect(body: bytes, headers: Mapping[str, str], encoding: str = "utf-8") -> 
     tree = LexborHTMLParser(text)
 
     for sig in load_signatures():
-        if sig.kind == "css":
-            if tree.css_first(sig.value) is not None:
-                return sig.name
-        elif sig.kind == "substring":
-            if sig.value in text:
-                return sig.name
-        elif sig.kind == "regex":
-            if re.search(sig.value, text):
-                return sig.name
+        if sig.kind == "css" and tree.css_first(sig.value) is not None:
+            return sig.name
+        if sig.kind == "substring" and sig.value in text:
+            return sig.name
+        if sig.kind == "regex" and re.search(sig.value, text):
+            return sig.name
 
     # <meta http-equiv="refresh"> auf einen Consent-Pfad.
     for meta in tree.css("meta"):
