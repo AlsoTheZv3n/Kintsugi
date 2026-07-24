@@ -313,7 +313,13 @@ def run(
             )
             counters.rows_inserted = counters_write.inserted
             counters.rows_versioned = counters_write.versioned
-            counters.rows_unchanged += counters_write.unchanged
+            # counters_write.unchanged (extrahiert, aber payload-identisch beim
+            # Schreiben) wird NICHT in rows_unchanged gefaltet: diese Zeilen zaehlen
+            # schon in rows_valid, ein Fold wuerde sie in meets_min doppelt zaehlen
+            # (rows_valid + rows_unchanged) und min_rows_per_run bei halber
+            # Distinktzahl bestehen lassen. rows_unchanged bleibt der dokumentierten
+            # Invariante treu: nur die versionsbewusst kurzgeschlossenen Seiten. Der
+            # Wert ist aus rows_valid - rows_inserted - rows_versioned ableitbar.
             duplicates = counters_write.duplicates
             if unchanged_urls:
                 keys = _natural_keys_for_urls(conn, pack_entity, unchanged_urls)
@@ -335,6 +341,8 @@ def run(
             fetch_ms_p95=int(counters.fetch_ms_p95),
             duplicates=duplicates,
             natural_key_missing=counters.rows_rejected.get("natural_key_missing", 0),
+            # Versionsbewusst unveraenderte Seiten aus dem Fill-Rate-Nenner nehmen.
+            rows_unchanged=len(unchanged_urls),
         )
         profile = compute_profile(accepted_payloads, pack, history, fetch_stats)
 
@@ -350,11 +358,20 @@ def run(
             fetch_evidence = soft_evidence
         else:
             fetch_evidence = {}
+        # rate_limited nur bei *gehaeuften* 429/403 (docs/04): die Mehrheit der
+        # tatsaechlich abgerufenen Seiten. Ein einzelnes transientes 403/429 darf
+        # das Verdikt nicht kippen — sonst maskiert es einen echten Bruch im selben
+        # Lauf (die Vorpruefung unterdrueckt dann alle Profil-Signale).
+        throttled = counters.http.get(429, 0) + counters.http.get(403, 0)
+        # unreachable nur, wenn ueberhaupt gefetcht werden *durfte* und keine
+        # Antwort kam. Ein reiner robots-Deny-Lauf (Seiten gar nicht abgerufen) ist
+        # nicht „Quelle down" — die Domain ist erreichbar, nur nicht erlaubt.
+        attempted = counters.rows_considered - counters.pages_skipped_robots
         precheck = evaluate_precheck(
             max_auto_versions_per_window=pack.healing.max_auto_versions_per_window,
-            unreachable=counters.rows_considered > 0 and not counters.http,
+            unreachable=attempted > 0 and not counters.http,
             block_hit=block_hit,
-            rate_limited=counters.http.get(429, 0) + counters.http.get(403, 0) > 0,
+            rate_limited=counters.pages_fetched > 0 and throttled * 2 > counters.pages_fetched,
             soft_404_hit=soft_404_hit,
             auto_versions_in_window=_auto_versions_in_window(
                 conn, domain, pack_entity, pack.healing.window

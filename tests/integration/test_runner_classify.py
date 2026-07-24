@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+from dataclasses import replace
 from pathlib import Path
 from uuid import UUID
 
@@ -70,7 +71,12 @@ def _fast_fetcher() -> HttpFetcher:
 
 
 def _activate_pack(
-    conn: Connection, base: str, *, broken_field: str | None = None, min_rows: int = 5
+    conn: Connection,
+    base: str,
+    *,
+    broken_field: str | None = None,
+    min_rows: int = 5,
+    conditional: bool = True,
 ) -> UUID:
     pack = load_pack("books.toscrape.com", "book", root=Path("packs"))
     disc = pack.discovery.model_copy(
@@ -81,7 +87,9 @@ def _activate_pack(
     )
     updates: dict[str, object] = {
         "discovery": disc,
-        "fetch": pack.fetch.model_copy(update={"rate_limit_rps": 2000.0}),
+        "fetch": pack.fetch.model_copy(
+            update={"rate_limit_rps": 2000.0, "conditional_requests": conditional}
+        ),
         "quality": pack.quality.model_copy(update={"min_rows_per_run": min_rows}),
     }
     if broken_field is not None:
@@ -153,7 +161,34 @@ class WrapFetcher:
                 self._seen += 1
                 if self._seen % 3 == 0:  # rund 30 % der Seiten fallen aus
                     raise httpx.ConnectError("injizierter Ausfall")
+            if self.mode == "one_403":
+                self._seen += 1
+                if self._seen == 1:  # genau eine transiente Drossel
+                    inner = self.inner.fetch(url, etag=etag, last_modified=last_modified)
+                    return replace(inner, http_status=403, outcome=FetchOutcome.rate_limited)
         return self.inner.fetch(url, etag=etag, last_modified=last_modified)
+
+
+class MutateFetcher:
+    """Aendert die ersten ``mutate_first`` Detailseiten (content_hash) ohne die
+    extrahierten Werte zu beruehren — der Rest bleibt byte-identisch."""
+
+    def __init__(self, inner: HttpFetcher, *, mutate_first: int) -> None:
+        self.inner = inner
+        self.mutate_first = mutate_first
+        self._detail_seen = 0
+
+    def _is_detail(self, url: str) -> bool:
+        return url.endswith("/index.html") and "page-" not in url
+
+    def fetch(self, url, *, etag=None, last_modified=None):
+        result = self.inner.fetch(url, etag=etag, last_modified=last_modified)
+        if self._is_detail(url) and result.body:
+            self._detail_seen += 1
+            if self._detail_seen <= self.mutate_first:
+                body = result.body.replace(b"</body>", b"<!-- mutiert --></body>", 1)
+                return replace(result, body=body)
+        return result
 
 
 def test_kaputter_selektor_ist_degraded_mit_einem_fill_rate_incident(
@@ -277,6 +312,64 @@ def test_rerun_dedupliziert_auf_occurrences_zwei(conn, books_fixture_base_url, t
         text("select evidence->>'occurrences' from incident where closed_at is null")
     ).scalar_one()
     assert occ == "2"
+
+
+def test_inkrementeller_lauf_mit_wenigen_aenderungen_bleibt_ok(
+    conn, books_fixture_base_url, tmp_path
+):
+    # Review-Fix: der Fill-Rate-Nenner darf die versionsbewusst unveraenderten
+    # Seiten nicht mitzaehlen — sonst faerbt jeder inkrementelle Lauf (die meisten
+    # Seiten unveraendert, wenige neu) die Fill-Rate faelschlich auf fast 0 und
+    # oeffnet Fehlalarm-Incidents.
+    _activate_pack(conn, books_fixture_base_url, min_rows=5, conditional=False)
+    run("books.toscrape.com", fetcher=_fast_fetcher(), settings=_settings(tmp_path), max_urls=15)
+    # Zweiter Lauf: 2 Seiten aendern sich (neu extrahiert, Werte identisch), 13
+    # sind versionsbewusst unveraendert und werden vor der Extraktion kurzgeschlossen.
+    result = run(
+        "books.toscrape.com",
+        fetcher=MutateFetcher(_fast_fetcher(), mutate_first=2),
+        settings=_settings(tmp_path),
+        max_urls=15,
+    )
+    assert result.status == "ok"
+    assert _open_incidents(conn) == []
+
+
+def test_einzelnes_403_maskiert_keinen_bruch(conn, books_fixture_base_url, tmp_path):
+    # Review-Fix: ein einzelnes transientes 403 darf das Verdikt nicht auf
+    # rate_limited kippen (das alle Profil-Signale unterdruecken wuerde). Der
+    # echte Selektor-Bruch muss trotzdem als fill_rate_drop gemeldet werden.
+    _activate_pack(conn, books_fixture_base_url, broken_field="title", min_rows=5)
+    result = run(
+        "books.toscrape.com",
+        fetcher=WrapFetcher(_fast_fetcher(), mode="one_403"),
+        settings=_settings(tmp_path),
+        max_urls=15,
+    )
+    assert result.status == "degraded"
+    incidents = _open_incidents(conn)
+    assert ("fill_rate_drop", "title") in {(k, f) for k, f, _sev in incidents}
+    assert not any(k == "rate_limited" for k, _f, _sev in incidents)
+
+
+def test_write_unchanged_zaehlt_nicht_doppelt_gegen_min_rows(
+    conn, books_fixture_base_url, tmp_path
+):
+    # Review-Fix: write-time-unchanged Zeilen (payload-identisch beim Schreiben)
+    # stehen schon in rows_valid und duerfen nicht zusaetzlich in rows_unchanged
+    # gefaltet werden — sonst besteht min_rows_per_run bei halber Distinktzahl.
+    _activate_pack(conn, books_fixture_base_url, min_rows=20, conditional=False)
+    run("books.toscrape.com", fetcher=_fast_fetcher(), settings=_settings(tmp_path), max_urls=15)
+    # Zweiter Lauf: alle 15 Seiten aendern ihren Rohkoerper (content_hash), aber der
+    # extrahierte payload bleibt identisch -> 15 write-unchanged, 0 Kurzschluss.
+    result = run(
+        "books.toscrape.com",
+        fetcher=MutateFetcher(_fast_fetcher(), mutate_first=15),
+        settings=_settings(tmp_path),
+        max_urls=15,
+    )
+    # 15 distinkte Records < min_rows 20 -> failed (nicht faelschlich ok durch 15+15).
+    assert result.status == "failed"
 
 
 def test_runner_bindet_kein_heal_modul():

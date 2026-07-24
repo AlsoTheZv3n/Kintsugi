@@ -63,6 +63,12 @@ class FetchStats:
     fetch_ms_p95: int
     duplicates: int
     natural_key_missing: int
+    # Versionsbewusst unveraenderte Seiten (Kurzschluss VOR der Extraktion). Sie
+    # sind gesund, nur ungeprueft, und fallen aus dem Nenner der Seiten-Raten —
+    # sonst faerbte ein inkrementeller Lauf (die meisten Seiten unveraendert)
+    # jede Fill-Rate faelschlich auf fast 0. Ausgefallene/leere Seiten bleiben
+    # dagegen im Nenner (der Teilausfall N05 soll ja sichtbar sein).
+    rows_unchanged: int = 0
 
 
 @dataclass(frozen=True)
@@ -99,10 +105,15 @@ def compute_profile(
     schema = pack.schema_
     fields = list(schema.fields)
     considered = fetch_stats.rows_considered
+    # Nenner der Seiten-Raten: betrachtete minus die versionsbewusst
+    # Unveraenderten. Der Zaehler (fill_counts) zaehlt nur ueber die extrahierten
+    # Records, also muss der Nenner die gar nicht extrahierten Kurzschluss-Seiten
+    # auslassen — sonst ist jeder inkrementelle Lauf ein Fill-Rate-Fehlalarm.
+    denominator = max(considered - fetch_stats.rows_unchanged, 0)
     written = len(records)
 
     def _rate(count: int) -> float:
-        return count / considered if considered else 0.0
+        return count / denominator if denominator else 0.0
 
     fill_counts = _fill_counts(records, fields)
     fill_rate = {f: _rate(fill_counts[f]) for f in fields}
