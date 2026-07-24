@@ -207,6 +207,9 @@ class HttpFetcher:
 
         body = response.content  # rohe Bytes, nie response.text
         content_type = response.headers.get("content-type")
+        # 304 heisst "unveraendert seit deinem Validator": aus dem Cache. Der
+        # Schreibpfad (E0.9) traegt content_hash/blob_key vom letzten 200 nach.
+        from_cache = response.status_code == 304
         return FetchResult(
             url=url,
             final_url=str(response.url),
@@ -217,7 +220,7 @@ class HttpFetcher:
             encoding=resolve_encoding(body, content_type),
             elapsed_ms=elapsed_ms,
             fetcher="httpx",
-            from_cache=False,
+            from_cache=from_cache,
             outcome=outcome,
         )
 
