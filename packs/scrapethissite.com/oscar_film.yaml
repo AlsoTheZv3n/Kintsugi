@@ -1,0 +1,149 @@
+# Site-Pack fuer scrapethissite.com (Phase-1-Quelle drei, F4).
+#
+# F4: Diese Quelle ersetzt das roadmap-genannte webscraper.io/test-sites/
+# e-commerce/ajax, dessen robots.txt /test-sites/e-commerce/ verbietet. Hier
+# verbietet die robots.txt (www.scrapethissite.com) nur /lessons/ und /faq/; der
+# Eintrittspfad /pages/ajax-javascript/ ist erlaubt. Die Abweichung von docs/08
+# ist bewusst und in der Zulassungspruefung (#100) belegt.
+#
+# Die Entitaet ist oscar_film, NICHT product -- den Pack nach einer Handels-
+# entitaet zu benennen, die er nicht modelliert, vergiftete jedes Metrik-Label und
+# jeden Fixture-Pfad. Datei: packs/scrapethissite.com/oscar_film.yaml (domain =
+# Verzeichnisname); die URLs nutzen den echten Host www.scrapethissite.com.
+#
+# Zwei Quellen (docs/01 Extraktionsleiter):
+#   1. xhr gegen den eigenen AJAX-Endpunkt der Seite mit year-Query. Der Endpunkt
+#      liefert ein BARES JSON-Array (verifiziert), daher row_root: '$[*]'. title
+#      traegt Rand-Whitespace ("Spotlight  "), daher strip in transforms.
+#   2. css als NACHRANGIGE Quelle. Verifizierte Fallback-Regel: die Server-HTML der
+#      AJAX-Seite hat <tbody id="table-body"> LEER (die Zeilen liegen nur in der
+#      AJAX-Antwort). Mit fetch.strategy: http und Playwright erst in Phase 5 KANN
+#      die css-Quelle die XHR-Zeilen hier nicht reproduzieren -- sie ist bewusst so
+#      deklariert, dass sie auf der AJAX-Seite einen typisierten Fehltreffer liefert
+#      (row_selector 'tr.country' trifft dort nichts) und gegen die server-
+#      gerenderte /pages/simple/ echte Zeilen zieht. Ihre Rolle ist der Nachweis
+#      des Ketten-Durchfalls, nicht die Rekonstruktion der Filme.
+#
+# natural_key [film_id] ist abgeleitet (ADR-013), exakt wie der quotes-Schluessel:
+# natural_key_16 ueber title + U+001F + year, NFC-normalisiert und whitespace-
+# kollabiert, erste 16 Hex. So hat die Mutation M15 (Natural Key nicht mehr
+# extrahierbar) mit dem Entfernen von title/year etwas zu brechen.
+apiVersion: kintsugi/v1
+domain: scrapethissite.com
+entity: oscar_film
+version: 1
+notes: >-
+  natural_key [film_id] abgeleitet via natural_key_16 (ADR-013) ueber [title, year].
+  robots (www.scrapethissite.com): /lessons/ und /faq/ verboten, /pages/ajax-javascript/
+  erlaubt; F4-Ersatz fuer die von webscraper.io/robots.txt gesperrte AJAX-Sandbox.
+
+discovery:
+  strategy: seed_list
+  # Ein Seed je Oscar-Jahr; die xhr-Quelle fuellt {year} aus dem Query der Seiten-URL.
+  seeds:
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2010
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2011
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2012
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2013
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2014
+    - https://www.scrapethissite.com/pages/ajax-javascript/?year=2015
+  max_urls_per_run: 20
+
+fetch:
+  strategy: http
+  rate_limit_rps: 0.5
+  concurrency: 2
+  respect_robots: true
+  conditional_requests: true
+
+extract:
+  sources:
+    # Quelle 1 (Prioritaet): der AJAX-Endpunkt, ein bares JSON-Array.
+    - kind: xhr
+      endpoint: https://www.scrapethissite.com/pages/ajax-javascript/?ajax=true&year={year}
+      method: GET
+      headers:
+        X-Requested-With: XMLHttpRequest
+      row_root: '$[*]'
+      fields:
+        title: '$.title'
+        year: '$.year'
+        awards: '$.awards'
+        nominations: '$.nominations'
+        best_picture: '$.best_picture'
+      transforms:
+        title: [strip]   # der Endpunkt liefert "Spotlight  " mit Rand-Whitespace
+    # Quelle 2 (Fallback): trifft 'tr.country' -- auf der AJAX-Seite (leeres tbody)
+    # null Treffer (typisierter Fehltreffer), gegen /pages/simple/ echte Zeilen.
+    - kind: css
+      row_selector: 'tr.country'
+      fields:
+        title:
+          selector: 'h3.country-name'
+          anchor_hint: 'Nur zum Nachweis des Fallbacks; /pages/simple/ ist keine Filmliste'
+          transform: [strip]
+
+schema:
+  natural_key: [film_id]
+  fields:
+    film_id:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+      pattern: '^[a-f0-9]{16}$'
+      derived_from:
+        source: [title, year]
+        transform: natural_key_16
+    title:
+      type: string
+      required: true
+      min_fill_rate: 1.0
+    year:
+      type: integer
+      required: true
+      min_fill_rate: 1.0
+      sane_range: [1927, 2100]
+    awards:
+      type: integer
+      required: false
+      min_fill_rate: 0.0
+      sane_range: [0, 100]
+    nominations:
+      type: integer
+      required: false
+      min_fill_rate: 0.0
+      sane_range: [0, 100]
+    best_picture:
+      type: boolean
+      required: false      # nur auf den Gewinner-Zeilen vorhanden -> Fill-Rate < 1
+      min_fill_rate: 0.0
+
+quality:
+  min_rows_per_run: 10
+  row_count_deviation: 0.30
+  max_duplicate_rate: 0.02
+  max_range_violation_rate: 0.05
+  thresholds_source: provisional
+
+healing:
+  enabled: false
+  max_auto_versions_per_window: 3
+  window: 7d
+  require_golden_pass: true
+  canary_fraction: 0.05
+  canary_min_rows: 50
+  escalate_on: [field_removed, schema_change, enum_violation, natural_key_broken]
+
+delivery:
+  sinks: [postgres]
+  webhook_on_change: null
+
+compliance:
+  tos_url: https://www.scrapethissite.com/
+  tos_verdict: permits           # explizit als Scraping-Sandbox gebaut
+  tos_reviewed_at: 2026-07-24
+  reviewed_by: human:sven
+  # robots.txt verbietet /lessons/ und /faq/; /pages/ajax-javascript/ ist erlaubt.
+  robots_checked_at: 2026-07-24
+  public_content: true
+  personal_data: false
