@@ -15,7 +15,8 @@ def _settings(**over: object) -> Settings:
 
 
 def _fetcher(handler) -> HttpFetcher:
-    return HttpFetcher(_settings(), transport=httpx.MockTransport(handler))
+    # respect_robots=False: diese Tests pruefen HTTP-Verhalten, nicht robots.
+    return HttpFetcher(_settings(), transport=httpx.MockTransport(handler), respect_robots=False)
 
 
 # --------------------------------------------------------------------------

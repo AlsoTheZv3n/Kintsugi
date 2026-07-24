@@ -17,7 +17,9 @@ def test_jede_anfrage_traegt_den_kontakt():
         seen.update(request.headers)
         return httpx.Response(200, content=b"x")
 
-    with HttpFetcher(Settings(contact=CONTACT), transport=httpx.MockTransport(handler)) as f:
+    with HttpFetcher(
+        Settings(contact=CONTACT), transport=httpx.MockTransport(handler), respect_robots=False
+    ) as f:
         f.fetch("https://x/a")
     ua = seen["user-agent"]
     assert ua.startswith("kintsugi/")

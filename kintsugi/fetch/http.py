@@ -15,6 +15,7 @@ import httpx
 
 from kintsugi.config import Settings, get_settings
 from kintsugi.fetch.base import FetchOutcome, FetchResult
+from kintsugi.fetch.robots import RobotsDenied, RobotsGate
 
 _BROWSER_TOKENS = ("Mozilla", "Chrome", "Safari", "AppleWebKit", "Gecko")
 
@@ -65,6 +66,7 @@ class HttpFetcher:
         settings: Settings | None = None,
         *,
         transport: httpx.BaseTransport | None = None,
+        respect_robots: bool = True,
     ) -> None:
         self._settings = settings or get_settings()
         user_agent = self._settings.user_agent  # ruft require_contact() -> wirft ohne Kontakt
@@ -84,6 +86,9 @@ class HttpFetcher:
             headers={"User-Agent": user_agent},
             transport=transport,
         )
+        # Robots-Pruefung im Fetcher, damit keine Aufrufstelle sie umgeht. Nur
+        # eine dokumentierte Ausnahme (RobotsOverride) setzt respect_robots=False.
+        self._robots = RobotsGate(self._client, user_agent) if respect_robots else None
 
     @property
     def client(self) -> httpx.Client:
@@ -92,6 +97,11 @@ class HttpFetcher:
     def fetch(
         self, url: str, *, etag: str | None = None, last_modified: str | None = None
     ) -> FetchResult:
+        # robots.txt zuerst — auch fuer Discovery-URLs. RobotsUnavailable (5xx)
+        # propagiert und bricht den Lauf ab; RobotsDenied ueberspringt die URL.
+        if self._robots is not None and not self._robots.allowed(url):
+            raise RobotsDenied(url)
+
         headers: dict[str, str] = {}
         if etag:
             headers["If-None-Match"] = etag

@@ -116,7 +116,7 @@ that are enforced name a single pytest node that proves it.
 | User agent carries a contact address | `kintsugi.config` | request refused before it is sent | `tests/unit/test_config.py::test_user_agent_wird_erwartungsgemaess_gerendert` | 0 |
 | Missing contact address blocks the user agent | `kintsugi.config` | `ConfigError` on first use | `tests/unit/test_config.py::test_user_agent_wirft_ohne_kontakt` | 0 |
 | Secrets never surface in logs, reprs or dumps | `kintsugi.config` | leak guard fails the build | `tests/compliance/test_no_secret_leaks.py::test_keine_standarddarstellung_zeigt_den_klartext` | 0 |
-| robots.txt obeyed; 404/410 allow-all, 5xx/timeout deny | `UNENFORCED` | fetch layer, E0.7 | planned `tests/compliance/test_robots_policy.py` | 0 |
+| robots.txt obeyed; 404/410 allow-all, 5xx/timeout deny | `kintsugi.fetch.robots` | fetch aborts or skips the URL | `tests/compliance/test_robots.py::test_404_robots_erlaubt_die_produktseite` | 0 |
 | Conservative rate limit; Crawl-delay only raises it | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_rate_limit.py` | 0 |
 | Conditional requests (ETag / If-Modified-Since) | `UNENFORCED` | fetch layer, E0.7 | planned `tests/unit/test_conditional_requests.py` | 0 |
 | CAPTCHA / consent wall aborts the run as `blocked` | `UNENFORCED` | fetch/extract, E0.7/E0.8 | planned `tests/unit/test_block_detection.py` | 0 |
