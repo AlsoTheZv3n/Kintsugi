@@ -182,8 +182,10 @@ def run(
                     counters.rows_unchanged += 1
                     unchanged_urls.append(url)
                     continue
-                if snap.http_status != 200:
-                    partial_failures += 1  # 404/5xx-Detailseite: nicht extrahiert
+                # 200 und 304 tragen einen extrahierbaren Body (304 aus dem Store,
+                # wenn er nicht versionsbewusst unchanged war). 404/5xx nicht.
+                if snap.http_status not in (200, 304):
+                    partial_failures += 1
                     continue
 
                 # Block-Erkennung NACH dem Snapshot, VOR dem Extraktor.
