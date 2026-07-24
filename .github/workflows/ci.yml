@@ -56,6 +56,9 @@ jobs:
           enable-cache: true
       - run: uv sync --frozen
       - run: uv lock --check
+      # Fixture-Manifest: ein editiertes Golden-Byte muss im Review auffallen,
+      # nie stillschweigend durchgehen (I1.3.1).
+      - run: uv run pytest tests/harness/test_fixture_manifest.py
       # Kein Netz zu einer gescrapten Seite und keine DB: live und integration
       # sind abgewaehlt. Der Integrationsjob mit postgres-Service kommt mit der
       # DoD (E0.9) additiv dazu.

@@ -8,11 +8,15 @@ Zeile eingespielt werden kann. ``content_hash`` ist der sha256-Hex des
 
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 __all__ = ["FixtureMeta"]
+
+# baseline oder edge:<slug> mit slug aus [a-z0-9_].
+_LABEL_RE = re.compile(r"^(baseline|edge:[a-z0-9_]+)$")
 
 
 class FixtureMeta(BaseModel):
@@ -44,6 +48,13 @@ class FixtureMeta(BaseModel):
     def _sha256_hex(cls, value: str) -> str:
         if len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
             raise ValueError("content_hash muss 64 Hex-Zeichen sein (sha256)")
+        return value
+
+    @field_validator("golden_label")
+    @classmethod
+    def _label_shape(cls, value: str) -> str:
+        if not _LABEL_RE.match(value):
+            raise ValueError("golden_label muss 'baseline' oder 'edge:<slug>' sein")
         return value
 
     @model_validator(mode="after")

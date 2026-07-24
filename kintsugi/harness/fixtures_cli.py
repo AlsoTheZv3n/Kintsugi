@@ -42,6 +42,7 @@ __all__ = [
     "capture_golden",
     "guard_domain",
     "label_dirname",
+    "verify_index",
     "write_index",
 ]
 
@@ -160,35 +161,47 @@ def capture_corpus(
     return corpus
 
 
+# Diese Praefix-Wurzeln sind manifest-befreit (I1.3.1).
+_EXEMPT_ROOTS = ("_selftest", "_synthetic")
+
+
 def _is_exempt_dir(rel: Path) -> bool:
     parts = rel.parts
-    return parts[0] == "_selftest" or "corpus" in parts
+    return (parts and parts[0] in _EXEMPT_ROOTS) or "corpus" in parts
+
+
+def _sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def build_index(root: Path) -> dict[str, object]:
     """Erzeugt den regenerierbaren Fixture-Index (deterministisch sortiert).
 
-    Golden-Fixtures werden ueber ``content_hash`` aus ihrer ``meta.json``
-    verankert; ``_selftest/`` und jeder ``*/corpus/``-Pfad sind ausgenommen und
-    stehen unter ``exempt``.
+    Je Golden-Fixture den sha256 von ``page.html.gz`` **und** ``expected.json``
+    (soweit vorhanden) — die Datei-Hashes, nicht der Body-Hash aus meta.json,
+    damit ein einziges editiertes Byte im Review sichtbar wird. ``_selftest/``,
+    ``_synthetic/`` und jeder ``*/corpus/``-Pfad sind ausgenommen und stehen
+    unter ``exempt``.
     """
-    golden: dict[str, dict[str, object]] = {}
-    exempt: set[str] = {"_selftest/"}
+    golden: dict[str, dict[str, str]] = {}
+    exempt: set[str] = {root_name + "/" for root_name in _EXEMPT_ROOTS}
     if root.is_dir():
         for meta_path in sorted(root.rglob("meta.json")):
             rel = meta_path.parent.relative_to(root)
             if _is_exempt_dir(rel):
                 continue
             try:
-                meta = FixtureMeta.model_validate_json(meta_path.read_text(encoding="utf-8"))
+                FixtureMeta.model_validate_json(meta_path.read_text(encoding="utf-8"))
             except ValidationError:
                 # Fremdes Golden-Format (z. B. der CssExtractor-Baseline mit
                 # 'expected'-Block) — nicht von diesem Index verwaltet.
                 continue
-            golden[rel.as_posix()] = {
-                "content_hash": meta.content_hash,
-                "byte_size": meta.byte_size,
-            }
+            entry: dict[str, str] = {}
+            for filename in ("page.html.gz", "expected.json"):
+                target = meta_path.parent / filename
+                if target.is_file():
+                    entry[filename] = _sha256_file(target)
+            golden[rel.as_posix()] = entry
         for corpus_dir in sorted(root.rglob("corpus")):
             if corpus_dir.is_dir():
                 exempt.add(corpus_dir.relative_to(root).as_posix() + "/")
@@ -197,6 +210,27 @@ def build_index(root: Path) -> dict[str, object]:
         "exempt": sorted(exempt),
         "golden": dict(sorted(golden.items())),
     }
+
+
+def verify_index(root: Path) -> list[str]:
+    """Golden-Pfade, deren Datei-Hashes vom committeten ``index.json`` abweichen.
+
+    Leere Liste = der Baum passt zum Manifest. Ein editiertes Byte in einer
+    Golden-Datei taucht hier als Pfad auf.
+    """
+    index_path = root / "index.json"
+    if not index_path.is_file():
+        return ["index.json fehlt"]
+    committed = json.loads(index_path.read_text(encoding="utf-8"))
+    current = build_index(root)
+    offenders: list[str] = []
+    committed_golden = committed.get("golden", {})
+    current_golden = current["golden"]
+    assert isinstance(current_golden, dict)
+    for path in sorted(set(committed_golden) | set(current_golden)):
+        if committed_golden.get(path) != current_golden.get(path):
+            offenders.append(path)
+    return offenders
 
 
 def write_index(root: Path) -> Path:
